@@ -1,0 +1,358 @@
+extends ../layout
+block style_propio
+    style.
+        p {
+            margin: 0px;
+        }
+        #rutas h6 {
+            text-shadow: -2px 2px 10px rgba(0,0,0,0.51);
+        }
+
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-0Wt6vynQ9q_P23Hj5s0DZv5KvbVTBHc")
+block contenido
+
+    input#route(style="display:none", value=backend_route)
+    .row
+        .col-sm-6.col-md-6.col-lg-4(style="background-color: #008295 ;height: 270px;")
+            div(style="display: table;cursor: pointer;height:100%" onclick="location.href = '/catalogo'")
+                div(style="display: table-cell;vertical-align: middle;text-align: center;")
+                    img(src="/images/icons/Elfec-14.png", style="width:50%;margin-top:-50px;")
+                    h6(style="color:white;margin-top:-50px;font-weight: bold;") CATALOGO DE SERVICIOS
+
+
+        .col-sm-6.col-md-6.col-lg-4(style="background-color: #005d95;height: 270px;")
+            .gradient_gris
+                #Fecha_index(style="display: table;height: 100%;margin: 0 auto;")
+
+            .gradient_gris
+                #Clima_index(style="display: table;height: 100%;margin: 0 auto;")
+
+            .gradient_gris
+                #Ciudad_index(style="display: table;height: 100%;margin: 0 auto;")
+
+
+        .col-md-12.col-lg-4(style="background-color: #3A639E;height: 270px;display:table;")
+            if (imagenes.length == 0 || imagenes == null)
+                    div(style="display: table-cell; vertical-align: middle;text-align: center;font-weight:bold;color: white;") SIN IMAGENES
+            else
+                #carouselExampleControls.carousel.slide(data-ride='carousel', style="max-height: 270px;display: table-cell; vertical-align: middle;")
+                    .carousel-inner(style="max-height: 270px;")
+                        - var index = 0;
+                            each imagen in imagenes
+                                if(index <= 0)
+                                    .carousel-item.active(style="text-align:center;")
+                                        span(style="display: inline-block;height: 0%; vertical-align: middle;")
+                                        img.img-fluid.ruta(src=imagen.ruta ,style="width:100%;height:100%;vertical-align: middle;")
+                                    - index++;
+                                else
+                                    .carousel-item(style="text-align:center;")
+                                        span(style="display: inline-block;height: 0%; vertical-align: middle;")
+                                        img.img-fluid.ruta(src=imagen.ruta ,style="width:100%;height:100%;vertical-align: middle;")
+                                    - index++;
+                a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+                    span.carousel-control-prev-icon(aria-hidden='true')
+                    span.sr-only Previous
+                a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+                    span.carousel-control-next-icon(aria-hidden='true')
+                    span.sr-only Next
+
+
+    #comunicados.row(style="background-color: #5d5c61;")
+        .col-sm-12
+            h2 Comunicados
+            .row
+                .col-md-12.col-lg-4(style="background-color: #5d5c61;")
+                    div(style="background-color: #e6ebe5;height: 250px;display: table; width: 100%;")
+                        if (videos.length == 0 || videos == null)
+                            div(style="display: table-cell; vertical-align: middle;text-align: center;font-weight:bold;") SIN VIDEOS
+                        else
+                            #carousel.carousel.slide(data-ride='carousel', style="max-height: 270px;display: table-cell; vertical-align: middle;")
+                                .carousel-inner(style="max-height: 270px;")
+                                    - var index = 0;
+                                    each imagen in videos
+                                        if(index <= 0)
+                                            .carousel-item.active(style="text-align:center;")
+                                                video.img-fluid.ruta.video_play(src=imagen.ruta ,style="width:100%;height:100%;vertical-align: middle;", id=imagen.id, controls)
+                                            - index++;
+                                        else
+                                            .carousel-item(style="text-align:center;")
+                                                video.img-fluid.ruta.video_play(src=imagen.ruta ,style="width:100%;height:100%;vertical-align: middle;", id=imagen.id)
+                                            - index++;
+
+                            a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+                                span.carousel-control-prev-icon(aria-hidden='true')
+                                span.sr-only Previous
+                            a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+                                span.carousel-control-next-icon(aria-hidden='true')
+                                span.sr-only Next
+
+                    h3 Videos
+                .col-md-6.col-lg-4(style="background-color: #5d5c61;")
+                    div(style="background-color: white;height: 250px;")
+                        div#scroll_boletin.scroll_style(style="padding: 0;")
+                            each noti in urgentes
+                                div(style="border: #5d5c61 solid 1px")
+                                    p(style="float: right; color: white; font-size: 9px; padding:0 5px;font-weight: bold;")=noti.noticia.fecha
+                                    if (noti.noticia.tipo == 'Destacados')
+                                        h6(style="background-color: #82b74b;color: white;padding: 5px;")=noti.noticia.titulo
+                                    else
+                                        h6(style="background-color: #c94c4c;color: white;padding: 5px;")=noti.noticia.titulo
+                                    p(style="font-size:12px;LINE-HEIGHT:13px;padding: 5px;")=noti.noticia.subtitulo
+                                    div(style="background-color: #f3f2f2;")
+                                        div(style="display: table")
+                                            div(style="display: table-cell;")
+                                                each categoria in noti.categorias
+                                                    h6.categorias_noticia=categoria.nombre
+                    h3 Urgentes o Destacados
+                .col-md-6.col-lg-4(style="background-color: #5d5c61;")
+                    div(style="background-color: white;height: 250px;")
+                        div#scroll_boletin.scroll_style(style="padding: 0;")
+                            each noti in boletin
+                                div(style="border: #5d5c61 solid 1px; cursor: pointer", onclick="location.href = '/comunicacion/Noticia/"+noti.noticia.id+"'")
+                                    div(style="display: table;")
+                                    p(style="float: right; color: white; font-size: 9px; padding: 0 5px;font-weight: bold;")=noti.noticia.fecha
+                                    if (noti.noticia.tipo == 'Noticia Empresa')
+                                        h6(style="background-color: #034f84;color: white;padding: 5px;")=noti.noticia.titulo
+                                    else
+                                        h6(style="background-color: #655555;color: white;padding: 5px;")=noti.noticia.titulo
+                                    p(style="font-size:12px;LINE-HEIGHT:13px;padding: 5px;")=noti.noticia.subtitulo
+                                    div(style="background-color: #f3f2f2;")
+                                        div(style="display: table")
+                                            div(style="display: table-cell;")
+                                                each categoria in noti.categorias
+                                                        h6.categorias_noticia=categoria.nombre
+
+
+                    h3 Boletín
+    .row
+
+        #sugerencia.col-md-6.col-lg-4(style="background-color: #1c77ce;height: 225px;", data-info="informacion de sugerencia")
+            a#reference.clase(href='/personal/buzon', title="Sugerencia aquí")
+                h3(style="color:white;") Buzón de sugerencia
+                div(style="height: 70%;text-align: center;")
+                    img(src="/images/icons/Elfec-13.png", style="height: 100%;")
+        .col-md-6.col-lg-4(style="background-color: #2a5f98;height: 225px;")
+            h3(style="color: white;") Cumpleaños
+
+            if cumpleaneros.length != 0
+                .scroll_style(style="overflow-x:auto;height:")
+                    div(style="display:inline-flex;")
+                        each cumple in cumpleaneros
+                            div(style="margin: 1.5px;background-color: white;")
+                                p(style="font-size:15px;text-align: center;")=cumple.dia
+                                if cumple.dia == 'HOY'
+                                    div(style="width:80px; height:80px;text-align: center;margin:1px;")
+                                        img(src="/images/icons/birthday.png", style="width:100%; height: 100%;")
+                                else
+                                    div(style="width:80px; height:80px;text-align: center;margin:3px;")
+                                        img(src="/images/icons/boy.png", style="width:100%; height: 100%;")
+                                div
+                                    p(style="font-size:12px;line-height: normal;text-align: center;word-wrap: break-word;overflow: hidden;max-height: 5.4em;")=cumple.nombre
+            else
+                div(style="display: table;height: 80%;width: 100%;")
+                    h4(style="display: table-cell;vertical-align:middle;text-align:center;color: white;") NINGUNO
+        #accesos.col-md-12.col-lg-4(style="background-color: #96ccff;height: 225px;")
+            h3(style="color: white;") Accesos
+            #rutas.row(style="position: relative; top: 15%;")
+
+                .col-sm-4(data-direccion="Turnos")
+                    button.button_accesos(style="background-color:#e02a5a;" onclick="location.href = '/personal/turnos'")
+                        img(src="/images/icons/Elfec-10.png", style="width:100%;")
+                    h6 Turnos personal
+                .col-sm-4(data-direccion="Cortes programados")
+                    button.button_accesos(style="background-color:#c49f09;")
+                        img(src="/images/icons/Elfec-11.png", style="width:100%;")
+                    h6 Cortes Programados
+                .col-sm-4(data-direccion="Directorio Personal")
+                    button.button_accesos(style="background-color:#109c82;", onclick="location.href = '/personal/directorio'")
+                        img(src="/images/icons/Elfec-12.png", style="width:100%;")
+                    h6 Directorio Personal
+block scripts
+    script(type='text/javascript').
+        function init(){
+            var rutas = document.getElementsByClassName('ruta');
+            for (let i = 0; i < rutas.length; i++) {
+                var ruta = rutas[i];
+                var src = ruta.getAttribute('src');
+                var rutaCortada = src.split('public')
+                var route = $('#route').val();
+                console.log(route + rutaCortada[1])
+                rutas[i].setAttribute('src', route + rutaCortada[1] + "");
+            }
+
+            $('#carousel').on('slid.bs.carousel', function (e) {
+                var elemento = $('#carousel .carousel-inner .active video').first();
+                elemento.css('border', '2px solid black;');
+                console.log(elemento.prop("tagName"))
+                if (elemento.prop("tagName") == "VIDEO") {
+                    var promise = elemento.get(0).play();
+                    if (promise !== undefined) {
+
+                    }
+                }
+            });
+            $('#carousel').on('slide.bs.carousel', function () {
+                var elemento = $('#carousel .carousel-inner .active video').first();
+                elemento.css('border', '2px solid black;');
+                console.log(elemento.prop("tagName"))
+                if (elemento.prop("tagName") == "VIDEO") {
+                    var promise = elemento.get(0).pause();
+                    if (promise !== undefined) {
+
+                    }
+                }
+            });
+
+            if ("geolocation" in navigator) { //check geolocation available
+
+                var geocoder = new google.maps.Geocoder();
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+                }
+
+                //Get the latitude and the longitude;
+                function successFunction(position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    codeLatLng(lat, lng)
+                }
+
+                function errorFunction() {
+                    alert("Geocoder failed");
+                }
+
+                function codeLatLng(lat, lng) {
+                    var latlng = new google.maps.LatLng(lat, lng);
+                    geocoder.geocode({'latLng': latlng}, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var content = results[1].address_components;
+                            var ciudad = content[content.length-4].long_name;
+                            getClima(ciudad);
+
+                        } else {
+                            alert("No se puede obtener información: " + status);
+                        }
+                    });
+                }
+            } else {
+                console.log("Browser doesn't support geolocation!");
+            }
+
+
+        }
+
+        function getClima(ciudad){
+            axios.get('http://api.apixu.com/v1/current.json?key=734f00c68ac54ba1bff191334180312&q='+ciudad)
+                .then(function (response) {
+                    // handle success
+                    var mydate = new Date(response.data.location.localtime);
+                    console.log(mydate);
+                    var month = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"][mydate.getMonth()];
+                    var str = mydate.getDate()+' '+month + ' ' + mydate.getFullYear()+' '+mydate.getHours()+':'+mydate.getMinutes();
+                    console.log(response.data.current.temp_c);
+                    var htmlFecha = '<h4 style="display: table-cell; vertical-align: middle;height: 100%;padding: 5px; text-align: center;margin-left: auto; margin-right: auto;">'+str+'</h4>';
+                    var htmlClima = '<div style="display: table-cell; vertical-align: middle;height: 100%;padding: 5px; text-align: center;margin-left: auto; margin-right: auto;"><img style="display: inline-flex" src="'+response.data.current.condition.icon+'" /><h2 style="display: inline-flex; vertical-align: middle;">'+response.data.current.temp_c+'°C</h2></div>';
+                    var htmlCiudad = '<h4 style="display: table-cell; vertical-align: middle;height: 100%;padding: 5px; text-align: center;margin-left: auto; margin-right: auto;">'+response.data.location.name+'</h4>';
+                    $('#Fecha_index').append(htmlFecha);
+                    $('#Clima_index').append(htmlClima);
+                    $('#Ciudad_index').append(htmlCiudad);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+
+                })
+                .then(function () {
+                    // always executed
+                });
+        }
+
+        $('#carousel').on('slid.bs.carousel', function (e) {
+            var elemento = $('#carousel .carousel-inner .active video').first();
+            elemento.css('border', '2px solid black;');
+            console.log(elemento.prop("tagName"))
+            if (elemento.prop("tagName") == "VIDEO") {
+                var promise = elemento.get(0).play();
+                if (promise !== undefined) {
+
+                }
+            }
+        });
+        $('#carousel').on('slide.bs.carousel', function () {
+            var elemento = $('#carousel .carousel-inner .active video').first();
+            elemento.css('border', '2px solid black;');
+            console.log(elemento.prop("tagName"))
+            if (elemento.prop("tagName") == "VIDEO") {
+                var promise = elemento.get(0).pause();
+                if (promise !== undefined) {
+
+                }
+            }
+        });
+
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                    console.log('entro con mayor 1');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                    console.log('entro con menor 1');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#accesos').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenido + contenidoHeight - cabecera;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    console.log('entro con mayor 2');
+                    $('#scroll').attr('style', 'height: 100%;')
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                    console.log('entro con mayor 2');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#accesos').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenido + contenidoHeight - cabecera;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })
+
+
+
+
+
+
+
+
+

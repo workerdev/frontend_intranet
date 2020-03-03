@@ -1,0 +1,5 @@
+---
+applications:
+ - name: SendEmailApp
+   random-route: true
+   memory: 256M

@@ -1,0 +1,93 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/empresa_style.css')
+    style.
+        button{
+            outline: none;
+        }
+block contenido
+    h2.color_texto_base.text-center EMPRESA
+    .row        
+        #accordion.col-sm-12.col-md-12
+            .row
+                each dato in datos                
+                    .col-sm-6.pad-superior
+                        .card.bordes-card  
+                            .card-header.color_fondo_empresa.title_empresa.bordes-card-header
+                                .text-center
+                                    =dato.nombre
+                            .card-body(id='heading'+dato.id).ocultar.bordes-card                                
+                                //- collapse.color_cardBody.card_scroll(id='collapse'+dato.id ,aria-labelledby='heading'+dato.id, data-parent='#accordion')
+                                div#cuadro
+                                    each desc in dato.descripcion
+                                        .card-body 
+                                            =desc
+
+        #botones_empresas.col-sm-12.col-md-12.col-lg-12.pad-superior
+            .row.pad-superior
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                    div(onclick="location.href = '/empresa/organigrama'").text-center.manito.animated.pulse.infinite
+                        img(src="/images/Elfec iconos-02.png").w-50
+                        h3 Organigrama
+                .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                    div(onclick="location.href = '/empresa/comite_etica'").text-center.manito.animated.pulse.infinite
+                        img(src="/images/Elfec iconos-03.png").w-50
+                        h3 Comité de ética
+block scripts
+    script(type="text/javascript").
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height','817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height',(total)+'px')
+                    if (buttonNavigation.length > 13) {
+                        $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function(){
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if(anchowindow >= 992){
+                $('nav').css('height','817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                $('#scroll').attr('class', 'submenu_menor');
+                }
+            }else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                    if (buttonNavigation.length > 13) {
+                        $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })
+
+        $(".nav-link").click(function(){
+            var link = $(this).attr('data-link');
+            location.href = link;
+        })

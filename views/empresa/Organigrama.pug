@@ -1,0 +1,427 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', href='/css/select2.min.css')
+    style.
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    script(src="/Gojs/go-debug.js")
+    script.
+        function init() {
+            // if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
+                    {
+                        initialContentAlignment: go.Spot.Center,
+                        initialAutoScale: go.Diagram.None,
+                        maxSelectionCount: 1, // users can select only one part at a time
+                        validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create tree
+                        layout:
+                            $(SideTreeLayout,
+                                {
+                                    treeStyle: go.TreeLayout.StyleLastParents,
+                                    arrangement: go.TreeLayout.ArrangementHorizontal,
+                                    // properties for most of the tree:
+                                    angle: 90,
+                                    layerSpacing: 35,
+                                    // properties for the "last parents":
+                                    alternateAngle: 90,
+                                    alternateLayerSpacing: 35,
+                                    alternateAlignment: go.TreeLayout.AlignmentBus,
+                                    alternateNodeSpacing: 20
+                                }),
+                        "undoManager.isEnabled": true // enable undo & redo
+                    });
+
+            var levelColors = ["#19458D",
+                "#ff0000",
+                "#1f55ad",
+                "#2260c3",
+                "#266bd9",
+                "#3c7add",
+                "#5288e0",
+                "#6797e4",
+                "#7da6e8",
+                "#93b5ec",
+                "#a8c4f0"];
+            // override TreeLayout.commitNodes to also modify the background brush based on the tree depth level
+            // myDiagram.layout.commitNodes = function () {
+            //     go.TreeLayout.prototype.commitNodes.call(myDiagram.layout);  // do the standard behavior
+            //     // then go through all of the vertexes and set their corresponding node's Shape.fill
+            //     // to a brush dependent on the TreeVertex.level value
+            //     myDiagram.layout.network.vertexes.each(function (v) {
+            //         if (v.node) {
+            //             var level = v.level % (levelColors.length);
+            //             var color = levelColors[level];
+            //             var shape = v.node.findObject("SHAPE");
+            //             if (shape) shape.fill = $(go.Brush, "Linear", {
+            //                 0: color,
+            //                 1: go.Brush.lightenBy(color, 0.05),
+            //                 start: go.Spot.Left,
+            //                 end: go.Spot.Right
+            //             });
+            //         }
+            //     });
+            // };
+            // This function provides a common style for most of the TextBlocks.
+            // Some of these values may be overridden in a particular TextBlock.
+            function textStyle() {
+                return {font: "9pt  Segoe UI,sans-serif", stroke: "white"};
+            }
+
+            // define the Node template
+            myDiagram.nodeTemplate =
+                $(go.Node, "Auto",
+                    new go.Binding("text", "name"),
+                    // bind the Part.layerName to control the Node's layer depending on whether it isSelected
+                    new go.Binding("layerName", "isSelected", function (sel) {
+                        return sel ? "Foreground" : "";
+                    }).ofObject(),
+                    // define the node's outer shape
+                    $(go.Shape, "Rectangle",
+                        {
+                            name: "SHAPE", fill: "gray", stroke: null,
+                            // set the port properties:
+                            portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"
+                        }),
+                    $(go.Panel, "Horizontal",
+                        // define the panel where the text will appear
+                        $(go.Panel, "Table",
+                            {
+                                maxSize: new go.Size(185, 1049),
+                                margin: new go.Margin(6, 10, 0, 3),
+                                defaultAlignment: go.Spot.Left
+                            },
+                            $(go.RowColumnDefinition, {column: 2, width: 4}),
+                            $(go.TextBlock, textStyle(),  // the name
+                                {
+                                    row: 0, column: 0, columnSpan: 5,
+                                    font: "12pt Segoe UI,sans-serif",
+                                    editable: false, isMultiline: false,
+                                    minSize: new go.Size(10, 16)
+                                },
+                                new go.Binding("text", "name").makeTwoWay()),
+                            $(go.TextBlock, "Cargo: ", textStyle(),
+                                {row: 1, column: 0}),
+                            $(go.TextBlock, textStyle(),
+                                {
+                                    row: 1, column: 1, columnSpan: 4,
+                                    editable: false, isMultiline: false,
+                                    minSize: new go.Size(10, 14),
+                                    margin: new go.Margin(0, 0, 0, 3)
+
+                                },
+                                new go.Binding("text", "title").makeTwoWay()),
+
+                            $(go.TextBlock, textStyle(),  // the comments
+                                {
+                                    row: 3, column: 0, columnSpan: 5,
+                                    font: "italic 9pt sans-serif",
+                                    wrap: go.TextBlock.WrapFit,
+                                    editable: false,  // by default newlines are allowed
+                                    minSize: new go.Size(10, 14)
+                                },
+                                new go.Binding("text", "comments").makeTwoWay())
+                        ),
+                        $("TreeExpanderButton")// end Table Panel
+                    ) // end Horizontal Panel
+                );  // end Node
+            // the context menu allows users to make a position vacant,
+            // remove a role and reassign the subtree, or remove a department
+
+            // define the Link template
+            myDiagram.linkTemplate =
+                $(go.Link, go.Link.Orthogonal,
+                    {corner: 5, relinkableFrom: true, relinkableTo: true},
+                    $(go.Shape, {strokeWidth: 4, stroke: "#19458D"}));  // the link shape
+            // read in the JSON-format data from the "mySavedModel" element
+            load();
+            // support editing the properties of the selected person in HTML
+            if (window.Inspector) myInspector = new Inspector("myInspector", myDiagram,
+                {
+                    properties: {
+                        "key": {readOnly: true},
+                        "comments": {},
+                        "isassistant": {type: "boolean"}
+                    },
+                    propertyModified: function (name, val) {
+                        if (name === "isassistant") myDiagram.layout.invalidateLayout();
+                    }
+                });
+        }
+        // Assume that the SideTreeLayout determines whether a node is an "assistant" if a particular data property is true.
+        // You can adapt this code to decide according to your app's needs.
+        function isassistant(n) {
+            if (n === null) return false;
+            return n.data.isassistant;
+        }
+        // This is a custom TreeLayout that knows about "assistants".
+        // A Node for which isassistant(n) is true will be placed at the side below the parent node
+        // but above all of the other child nodes.
+        // An assistant node may be the root of its own subtree.
+        // An assistant node may have its own assistant nodes.
+        function SideTreeLayout() {
+            go.TreeLayout.call(this);
+        }
+
+        go.Diagram.inherit(SideTreeLayout, go.TreeLayout);
+        SideTreeLayout.prototype.makeNetwork = function (coll) {
+            var net = go.TreeLayout.prototype.makeNetwork.call(this, coll);
+            // copy the collection of TreeVertexes, because we will modify the network
+            var vertexcoll = new go.Set(go.TreeVertex);
+            vertexcoll.addAll(net.vertexes);
+            for (var it = vertexcoll.iterator; it.next();) {
+                var parent = it.value;
+                // count the number of assistants
+                var acount = 0;
+                var ait = parent.destinationVertexes;
+                while (ait.next()) {
+                    if (isassistant(ait.value.node)) acount++;
+                }
+                // if a vertex has some number of children that should be assistants
+                if (acount > 0) {
+                    // remember the assistant edges and the regular child edges
+                    var asstedges = new go.Set(go.TreeEdge);
+                    var childedges = new go.Set(go.TreeEdge);
+                    var eit = parent.destinationEdges;
+                    while (eit.next()) {
+                        var e = eit.value;
+                        if (isassistant(e.toVertex.node)) {
+                            asstedges.add(e);
+                        } else {
+                            childedges.add(e);
+                        }
+                    }
+                    // first remove all edges from PARENT
+                    eit = asstedges.iterator;
+                    while (eit.next()) {
+                        parent.deleteDestinationEdge(eit.value);
+                    }
+                    eit = childedges.iterator;
+                    while (eit.next()) {
+                        parent.deleteDestinationEdge(eit.value);
+                    }
+                    // if the number of assistants is odd, add a dummy assistant, to make the count even
+                    if (acount % 2 == 1) {
+                        var dummy = net.createVertex();
+                        net.addVertex(dummy);
+                        net.linkVertexes(parent, dummy, asstedges.first().link);
+                    }
+                    // now PARENT should get all of the assistant children
+                    eit = asstedges.iterator;
+                    while (eit.next()) {
+                        parent.addDestinationEdge(eit.value);
+                    }
+                    // create substitute vertex to be new parent of all regular children
+                    var subst = net.createVertex();
+                    net.addVertex(subst);
+                    // reparent regular children to the new substitute vertex
+                    eit = childedges.iterator;
+                    while (eit.next()) {
+                        var ce = eit.value;
+                        ce.fromVertex = subst;
+                        subst.addDestinationEdge(ce);
+                    }
+                    // finally can add substitute vertex as the final odd child,
+                    // to be positioned at the end of the PARENT's immediate subtree.
+                    var newedge = net.linkVertexes(parent, subst, null);
+                }
+            }
+            return net;
+        };
+
+        SideTreeLayout.prototype.assignTreeVertexValues = function (v) {
+            // if a vertex has any assistants, use Bus alignment
+            var any = false;
+            var children = v.children;
+            for (var i = 0; i < children.length; i++) {
+                var c = children[i];
+                if (isassistant(c.node)) {
+                    any = true;
+                    break;
+                }
+            }
+            if (any) {
+                // this is the parent for the assistant(s)
+                v.alignment = go.TreeLayout.AlignmentBus;  // this is required
+                v.nodeSpacing = 50; // control the distance of the assistants from the parent's main links
+            } else if (v.node == null && v.childrenCount > 0) {
+                // found the substitute parent for non-assistant children
+                //v.alignment = go.TreeLayout.AlignmentCenterChildren;
+                //v.breadthLimit = 3000;
+                v.layerSpacing = 0;
+            }
+        };
+
+        SideTreeLayout.prototype.commitLinks = function () {
+            go.TreeLayout.prototype.commitLinks.call(this);
+            // make sure the middle segment of an orthogonal link does not cross over the assistant subtree
+            var eit = this.network.edges.iterator;
+            while (eit.next()) {
+                var e = eit.value;
+                if (e.link == null) continue;
+                var r = e.link;
+                // does this edge come from a substitute parent vertex?
+                var subst = e.fromVertex;
+                if (subst.node == null && r.routing == go.Link.Orthogonal) {
+                    r.updateRoute();
+                    r.startRoute();
+                    // middle segment goes from point 2 to point 3
+                    var p1 = subst.center;  // assume artificial vertex has zero size
+                    var p2 = r.getPoint(2).copy();
+                    var p3 = r.getPoint(3).copy();
+                    var p5 = r.getPoint(r.pointsCount - 1);
+                    var dist = 10;
+                    if (subst.angle == 270 || subst.angle == 180) dist = -20;
+                    if (subst.angle == 90 || subst.angle == 270) {
+                        p2.y = p5.y - dist; // (p1.y+p5.y)/2;
+                        p3.y = p5.y - dist; // (p1.y+p5.y)/2;
+                    } else {
+                        p2.x = p5.x - dist; // (p1.x+p5.x)/2;
+                        p3.x = p5.x - dist; // (p1.x+p5.x)/2;
+                    }
+                    r.setPoint(2, p2);
+                    r.setPoint(3, p3);
+                    r.commitRoute();
+                }
+            }
+        };  // end of SideTreeLayout
+        // Show the diagram's model in JSON format
+        function save() {
+            document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+            myDiagram.isModified = true;
+        }
+
+        function load() {
+            myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+
+            var root_node = null;
+            myDiagram.findTreeRoots().each(function(n) { 
+                root_node = n.data 
+            })
+
+            myDiagram.nodes.each(function(n) { 
+                if(!Object.is(n.data, root_node)) n.collapseTree();
+            })
+        }
+
+
+
+block contenido
+    h2.color_texto_base.text-center ORGANIGRAMA
+    .container-fluid#det_docproc(style="margin-top:0%;")
+        #gg(style="margin-top:0%;")
+        .card
+            .card-body
+                ul.nav.nav-tabs.justify-content-center
+                    li.nav-item
+                        a.nav-link.active(data-toggle='tab' href='#taborgnc' style='padding: .5rem 1rem;') ORGANIGRAMA POR CARGO
+                    li.nav-item
+                        a.nav-link(data-toggle='tab' href='#taborgng' style='padding: .5rem 1rem;', id='ref-prv') ORGANIGRAMA POR GERENCIA
+                //Paneles
+                .tab-content
+                    #taborgnc.container-fluid.tab-pane.active
+                        fieldset.border.border-secondary 
+                            .row
+                                .col-sm-12(style="padding-right: 30px; padding-left: 30px; padding-bottom: 20px;")
+                                    .row
+                                        .col-sm-12                                        
+                                            label(for="comboOrgCargo" style="padding-top: 6px; width: 100%") CARGO
+                                                select#comboOrgCargo.js-example-basic-single.js-states.form-control
+                                                    option(disabled, selected) Seleccione
+                                                    option(value="0") Ver Todo
+                                .col-sm-12
+                                    #myDiagramDiv(style='background-color: #e3f2e8; border: solid 1px black; height: 500px')    
+                                    textarea#mySavedModel(style="width:100%;height:250px;display:none;")
+                                        |{"class": "go.TreeModel",
+                                        |"nodeDataArray": [
+                                        - var contador =  0;
+                                        each org in organigrama
+                                            - contador++
+                                            if contador < cantidad
+                                                ='{"key":'+org.key+',"name": "'+org.name+'","title":"'+org.title+'","parent":'+org.parent+',"isassistant":'+org.isassistant+'},'
+                                            else
+                                                ='{"key":' + org.key + ',"name": "' + org.name + '","title":"' + org.title + '","parent":' + org.parent + ',"isassistant":' + org.isassistant + '}'
+                                        |]} 
+                    #taborgng.container-fluid.tab-pane.fade 
+                        fieldset.border.border-secondary                    
+                            .row
+                                .col-sm-12(style="padding-right: 30px; padding-left: 30px; padding-bottom: 20px;")
+                                    .row
+                                        .col-sm-12                                        
+                                            label(for="comboOrganigrama" style="padding-top: 6px; width: 100% !important") GERENCIA
+                                                select#comboOrganigrama.js-example-basic-single.js-states.form-control
+                                                    option(disabled, selected) Seleccione
+                                .col-sm-12
+                                    img#imagen
+                                    
+
+                //Fin paneles  
+    
+    
+
+
+block scripts
+    script(src="/js/select2.min.js")
+    script.
+        init()   
+    script.
+        var selectOrganigrama = document.getElementById("comboOrganigrama")
+        var selectOrgCargo = document.getElementById("comboOrgCargo")
+        var arrayOrg = 0;
+        var arrayOrgcr = 0;
+        var servidor = '!{backend_route}'
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('.js-example-basic-single').select2();
+        });
+
+        $('.js-example-basic-single').select2();
+
+        axios.get('/get_combo_organigrama')
+            .then(function (response){
+
+                arrayOrg = response.data
+                for(e in response.data){
+                    opt = document.createElement("option");
+                    opt.value= response.data[e].id;
+                    opt.innerHTML = response.data[e].nombre;
+                    selectOrganigrama.appendChild(opt);                 
+                }
+            })
+
+        selectOrganigrama.onchange = function (){
+            for(e in arrayOrg ){
+                if(arrayOrg[e].id == this.value ){
+                    document.getElementById("imagen").src = servidor+arrayOrg[e].ruta                    
+                }
+            }
+        }
+
+        axios.get('/get_combo_orgcargo')
+            .then(function (response){
+                arrayOrgcr = response.data
+
+                for(e in response.data){
+                    opt = document.createElement("option");
+                    opt.value = response.data[e].idc;
+                    opt.innerHTML = response.data[e].cargo;
+                    selectOrgCargo.appendChild(opt);                 
+                }
+            })
+
+        $('#comboOrgCargo').change(function() {
+            let id_cargo = this.value;
+            
+            if(id_cargo == 0) window.location.href = '/empresa/organigrama';
+            else window.location.href = '/empresa/organigrama/' + id_cargo;
+        })

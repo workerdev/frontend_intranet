@@ -1,0 +1,80 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/indicadores_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+block contenido
+    h2.color_texto_base.text-center INDICADORES
+    #indicador.row(style="text-align: center;")        
+            button.box.blue(onclick="location.href = 'intranet/estadisticas/tropico/index.php'") 
+                div.align_horizontal
+                    h4(style="color:white;text-align: center;") VENTAS
+                    img#img-1(src="/images/Elfec iconos-09.png")
+            button.box.green
+                div.align_horizontal
+                    h4(style="color:white;") DÍAS SIN ACCIDENTES
+                    if dias == null || dias == undefined || dias == 0
+                        h6#tiempo_problemas 0
+                    else
+                        h6#tiempo_problemas=dias
+            button.box.red(onclick="location.href = '/indicadores/cobertura'")
+                div.align_horizontal
+                    h4(style="color:white;text-align: left;") COBERTURA
+            .box.yellow(onclick="location.href = 'intranet/estadisticas/tropico/index.php'")
+                div.align_horizontal
+                    h4#cliente_title(style="color:white;text-align:left;") CLIENTES
+                    img#img-2(src="/images/Elfec iconos-04.png")
+
+block scripts
+    script(type="text/javascript").
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })
+

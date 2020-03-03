@@ -1,0 +1,54 @@
+extends ../layout
+block style_propio
+    //link(rel='stylesheet', type='text/css', href='/css/extras/comite_etica.css')
+block contenido
+    div.card.mt-4
+        div.card-body
+            h4.card-title.text-center COBERTURA
+            div.table-responsive 
+                table.table.table-hover.table-light
+                    thead
+                    tr#hd-lcob
+                    tbody#cn-lcob
+
+
+block scripts  
+    script.
+        $(document).ready(function(){
+            $("div.card").animate({height: "+=400px"}, "slow");
+        });
+
+        axios.post('/listar_cobertura')
+            .then(function (response){
+                self = response.data;
+                var rep = [];
+                let html = "<th style='background-color: rgba(0, 76, 153, .2)'>NRO.</th>"+
+                            "<th style='background-color: rgba(0, 76, 153, .2)'>DESCRIPCION DATOS</th>"+
+                            "<th style='background-color: rgba(0, 76, 153, .2)'>UNIDAD</th>";
+                let html2;        
+                for(i=0; i<self.cobertura.length; i++){
+                    if (self.cobertura[i].mes != ""){
+                        let vmsa = self.cobertura[i].anio+"-"+self.cobertura[i].mes;
+                        rep.push(vmsa);
+                        if(rep.indexOf(vmsa) == rep.lastIndexOf(vmsa)) html += "<th style='background-color: rgba(0, 76, 153, .2)'>" + self.cobertura[i].mes + " - " +self.cobertura[i].anio + "</th>";
+                    }else{ 
+                        let van = self.cobertura[i].anio;
+                        rep.push(van);
+                        if(rep.indexOf(van) == rep.lastIndexOf(van)) html += "<th style='background-color: rgba(0, 76, 153, .2)'>" + van + "</th>";
+                    }
+                }
+                $("#hd-lcob").append(html);
+
+                for(m=0; m<self.tipo.length; m++){
+                    html2 += "<tr>"+
+                                "<td style='background-color: rgba(0, 76, 153, .4)'>" + self.tipo[m].id + "</td>" +
+                                "<td style='background-color: rgba(0, 76, 153, .4)'>" + self.tipo[m].nombre + "</td>" +
+                                "<td></td>";
+                    for(n=0; n<self.cobertura.length; n++){
+                        if(self.tipo[m].id == self.cobertura[n].fktipo)
+                        html2 += "<td>" + self.cobertura[n].valor + "</td>";
+                    }
+                    html2 += "</tr>";
+                }
+                $("#cn-lcob").append(html2);
+            })

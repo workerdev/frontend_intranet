@@ -1,0 +1,60 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/documentacion_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+block contenido
+    h2.color_texto_base Procesos
+
+//block scripts
+//    script(type="text/javascript").
+//        $(window).load(function () {
+//            $('#contenedor').slideDown('slow');
+//            var buttonNavigation = $('.nav-link');
+//            var anchowindow = (window.innerWidth);
+//
+//            if (anchowindow >= 992) {
+//                $('nav').css('height', '817px')
+//                if (buttonNavigation.length > 7) {
+//                    $('#scroll').attr('class', 'submenu_mayor');
+//                } else {
+//                    $('#scroll').attr('class', 'submenu_menor');
+//                }
+//            } else if (anchowindow >= 767 && anchowindow <= 991) {
+//                // var contenido = $('#accesos').offset().top;
+//                var contenidoHeight = $('#contenido').height();
+//                // var total = contenido + contenidoHeight;
+//                var cabecera = $('#head').height();
+//                var total = contenidoHeight;
+//                $('nav').css('height', (total) + 'px')
+//                if (buttonNavigation.length > 13) {
+//                    $('#scroll').attr('class', 'submenu_mayor');
+//                } else {
+//                    $('#scroll').attr('class', 'submenu_menor');
+//                }
+//            }
+//        });
+//
+//        $(window).on('resize', function () {
+//            var anchowindow = (window.innerWidth);
+//            var buttonNavigation = $('.nav-link');
+//            if (anchowindow >= 992) {
+//                $('nav').css('height', '817px')
+//                if (buttonNavigation.length > 7) {
+//                    $('#scroll').attr('class', 'submenu_mayor');
+//                } else {
+//                    $('#scroll').attr('class', 'submenu_menor');
+//                }
+//            } else if (anchowindow >= 767 && anchowindow <= 991) {
+//                // var contenido = $('#contenido';
+//                var contenidoHeight = $('#contenido').height();
+//                // var total = contenido + contenidoHeight;
+//                var cabecera = $('#head').height();
+//                var total = contenidoHeight;
+//                $('nav').css('height', (total) + 'px')
+//                if (buttonNavigation.length > 13) {
+//                    $('#scroll').attr('class', 'submenu_mayor');
+//                } else {
+//                    $('#scroll').attr('class', 'submenu_menor');
+//                }
+//            }
+//        })

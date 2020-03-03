@@ -1,0 +1,41 @@
+extends ../layout
+block style_propio
+    //link(rel='stylesheet', type='text/css', href='/css/extras/comite_etica.css')
+block contenido
+    h2.color_texto_base TIEMPO SIN ACCIDENTES
+    .row
+        .col-md-1
+        .col-md-10(style="margin: 15px;")
+            canvas#myChart.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+        .col-md-1
+
+block scripts
+    script(src='/Chartjs/Chart.min.js')
+    script(type="text/javascript").
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                datasets: [{
+                    data: [15339, 21345, 18483, 24003, 23489, 24092, 12034, 19965, 12345, 979],
+                    lineTension: 0,
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                }
+            }
+        });

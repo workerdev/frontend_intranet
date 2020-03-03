@@ -1,0 +1,84 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/extras/extra.css')    
+block contenido
+    div
+        #comite_etica.col-sm-12
+            .color_base(style="margin:5px;")
+                .row
+                    .col-sm-6.h-50.text-center
+                        img#img_elfec(src="/images/icons/ElfecBlanco.png",height="70px" )
+                    .col-sm-6.text-center
+                        img#img_logo(src="/images/icons/crowd-of-users.png")
+                    .col-sm-12
+                        h4.text-center Comit&eacute; de &Eacute;tica
+                .row
+                    .col-md-3
+                        h2 Título:
+                    .col-md-6
+                        input#asunto(name="asunto")
+                .row
+                    .col-md-3
+                        h2 Reclamo:
+                    .col-md-6
+                        textarea#cuerpo(name="cuerpo")
+                .row
+                    .col-md-12.text-center
+                        button#enviar_reclamo.btn.btn-primary ENVIAR
+
+block scripts
+    script(src="/js/sweetalert2.all.min.js")
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    script.
+        document.getElementById("enviar_reclamo").addEventListener("click", function(){
+            var asuntoValue = document.getElementById("asunto").value,
+                cuerpoValue = document.getElementById("cuerpo").value ;
+                //console.log(asuntoValue)
+                //console.log(cuerpoValue)
+            if(asuntoValue == "" || cuerpoValue  == "" ){
+                    Swal.fire(
+                'Error!',
+                'No se admiten valores vacio en el titulo y reclamo!',
+                'error'
+                )
+                console.log("cargo")
+            }else{             
+                Swal.fire({
+                    title: 'Espere por favor',                       
+                    confirmButtonText: 'Si',                                    
+                    allowEscapeKey: false,
+                    allowOutsideClick: function (){ !Swal.isLoading()},
+                    showLoaderOnConfirm: true,                                                                                   
+                    preConfirm : function (){
+                        return axios.post('/empresa/enviar_reclamo', {
+                            asunto: asuntoValue,
+                            cuerpo: cuerpoValue,
+                            remitente: localStorage.getItem("nombre")+" "+localStorage.getItem("apellido"),
+                            login:localStorage.getItem("login")                            
+                        })
+                        .then(function (response) {
+                            //console.log(response)
+                            return response.data                                                                                   
+                        })
+                        .catch(function (error) {
+                                // handle error
+                                console.log(error);                    
+                        })          
+                    },
+                    onOpen  : function (){
+                        Swal.clickConfirm()   
+                    }                          
+                }).then( function (result){
+                    //console.log("El rasultado es ")
+                    //console.log(result)
+                    if(result.value ){                                
+                                Swal.fire({                                        
+                                        type : 'success',
+                                        title :'Mensaje enviado correctamente!' 
+                                    }                                    
+                                )
+                                window.location ="/menu/1"
+                    }
+                })                                                                                                                    
+            }    
+        })

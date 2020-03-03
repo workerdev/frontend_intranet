@@ -1,0 +1,1070 @@
+
+extends ../layout
+
+block style_propio
+    //link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css?n=1')  
+    link(rel="stylesheet", href="/css/table_icon.css?n=1")
+    link(rel='stylesheet', type='text/css', href='/css/datepicker.min.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/css/select2.min.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/jquery-ui-1.12.1/jquery-ui.css?n=1')      
+    link(rel='stylesheet', type='text/css', href='/jquery-ui-1.12.1/jquery-ui.theme.css?n=1')     
+    link(rel='stylesheet', type='text/css', href='/jquery-ui-1.12.1/jquery-ui.structure.css?n=1')    
+    link(rel='stylesheet', type='text/css', href='/css/autocomplete-style.css?n=1') 
+    link(rel='stylesheet', type='text/css', href='/datatables/datatables.min.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/datatables/datatables/css/dataTables.bootstrap4.min.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/datatables/buttons/css/buttons.bootstrap.css?n=1')
+    //link(rel='stylesheet', type='text/css', href='/datatables/buttons/css/buttons.dataTables.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/datatables/buttons/css/buttons.bootstrap4.css?n=1')
+    link(rel='stylesheet', type='text/css', href='/fontawesome-5.12.1/css/all.css?n=1') 
+
+    style.
+        .datepicker{
+            z-index: 9999;
+        }
+        .form-control:disabled,.form-control[readonly]{
+            background-color: #ffffff;
+            opacity: 1;
+        } 
+        .bg-voided {
+            background-color: #ffb989 !important;
+        }
+        input[type="search"]{    
+            border: 1px solid #00940f !important;     
+        }
+        .hidden-own{
+            display: none;
+        }
+        .btn-scndr {
+            color: #fff !important;
+            background-color: #757575 !important;
+            border-color: #757575 !important;
+            padding: 3px 8px !important;
+            border-radius: 2px !important;
+        }
+        .btn-scndr:hover {
+            color: #fff !important;
+            background-color: #616161 !important;
+            border-color: #9e9e9e !important;
+        }
+        .btn-dngr {
+            color: #fff !important;
+            background-color: #f44336 !important;
+            border-color: #f44336 !important;
+            padding: 3px 8px !important;
+            border-radius: 6px !important;
+        }
+        .btn-dngr:hover {
+            color: #fff !important;
+            background-color: #e53935 !important;
+            border-color: #ef5350 !important;
+        }
+        .btn-sccss {
+            color: #fff !important;
+            background-color: #009688 !important;
+            border-color: #009688 !important;
+            padding: 3px 8px !important;
+            border-radius: 6px !important;
+        }
+        .btn-sccss:hover {
+            color: #fff !important;
+            background-color: #00897b  !important;
+            border-color: #26a69a !important;
+        }
+
+
+block contenido
+    input#backend(type="hidden", value=backend_route)
+    .container-fluid
+        .row.pb-2
+            .col-sm-12
+                h3.text-center(style="padding-top: 20px") Correlativo
+                .alert.alert-info#cargandoTabla
+                    <i class="fas fa-spinner fa-spin"></i>
+                    span &nbsp; Cargando datos espere por favor...
+            
+            .pb-2
+                button#newCorrelativo.btn.btn-primary(data-toggle="modal" data-target="#modalCorrelativo" style="display:none" ) 
+                    i.fas.fa-plus  
+                    span &nbsp;Nuevo  
+            
+            .col-sm-3(style="padding-right: 30px;padding-left: 30px;padding-bottom: 20px;")
+                .row
+                    .col
+                        .row
+                            .col-sm-3    
+                                label(for='comboGestion')  Gesti&oacute;n
+                            .col-sm-9
+                                select#comboGestion(name="comboGestion").form-control
+            
+            .col-sm-12            
+                table#table_correlativo.table.table-striped.table-bordered.display(style='width:100%')
+            
+            .col-sm-12
+                div(id='modalCorrelativo', class='modal fade', tabindex='-1', role='dialog')
+                    div(class='modal-dialog modal-lg')
+                        div(class='modal-content')
+                            form#submit_data.new(enctype="multipart/form-data", novalidate)
+                                .modal-header(style="background-color: #0085ba;")
+                                    h5(class='modal-title text-white')#modal-title 
+                                    button(type='button', class='close', data-dismiss='modal') &times;
+
+                                .modal-body#form(style="background-color: #dde7f9;") 
+                                    .box-body                                                              
+                                        .row
+                                            .col-sm-12
+                                                input(type="hidden", name="idCorrelativo")#idCorrelativo.correlative
+                                            
+                                            .col-sm-12
+                                                #cargandoDatos.alert.alert-info(style="display:none") Cargando datos...                                   
+                                            
+                                            .col-sm-4#prtnote
+                                                label Tipo de nota  
+                                                select(required, name="tipoNota")#tipoNota.form-control.correlative.js-example-basic-single
+                                                        
+                                            .col-sm-4.autocomplete 
+                                                label Redactor
+                                                input(type="text", required, autocomplete="off", name="redactor")#redactor.form-control.correlative.autocomp                  
+                                            
+                                            .col-sm-4
+                                                label Destinatario
+                                                input(type="text",required, name="destinatario")#destinatario.form-control.correlative 
+
+                                        .row.pt-2    
+                                            .col-sm-4 
+                                                label Referencia
+                                                input(type="text",required, name="referencia")#referencia.form-control.correlative  
+                                            
+                                            .col-sm-4#prtcenter 
+                                                label Centro de control correlativo
+                                                select(required, name="centroControl")#centroControl.form-control.correlative.js-example-basic-single                                        
+                                            
+                                            .col-sm-4 
+                                                label Antecedente
+                                                input(type="text", name="antecedente")#antecedente.form-control.correlative    
+                                        
+                                        .row.pt-2
+                                            .col-sm-4 
+                                                label URL
+                                                .form-check#formUrl(style="display:none")                                            
+                                                    input(type="checkbox")#urlCheckbox.form-check-input
+                                                    label.form-check-label(for="urlCheckbox") Modificar Archivo
+                                                input(type="file", name="url")#url.form-control-file.correlative
+                                                input(type="hidden")#urlText 
+                                            
+                                            .col-sm-4 
+                                                label URL editable
+                                                .form-check#formUrlEditable(style="display:none")                                           
+                                                    input(type="checkbox")#urlEditableCheckbox.form-check-input
+                                                    label.form-check-label(for="urlEditableCheckbox") Modificar Archivo                                        
+                                                input(type="file", name="urlEditable")#urlEditable.form-control-file.correlative
+                                                input(type="hidden")#urlEditableText       
+                                            
+                                            .col-sm-4 
+                                                label Url Origen
+                                                .form-check#formUrlOrigen(style="display:none")                                          
+                                                    input(type="checkbox")#urlOrigenCheckbox.form-check-input
+                                                    label.form-check-label(for="urlOrigenCheckbox") Modificar Archivo                                          
+                                                input(type="file", name="urlOrigen")#urlOrigen.form-control-file.correlative
+                                                input(type="hidden")#urlOrigenText                                        
+                                        
+                                        .row.pt-2  
+                                            .col-sm-4 
+                                                label Fecha de entrega
+                                                input#fechaEntrega.form-control.correlative(type="text", name="fechaEntrega",
+                                                    data-language='es',data-auto-close="true",data-position='top left' , readonly , required , data-date-format='yy-mm-dd')                  
+                                            
+                                            .col-sm-4#prtunit
+                                                label Unidad
+                                                select(required, name="unidad")#unidad.form-control.correlative.js-example-basic-single    
+
+                                .modal-footer(style="background-color: #b9d5ff;")
+                                    button.btn.btn-danger(type="button", data-dismiss="modal") Cerrar
+                                    button#guardar.btn.btn-primary(type="submit") Guardar
+                                    button#update.btn.btn-primary(type="submit") Guardar cambios
+
+block scripts 
+    script(src='/js/datepicker.min.js?n=1')
+    script(src='/js/datepicker.es.js?n=1')       
+    script(src='/js/customValidation.js?n=1')   
+    script(src="/js/fileSaver.js?n=1") 
+    script(src="/js/base64.js?n=1") 
+    script(src='/js/select2.min.js?n=1')
+    script(src='/js/jquery.dataTables.yadcf.js?n=1')  
+    script(src='/js/dataTables.bootstrap4.min.js?n=1')
+    script(src='/jquery-ui-1.12.1/jquery-ui.js?n=1')
+    script(src='/js/autocomplete-func.js?n=1')
+    script(src="/datatables/buttons/js/dataTables.buttons.min.js")
+    script(src="/datatables/jszip/jszip.min.js")
+    script(src="/datatables/pdfmake/pdfmake.min.js")
+    script(src="/datatables/pdfmake/vfs_fonts.js") 
+    script(src="/datatables/buttons/js/buttons.html5.min.js")
+          
+    script.
+        function load_view(year){
+            $('#cargandoTabla').show()
+
+            axios.post('/correlativo/datos_correlativo',{
+                username: localStorage.getItem("login"),
+                anio: year
+            })
+            .then(function (response){
+                var selectGestion = document.getElementById("comboGestion")
+                selectGestion.innerHTML = '';
+                console.log(response.data)
+                var gestiones = response.data.combo_gestion
+                var correlativos = response.data.correlativos
+
+                if(response.data.btn_permission){
+                    $('#newCorrelativo').show(); 
+                    $('#newCorrelativo').parent().addClass('col-sm-1');
+                }else{
+                    $('#newCorrelativo').hide(); 
+                    $('#newCorrelativo').parent().removeClass('col-sm-1');
+                } 
+
+                opti = document.createElement("option");
+                opti.innerHTML = 'Seleccione';
+                opti.disabled = true;
+                selectGestion.appendChild(opti);
+                for(e in gestiones){
+                    opt = document.createElement("option");
+                    opt.value = gestiones[e];
+                    opt.innerHTML = gestiones[e];
+                    selectGestion.appendChild(opt);
+                }
+                $('#comboGestion').val(year)
+
+                selectGestion.onchange = function (){
+                    load_view(this.value)
+                }
+
+                if ($.fn.DataTable.isDataTable('#table_correlativo')) {
+                    var tabledel = $('#table_correlativo').DataTable()
+                    tabledel.clear().draw()
+                    tabledel.destroy()
+                    $('#table_correlativo').empty()
+                }
+
+                var tableCorrelativo = $('#table_correlativo').DataTable({
+                        "scrollX": true,
+                        language :  {
+                            "url": "/js/Spanish.json"
+                        },
+                        data: correlativos,
+                        columns: [
+                            {
+                                "className": 'details-control',
+                                "orderable": false,
+                                "data": null,
+                                "defaultContent": '',
+                                "render": function () {
+                                    return '<i class="fa fa-plus-square" aria-hidden="true"></i>';
+                                }
+                            },
+                            { 
+                                title: 'Destinatario', data: "destinatario", visible: false 
+                            },
+                            { 
+                                title: 'Antecedente', data: "antecedente", visible: false 
+                            },
+                            { 
+                                title: 'Estado de correlativo', data: "estadocorrelativo", visible: false 
+                            },
+                            { 
+                                title: 'Item', data: "item", visible: false 
+                            },
+                            { 
+                                title: 'Fecha de entrega', data: "entrega", visible: false 
+                            },                    
+                            {   title: 'Centro de control correlativo', 
+                                data: function(data){
+                                    if(data.fkcorrelativo != null) return data.fkcorrelativo.descripcion
+                                    else return ''
+                                },
+                                visible: false 
+                            },
+                            {   title: 'Tipo de nota', 
+                                data: function(data){
+                                    if(data.fktiponota != null) return data.fktiponota.descripcion
+                                    else return ''
+                                },
+                                visible: false 
+                            },
+                            { 
+                                title: 'Unidad',
+                                data: function(data){
+                                    if(data.fkunidad != null) return data.fkunidad.nombre
+                                    else return ''
+                                },
+                                visible: false 
+                            },
+                            { title: "N&uacute;mero correlativo" , data : "numcorrelativo" },
+                            { title: "Fecha de registro", data : "fechareg" },                    
+                            { title: "Solicitante", data : "fullname" }, 
+                            { title: "Redactor", data : "redactor" },
+                            { title: "Referencia" , data : "referencia" }, 
+                            { title: "URL", data :"url",
+                                render : function (data, type, row) {
+                                    if (['', 'N/A', null].includes(data)) a = 'Ning&uacute;n archivo'                         
+                                    else {
+                                        url = $('#backend') .val() + data;
+                                        if (data == 'base64') a = '<a class="btn btn-warning btn-sm b64file" data-id="'+row.id+'" data-type="url" href="javascript:void(0)"><i class="fas fa-file-text"></i> Archivo </a>'
+                                        else a = '<a class="btn btn-primary btn-sm" target="_blank" href="' + url + '"><i class="fas fa-file-text"></i> Ver archivo </a>'
+                                    }                         
+                                    return a
+                            }
+                            },
+                            { title: "URL editable", data : "urleditable",
+                                render : function (data, type, row) {
+                                    if (['', 'N/A', null].includes(data)) a = 'Ning&uacute;n archivo'                         
+                                    else {
+                                        url = $('#backend') .val() + data;
+                                        if (data == 'base64') a = '<a class="btn btn-warning btn-sm b64file" data-id="'+row.id+'" data-type="urleditable" href="javascript:void(0)"><i class="fas fa-file-text"></i> Archivo </a>'
+                                        else a = '<a class="btn btn-primary btn-sm" target="_blank" href="' + url + '"><i class="fas fa-file-text"></i> Ver archivo </a>'
+                                    }                           
+                                    return a
+                                }
+                            },
+                            { title: "URL origen", data : "urlorigen",
+                                render : function (data, type, row){                            
+                                    if (['', 'N/A', null].includes(data)) a = 'Ning&uacute;n archivo'                         
+                                    else {
+                                        url = $('#backend') .val() + data;
+                                        if (data == 'base64') a = '<a class="btn btn-warning btn-sm b64file" data-id="'+row.id+'" data-type="urlorigen" href="javascript:void(0)"><i class="fas fa-file-text"></i> Archivo </a>'
+                                        else a = '<a class="btn btn-primary btn-sm" target="_blank" href="' + url + '"><i class="fas fa-file-text"></i> Ver archivo </a>'
+                                    }
+                                    return a
+                                }
+                            },
+                            { title: "Acciones", data : 'id' ,
+                                render : function (data, type, row){  
+                                    if(row.action_permission){                                           
+                                        a = '<button class="btn btn-primary editar" target="_blank" data-id="'+ row.id +'" data-numcorrelativo="'+ row.numcorrelativo +'" ><i class="fas fa-edit" style="color: aliceblue;font-size: 14px;"></i></button>'  +
+                                            '&nbsp;'                       
+                                        if(row.estadocorrelativo != 'Anulado'){
+                                            a += '<button class="btn btn-danger delete" target="_blank" data-id="'+ row.id  +'" data-numcorrelativo="'+ row.numcorrelativo +'" ><i class="fas fa-times" style="color: aliceblue;"></i></button>'
+                                        }
+                                    }else{
+                                        a = "Sin permisos"
+                                    }   
+                                    return a
+                                }
+                            }                                                            
+                        ],
+                        "createdRow": function( row, data, dataIndex ) {
+                            if (data.estadocorrelativo == "Anulado") {
+                                $(row).addClass('bg-voided');
+                            }
+                            $(row).children(':nth-child(7)').attr('align', 'center');
+                            $(row).children(':nth-child(8)').attr('align', 'center');
+                            $(row).children(':nth-child(9)').attr('align', 'center');
+                            $(row).children(':nth-child(10)').attr('align', 'center');
+                        },
+                        dom: "Bfrtip",
+                        "pageLength": 10,
+                        buttons: [
+                            { extend: 'pageLength', className: 'btn-scndr' },
+                            {  
+                                extend: 'pdfHtml5',
+                                orientation: 'landscape',
+                                pageSize: 'Legal',
+                                className: 'btn-dngr',
+                                customize: function(doc) {
+                                    doc.styles.tableBodyEven.alignment = 'center';
+                                    doc.styles.tableBodyOdd.alignment = 'center';
+
+                                    doc.content.splice( 0, 0, {
+                                        margin: [ 0, 0, 0, 2 ],
+                                        alignment: 'left',
+                                        image: 'data:image/png;base64,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'
+                                    });
+                                    doc.pageMargins = [20, 30, 15, 30];
+                                },
+                                exportOptions: {
+                                    columns: [ 
+                                        9, 10, 11, 12, 13, 1, 6, 7, 2, 3, 4, 5, 8
+                                    ],
+                                    format: { 
+                                        header: function ( data, column, row ) {
+                                            return data.split('<')[0]; 
+                                        }
+                                    }
+                                },
+                                title: 'ELFEC - Correlativos Registrados'
+                            },
+                            {  
+                                extend: 'excelHtml5',
+                                className: 'btn-sccss',
+                                exportOptions: { 
+                                    columns: [ 
+                                        9, 10, 11, 12, 13, 1, 6, 7, 2, 3, 4, 5, 8
+                                    ],
+                                    format: { 
+                                        header: function ( data, column, row ) {
+                                            return data.split('<')[0]; 
+                                        }
+                                    }
+                                },
+                                sheetName: 'Correlativos Registrados',
+                                title: 'ELFEC - Correlativos Registrados'  
+                            }
+                        ],
+                        initComplete: function () {
+                            $('.buttons-pdf').html('<i class="fa fa-file-pdf"></i> PDF')
+                            $('.buttons-excel').html('<i class="fa fa-file-excel"></i> Excel')
+                        }
+                    });   
+                
+                yadcf.init(tableCorrelativo, [{
+                        column_number: 9,
+                        select_type: 'select2',
+                        filter_reset_button_text: false,
+                        filter_default_label: "Todos"
+                    }, {
+                        column_number: 10,
+                        select_type: 'select2',
+                        filter_reset_button_text: false,
+                        filter_default_label: "Todos"
+                    },{
+                        column_number: 11,
+                        select_type: 'select2',
+                        filter_reset_button_text: false,
+                        filter_default_label: "Todos"
+                    },{
+                        column_number: 12,
+                        select_type: 'select2',
+                        filter_reset_button_text: false,
+                        filter_default_label: "Todos"
+                    },{
+                        column_number: 13,
+                        select_type: 'select2',
+                        filter_reset_button_text: false,
+                        filter_default_label: "Todos"                
+                    }
+                    ],{
+                        cumulative_filtering: true                
+                    })
+
+                $('#table_correlativo tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var tdi = tr.find("i.fa");
+                    var row = tableCorrelativo.row(tr);
+    
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                        tdi.first().removeClass('fa-minus-square');
+                        tdi.first().addClass('fa-plus-square');
+                    }
+                    else {
+                        // Open this row
+                        row.child(format(row.data())).show();
+                        tr.addClass('shown');
+                        tdi.first().removeClass('fa-plus-square');
+                        tdi.first().addClass('fa-minus-square');
+                    }                
+                });
+                tableCorrelativo.on("user-select", function (e, dt, type, cell, originalEvent) {
+                    if ($(cell.node()).hasClass("details-control")) {
+                        e.preventDefault();
+                    }
+                });
+                
+                $('#cargandoTabla').fadeOut('slow')
+            }).catch(function (error) {
+                console.log('error');
+                console.log(error);
+                $('#cargandoTabla').fadeOut('slow')
+                Swal.fire(
+                    'Error al obtener los correlativos', 'No se pudo realizar la acci&oacute;n.', 'error'
+                ) 
+                if (error.response) {
+                    // The request was made and the server responded with a status code that falls out of the range of 2xx
+                    console.log('error response');
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                    console.log('error request');
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
+        }
+
+        function format(data){
+            // `d` is the original data object for the row
+            if(data.fkcorrelativo != null) correlativo = data.fkcorrelativo.descripcion;
+            else correlativo = '';
+
+            if(data.fktiponota != null) tiponota = data.fktiponota.descripcion;
+            else tiponota = '';
+
+            if(data.fkunidad != null) unidad = data.fkunidad.nombre;
+            else unidad = ''; 
+
+            if(data.entrega != null) entrega = data.entrega;
+            else entrega = ''; 
+
+            if(data.antecedente == null) antecedente = ''; else antecedente = data.antecedente;
+            if(data.estadocorrelativo == null) estadocorrelativo = ''; else estadocorrelativo = data.estadocorrelativo;
+
+            return '<table id="tableDetalleCorrelativo" class="w-100" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                    '<td class="">Destinatario:</td>'+
+                    '<td>'+data.destinatario+'</td>'+
+                '</tr>'+           
+                '<tr>'+
+                    '<td class="">Centro de control correlativo:</td>'+
+                    '<td>'+correlativo+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="">Tipo de nota:</td>'+
+                    '<td>'+tiponota+'</td>'+
+                '</tr>'+                      
+                '<tr>'+
+                    '<td class="">Antecedente:</td>'+
+                    '<td>'+antecedente+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="">Estado correlativo:</td>'+
+                    '<td>'+estadocorrelativo+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="">Item:</td>'+
+                    '<td>'+data.item+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="">Fecha de entrega:</td>'+
+                    '<td>'+entrega+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="">Unidad:</td>'+
+                    '<td>'+unidad+'</td>'+
+                '</tr>'+
+                '</table>';
+        }
+        
+        $(document).ready(function() {
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '< Ant',
+                nextText: 'Sig >',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Mi&eacute;rcoles', 'Jueves', 'Viernes', 'S&aacute;bado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+
+            $("#fechaEntrega").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+
+            var c_year = new Date().getFullYear()
+            load_view(c_year)
+        })
+
+        function clean_data(){
+            $('.correlative').val('')
+        }
+
+        $('#newCorrelativo').click(function(){
+            $('#modal-title').text('Registrar Correlativo')
+            $('#update').hide()
+            $('#guardar').show()
+            clean_data()
+            
+            $('#url').show()
+            $('#urlEditable').show()
+            $('#urlOrigen').show()
+            $('#formUrl').hide()
+            $('#formUrlEditable').hide()
+            $('#formUrlOrigen').hide()
+
+            document.getElementById("unidad").innerHTML = "";            
+            document.getElementById("centroControl").innerHTML = "";
+            document.getElementById("tipoNota").innerHTML = "";
+            form_select()
+        })
+
+        function form_select(){
+            $('#cargandoDatos').show();
+
+            axios.post('/correlativo/form_datos',{
+                username: localStorage.getItem("login"),
+                anio: $('#comboGestion').val()
+            })
+            .then(function (response){
+                //console.log(response.data)
+                var selectNota = document.getElementById("tipoNota")
+                var selectCentro = document.getElementById("centroControl")
+                var selectUnidad = document.getElementById("unidad")
+
+                var notas = response.data.nota
+                var controles = response.data.control
+                var unidades = response.data.unidad
+                
+                selectNota.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+                selectCentro.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+                selectUnidad.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+
+                if(response.data.permission_units){
+                    for(en in notas){
+                        optn = document.createElement("option");
+                        optn.value = notas[en].id;
+                        optn.innerHTML = notas[en].nombre;
+                        selectNota.appendChild(optn);
+                    }
+
+                    for(ec in controles){
+                        optc = document.createElement("option");
+                        optc.value = controles[ec].id;
+                        optc.innerHTML = controles[ec].nombre;
+                        selectCentro.appendChild(optc);
+                    }
+
+                    for(eu in unidades){
+                        optu = document.createElement("option");
+                        optu.value = unidades[eu].id;
+                        optu.innerHTML = unidades[eu].nombre;
+                        selectUnidad.appendChild(optu);
+                    }
+                    $('#centroControl').select2({
+                        language: "es",
+                        dropdownParent: $('#prtcenter')
+                    });
+                    $('#tipoNota').select2({
+                        language: "es",
+                        dropdownParent: $('#prtnote')
+                    });
+                    $('#unidad').select2({
+                        language: "es",
+                        dropdownParent: $('#prtunit')
+                    });
+                    
+                    if(response.data.idctrl != null){
+                        $('#centroControl').val(response.data.idctrl.id)
+                        $('#centroControl').trigger('change')
+                    }
+                    
+                    autocomplete(document.getElementById("redactor"), response.data.redactores);
+                }else{
+                    Swal.fire({                                        
+                        type : 'warning',
+                        title : 'Error',
+                        text : 'No tiene ning&uacute;n permiso para crear correlativos.'
+                    })
+                    $('#modalCorrelativo').modal('hide')
+                    var prm_year = $('#comboGestion').val()
+                    load_view(prm_year)
+                }
+
+                $('#cargandoDatos').fadeOut('slow')
+            }).catch(function (error) {
+                console.log('error');
+                console.log(error);
+                $('#cargandoDatos').hide();
+                $('#modalCorrelativo').modal('hide')
+                Swal.fire(
+                    'Error al cargar datos del formulario', 'No se pudo realizar la acci&oacute;n.', 'error'
+                ) 
+                if (error.response) {
+                    // The request was made and the server responded with a status code that falls out of the range of 2xx
+                    console.log('error response');
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                    console.log('error request');
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
+        }
+
+        $('#submit_data').on('submit', function (e) {
+            e.preventDefault();
+            var formData = new FormData();
+            validationSelectChange('form');
+            
+            if (validationInputSelects("form") != true) {
+                var urlfl = document.querySelector('#url')
+                var urledtfl = document.querySelector('#urlEditable')
+                var urlorgfl = document.querySelector('#urlOrigen')
+
+                formData.append("url", urlfl.files[0])
+                formData.append("urleditable", urledtfl.files[0])
+                formData.append("urlorigen", urlorgfl.files[0])
+
+                if ($('#idCorrelativo').val() !== '') {
+                    formData.append('id', parseInt($('#idCorrelativo').val()))
+                } else {
+                    formData.append('fksolicitante', localStorage.getItem('login'))
+                    formData.append('item', localStorage.getItem('item_personal'))
+                }
+                formData.append('redactor', $('#redactor').val())
+                formData.append('destinatario', $('#destinatario').val())
+                formData.append('referencia', $('#referencia').val())
+                formData.append('fkcorrelativo', $('#centroControl').val())
+                formData.append('fktiponota', $('#tipoNota').val())
+                formData.append('antecedente', $('#antecedente').val())
+                formData.append('entrega', $('#fechaEntrega').val())
+                formData.append('fkunidad', $('#unidad').val())
+
+                var rutasrv = $('#backend') .val() + '/correlative_insert'
+
+                Swal.fire({
+                    title: 'Espere por favor',                       
+                    confirmButtonText: 'Si',                                    
+                    allowEscapeKey: false,
+                    allowOutsideClick: function () { !Swal.isLoading() } ,
+                    showLoaderOnConfirm: true,                                                                                   
+                    preConfirm : function (){
+                        return axios.post(rutasrv, formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }).then(function (response) {
+                            console.log('response')
+                            console.log(response)
+                            return response.data
+                        }).catch(function (error) {
+                            console.log('error');
+                            console.log(error);
+                            $('#modalCorrelativo').modal('hide')
+                            Swal.fire(
+                                'Error al registrar', 'No se pudo realizar la acción.', 'error'
+                            ) 
+                            if (error.response) {
+                                // The request was made and the server responded with a status code that falls out of the range of 2xx
+                                console.log('error response');
+                                console.log(error.response.data);
+                                console.log(error.response.status);
+                                console.log(error.response.headers);
+                            } else if (error.request) {
+                                // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                                console.log('error request');
+                                console.log(error.request);
+                            } else {
+                                // Something happened in setting up the request that triggered an Error
+                                console.log('Error', error.message);
+                            }
+                            console.log(error.config);
+                        });     
+                    },
+                    onOpen  : function (){
+                        Swal.clickConfirm()   
+                    }                          
+                }).then( function (result){
+                    console.log("El rasultado es ")
+                    console.log(result)
+                    if (result.value.success) {  
+                        $('#modalCorrelativo').modal('hide')                         
+                        Swal.fire({                                        
+                            type : 'success',
+                            title : result.value.response
+                        }) 
+                        var prm_year = $('#comboGestion').val()
+                        load_view(prm_year)                     
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Error al registrar', 'Revise los datos en el formulario.', 'error'
+                ) 
+            }
+        })
+        
+        $(document).on('click','.editar', function() {
+            $('#update').show()
+            $('#guardar').hide()
+            $('#cargandoDatos').show()
+            $('#modalCorrelativo').modal('show')
+            //console.log(this.dataset)            
+            
+            document.getElementById("unidad").innerHTML = "";            
+            document.getElementById("centroControl").innerHTML = "";
+            document.getElementById("tipoNota").innerHTML = "";
+
+            $('#modal-title').text('Editar Correlativo' + " " + this.dataset.numcorrelativo)
+            $('#idCorrelativo').val(this.dataset.id)
+            $('#formUrl').show()
+            $('#formUrlEditable').show()
+            $('#formUrlOrigen').show()
+
+            $('#url').hide()
+            $('#urlEditable').hide()
+            $('#urlOrigen').hide()
+
+            $('#urlCheckbox').prop('checked', false)
+            $('#urlEditableCheckbox').prop('checked', false)
+            $('#urlOrigenCheckbox').prop('checked', false)
+            $('#url').val('')
+            $('#urlEditable').val('')
+            $('#urlOrigen').val('')
+
+            document.getElementById("urlCheckbox").addEventListener('click',function(){
+                if(document.getElementById('urlCheckbox').checked == true){
+                    $('#url').show()
+                }else{
+                    $('#url').hide()
+                }
+            })
+            document.getElementById("urlEditableCheckbox").addEventListener('click',function(){
+                if(document.getElementById('urlEditableCheckbox').checked == true){
+                    $('#urlEditable').show()
+                }else{
+                    $('#urlEditable').hide()
+                }
+            })
+            document.getElementById("urlOrigenCheckbox").addEventListener('click',function(){
+                if(document.getElementById('urlOrigenCheckbox').checked == true){
+                    $('#urlOrigen').show()
+                }else{
+                    $('#urlOrigen').hide()
+                }
+            })
+
+            clean_data()
+            axios.post('/correlativo/editarCorrelativo',{
+                id: this.dataset.id,
+                username: localStorage.getItem('login'),
+                anio: $('#comboGestion').val()
+            }).then(function (response){
+                datoCorrelativo = response.data.correlativo 
+                //console.log(response.data)
+
+                var selectNota = document.getElementById("tipoNota")
+                var selectCentro = document.getElementById("centroControl")
+                var selectUnidad = document.getElementById("unidad")
+
+                var notas = response.data.nota
+                var controles = response.data.control
+                var unidades = response.data.unidad
+                
+                selectNota.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+                selectCentro.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+                selectUnidad.innerHTML = '<option disabled selected value="">Seleccione una opci&oacute;n</option>'
+
+                if(response.data.permission_unit){
+                    for(en in notas){
+                        optn = document.createElement("option");
+                        optn.value = notas[en].id;
+                        optn.innerHTML = notas[en].nombre;
+                        selectNota.appendChild(optn);
+                    }
+
+                    for(ec in controles){
+                        optc = document.createElement("option");
+                        optc.value = controles[ec].id;
+                        optc.innerHTML = controles[ec].nombre;
+                        selectCentro.appendChild(optc);
+                    }
+
+                    for(eu in unidades){
+                        optu = document.createElement("option");
+                        optu.value = unidades[eu].id;
+                        optu.innerHTML = unidades[eu].nombre;
+                        selectUnidad.appendChild(optu);
+                    }
+                    $('#centroControl').select2({
+                        dropdownParent: $('#prtcenter')
+                    });
+                    $('#tipoNota').select2({
+                        dropdownParent: $('#prtnote')
+                    });
+                    $('#unidad').select2({
+                        dropdownParent: $('#prtunit')
+                    });
+                    
+                    autocomplete(document.getElementById("redactor"), response.data.redactores);
+
+                    $('#idCorrelativo').val(datoCorrelativo.id)   
+                    $('#redactor').val(datoCorrelativo.redactor)
+                    $('#destinatario').val(datoCorrelativo.destinatario)
+                    $('#referencia').val(datoCorrelativo.referencia)
+
+                    if(datoCorrelativo.fkcorrelativo != null){
+                        $('#centroControl').val(datoCorrelativo.fkcorrelativo.id) 
+                        $('#centroControl').trigger('change')
+                    }
+                    if(datoCorrelativo.fktiponota != null){
+                        $('#tipoNota').val(datoCorrelativo.fktiponota.id)
+                        $('#tipoNota').trigger('change')
+                    }
+                    if(datoCorrelativo.fkunidad != null){
+                        $('#unidad').val(datoCorrelativo.fkunidad.id)
+                        $('#unidad').trigger('change')
+                    }
+                    
+                    if(datoCorrelativo.entrega != null) $("#fechaEntrega").datepicker("setDate", datoCorrelativo.entrega)
+                    
+                    $('#antecedente').val(datoCorrelativo.antecedente)
+                    $('#urlText').val(datoCorrelativo.url)
+                    $('#urlEditableText').val(datoCorrelativo.urleditable)
+                    $('#urlOrigenText').val(datoCorrelativo.urlorigen)
+
+                    $('#cargandoDatos').hide()
+                }else{
+                    Swal.fire({                                        
+                        type : 'warning',
+                        title : 'Error',
+                        text : 'No tiene permiso para crear y modificar correlativos en esta unidad.'
+                    })
+                    $('#cargandoDatos').hide()
+                    $('#modalCorrelativo').modal('hide')
+                    var prm_year = $('#comboGestion').val()
+                    load_view(prm_year)
+                }
+            }).catch(function (error) {
+                console.log('error');
+                console.log(error);
+                $('#cargandoDatos').hide();
+                $('#modalCorrelativo').modal('hide')
+                Swal.fire(
+                    'Error al cargar los datos del correlativo', 'No se pudo realizar la acci&oacute;n.', 'error'
+                ) 
+                if (error.response) {
+                    // The request was made and the server responded with a status code that falls out of the range of 2xx
+                    console.log('error response');
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                    console.log('error request');
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
+        });
+
+        $(document).on('click','.delete', function() {
+            var idDelete = this.dataset.id
+            var numCorrelativo = this.dataset.numcorrelativo
+
+            Swal.fire({
+                title: 'Seguro que desea anular el correlativo nro: ' + numCorrelativo + '?',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                showLoaderOnConfirm: true,
+                preConfirm : function (){
+                    return axios.post('/correlativo/eliminarCorrelativo', {                    
+                        id: idDelete,
+                        username: localStorage.getItem('login')                                
+                    }).then(function(response) {
+                        //console.log(response)
+                        return response.data  
+                    }).catch(function (error) {
+                        console.log('error');
+                        console.log(error);
+                        
+                        Swal.fire(
+                            'Error al anular el correlativo', 'No se pudo realizar la acci&oacute;n.', 'error'
+                        ) 
+                        if (error.response) {
+                            // The request was made and the server responded with a status code that falls out of the range of 2xx
+                            console.log('error response');
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+                        } else if (error.request) {
+                            // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                            console.log('error request');
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    });      
+                },
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI',
+                cancelButtonText: 'NO!'
+            }).then( function (result) {
+                console.log(result)
+                if (result.value.success) {
+                    console.log(result.value)
+                    Swal.fire(
+                        'Anulado!',
+                        'El correlativo ha sido anulado.',
+                        'success'
+                    )
+                }else{
+                    Swal.fire({                                        
+                        type : 'warning',
+                        title : 'Error',
+                        text : result.value.message
+                    })
+                }
+                var prm_year = $('#comboGestion').val()
+                load_view(prm_year)
+            })              
+        });
+
+        $(document).on('click','.b64file', function() {
+            //console.log(this.getAttribute("data-id"))
+            var id = this.getAttribute("data-id")
+            var tipo = this.getAttribute("data-type")
+            axios.post('/correlativo/obtenerArchivo', {
+                id: id,
+                tipo: tipo 
+            }).then(function (response){
+                console.log(response.data)
+                var dtfile = response.data[0];
+                var archivo = dtfile[tipo]
+                var tipoArchivo = base64MimeType(archivo)
+                console.log(tipoArchivo)
+                
+                var archivoBlob = b64toBlob(archivo, tipoArchivo)
+                var filename = dtfile.gestion + '_' + dtfile.numcorrelativo + '_' + tipo
+                saveAs(archivoBlob , filename)
+            }).catch(function (error) {
+                console.log('error');
+                console.log(error);
+                Swal.fire(
+                    'Error al obtener los datos del archivo', 'No se pudo realizar la acci&oacute;n.', 'error'
+                ) 
+                if (error.response) {
+                    // The request was made and the server responded with a status code that falls out of the range of 2xx
+                    console.log('error response');
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in node.js
+                    console.log('error request');
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
+        })
+        

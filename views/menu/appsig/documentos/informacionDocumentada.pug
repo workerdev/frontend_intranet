@@ -1,0 +1,174 @@
+.container-fluid
+    .row
+        .col-sm-12#infdocumentada(style="display:none;")    
+            #doc_inf_documentada
+                input#rt_infd(type="hidden", value=backend_route)
+                table#table_inf_documentada.table.table-striped.table-bordered
+                    tfoot
+                        tr
+                            th
+                            th
+                            th
+                            th
+                            th
+                            th
+                            th
+                            th
+                    //- thead
+                    //-     tr
+                    //-         th GERENCIA
+                    //-         th AREA
+                    //-         th TIPO DOCUMENTO
+                    //-         th CODIGO (VER DETALLE) 
+                    //-         th TITULO DOCUMENTO
+                    //-         th VINCULO DOC
+                    //-         th VERSION
+                    //-         th F. PUBLICACION
+                    //- tbody
+                    //-     tr
+        .col-sm-12#formularios_inf_doc(style="display:none;") 
+            #doc_inf_documentada_form
+                .row
+                    .col-sm-12
+                        p.fuente_y_color.text-center DOCUMENTOS
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_CODIGO_DOCUMENTO') CODIGO DOCUMENTO
+                            .col-sm-9
+                                input#DOC_CODIGO_DOCUMENTO.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_CODIGO_PROCESO') CODIGO PROCESO
+                            .col-sm-9
+                                input#DOC_CODIGO_PROCESO.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_TIPO_DOCUMENTO') TIPO DOCUMENTO
+                            .col-sm-9
+                                input#DOC_TIPO_DOCUMENTO.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_TITULO_DOCUMENTO') TITULO DOCUMENTO
+                            .col-sm-9
+                                input#DOC_TITULO_DOCUMENTO.form-control(type='text')
+                    .col-sm-4                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_VERSION') VERSION
+                            .col-sm-9
+                                input#DOC_VERSION.form-control(type='text')
+                    .col-sm-4                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FECHA_PUBLICACION') FECHA PUBLICACION
+                            .col-sm-9
+                                input#DOC_FECHA_PUBLICACION.form-control(type='text')
+                    .col-sm-4                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_APROBADO_POR') APROBADO POR
+                            .col-sm-9
+                                input#DOC_APROBADO_POR.form-control(type='text')
+                    .col-sm-4                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_CARPETA_OPERATIVA') CARPETA OPERATIVA
+                            .col-sm-9
+                                input#DOC_CARPETA_OPERATIVA.form-control(type='text')
+                    .col-sm-4                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_VINCULO_ARCHIVO') VINCULO ARCHIVO
+                            .col-sm-9
+                                a#DOC_VINCULO_ARCHIVO.btn.btn-primary
+                    .col-sm-4()                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_VINCULO_DIAGRAMA') VINCULO DIAGRAMA
+                            .col-sm-9
+                                a#DOC_VINCULO_DIAGRAMA.btn.btn-primary
+            #doc_inf_documentada_fichaproceso
+                .row
+                    .col-sm-12
+                        p.fuente_y_color.text-center FICHA PROCESO
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_ID') ID
+                            .col-sm-9
+                                input#DOC_FP_ID.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_ID_AREA') ID AREA
+                            .col-sm-9
+                                input#DOC_FP_ID_AREA.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_CODIGO_PROCESO') CODIGO PROCESO
+                            .col-sm-9
+                                input#DOC_FP_CODIGO_PROCESO.form-control(type='text')
+                    .col-sm-6                        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_NOMBRE') NOMBRE
+                            .col-sm-9
+                                input#DOC_FP_NOMBRE.form-control(type='text')
+                    .col-sm-6
+                        .form-group
+                            label(for='DOC_FP_OBJETIVO_PROCESO') OBJETIVO PROCESO
+                            textarea#DOC_FP_OBJETIVO_PROCESO.form-control
+                    .col-sm-6
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_VIGENTE') VIGENTE
+                            .col-sm-9
+                                input#DOC_FP_VIGENTE.form-control(type='text')
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_VERSION') VERSION
+                            .col-sm-9
+                                input#DOC_FP_VERSION.form-control(type='text')        
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_FP_FECHA_EMISION') FECHA EMISION
+                            .col-sm-9
+                                input#DOC_FP_FECHA_EMISION.form-control(type='text')   
+                    .col-sm-6
+                        .form-group
+                            label(for='DOC_FP_ENTRADAS_REQUERIDAS') ENTRADAS REQUERIDAS
+                            textarea#DOC_FP_ENTRADAS_REQUERIDAS.form-control
+                    .col-sm-6
+                        .form-group
+                            label(for='DOC_FP_SALIDAS_ESPERADAS') SALIDAS ESPERADAS
+                            textarea#DOC_FP_SALIDAS_ESPERADAS.form-control
+                    .col-sm-6
+                        .form-group
+                            label(for='DOC_FP_RECURSOS_NECESARIOS') RECURSOS NECESARIOS
+                            textarea#DOC_FP_RECURSOS_NECESARIOS.form-control
+                    .col-sm-6
+                        //Formulario Gerencia Area Sector
+                        .row.text-center
+                            .col-sm-12
+                                p.fuente_y_color.text-center GERENCIA AREA SECTOR
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_ID_AREA') ID AREA
+                            .col-sm-9
+                                input#DOC_GAS_ID_AREA.form-control(type='text')
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_GERENCIA') GERENCIA
+                            .col-sm-9
+                                input#DOC_GAS_GERENCIA.form-control(type='text')
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_AREA') AREA
+                            .col-sm-9
+                                input#DOC_GAS_AREA.form-control(type='text')                       
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_SECTOR') SECTOR
+                            .col-sm-9
+                                input#DOC_GAS_SECTOR.form-control(type='text')
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_RESPONSABLE') RESPONSABLE
+                            .col-sm-9
+                                input#DOC_GAS_RESPONSABLE.form-control(type='text')
+                        .form-group.row
+                            label.paralabel-control.col-sm-3(for='DOC_GAS_VIGENTE') VIGENTE
+                            .col-sm-9
+                                input#DOC_GAS_VIGENTE.form-control(type='text')
+            #doc_inf_documentada_fichacargo    
+                .row
+                    .col-sm-12
+                        p.fuente_y_color.text-center FICHAS DE CARGO
+                        table#table_inf_documentada_fc.table.table-bordered
+            br
+            br                
+                            
+                        

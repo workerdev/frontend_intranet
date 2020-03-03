@@ -1,0 +1,87 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/extras/extra.css')
+block contenido
+    h2.color_texto_base VENTAS
+    .row
+        .col-md-1
+        .col-md-4
+            .row
+                .col-md-6
+                    h4 Sistema
+                .col-md-6
+                    select.form-control
+                        option URBANO
+                        option RURAL
+                        option EMPRESARIAL
+        .col-md-4
+        .col-md-3
+            button.btn
+                |Impresion
+            button.btn
+                |Exportar
+    .row
+        .col-md-1
+        .col-md-10(style="padding: 15px;")
+            ul#myTab.nav.nav-tabs.nav-fill(role='tablist')
+                li.nav-item
+                    a#EnerZonas-tab.nav-link.active(data-toggle='tab', href='#EnerZonas', role='tab', aria-controls='home', aria-selected='true') Energía por Zonas
+                li.nav-item
+                    a#Energia-tab.nav-link(data-toggle='tab', href='#Energia', role='tab', aria-controls='profile', aria-selected='false') Energía
+                li.nav-item
+                    a#ClieZonas-tab.nav-link(data-toggle='tab', href='#ClieZonas', role='tab', aria-controls='contact', aria-selected='false') Clientes por Zonas
+                li.nav-item
+                    a#CantClien-tab.nav-link(data-toggle='tab', href='#CantClien', role='tab', aria-controls='contact', aria-selected='false') Cantidad de Clientes
+                li.nav-item
+                    a#CompEner-tab.nav-link(data-toggle='tab', href='#CompEner', role='tab', aria-controls='contact', aria-selected='false') Compra Energía
+                li.nav-item
+                    a#PerdiEner-tab.nav-link(data-toggle='tab', href='#PerdiEner', role='tab', aria-controls='contact', aria-selected='false') Perdida Energía
+                li.nav-item
+                    a#PerdiPorcen-tab.nav-link(data-toggle='tab', href='#PerdiPorcen', role='tab', aria-controls='contact', aria-selected='false') Perdida Porcentual
+            #myTabContent.tab-content
+                #EnerZonas.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='EnerZonas-tab') TAB1
+                    canvas#myChart.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #Energia.tab-pane.fade(role='tabpanel', aria-labelledby='Energia-tab') TAB 2
+                    canvas#myChart1.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #ClieZonas.tab-pane.fade(role='tabpanel', aria-labelledby='ClieZonas-tab') TAB 3
+                    canvas#myChart2.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #CantClien.tab-pane.fade(role='tabpanel', aria-labelledby='CantClien-tab') TAB 4
+                    canvas#myChart3.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #CompEner.tab-pane.fade(role='tabpanel', aria-labelledby='CompEner-tab') TAB 5
+                    canvas#myChart4.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #PerdiEner.tab-pane.fade(role='tabpanel', aria-labelledby='PerdiEner-tab') TAB 6
+                    canvas#myChart5.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+                #PerdiPorcen.tab-pane.fade(role='tabpanel', aria-labelledby='PerdiPorcen-tab') TAB 7
+                    canvas#myChart6.my-4.w-100.chartjs-render-monitor(width='1670', height='704', style='display: block; width: 835px; height: 352px;')
+
+
+block scripts
+    script(src='/Chartjs/Chart.min.js')
+    script(type="text/javascript").
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                datasets: [{
+                    data: [15339, 21345, 18483, 24003, 23489, 24092, 12034,19965,12345,979],
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: '#007bff',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                }
+            }
+        });

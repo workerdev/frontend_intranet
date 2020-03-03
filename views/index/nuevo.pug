@@ -1,0 +1,23 @@
+doctype html
+html(lang='en', style="background-color:#839eb4;overflow:;")
+    head
+        title= title
+        meta(name="viewport", content="width=device-width, initial-scale=1,user-scalable=no")
+        //link(rel='stylesheet', type='text/css', href='/css/materialize.min.css')
+        //link(rel='stylesheet', type='text/css', href='/css/sweetalert2.min.css')
+        link(rel='stylesheet', type='text/css', href='/css/init.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.min.css')
+        link(rel='hortcut icon', href='/images/nube.jpg')
+        script(rel='ajax', src="/js/axios.min.js")
+        //TODO: icons
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons",rel="stylesheet")
+        //TODO: estilos extras
+        link(rel='stylesheet', type='text/css', href='/css/style-extra.css')
+        //TODO: flexslider
+        link(href='/Flexslider/flexslider.css', rel='stylesheet', type='text/css', media='all')
+        //TODO: animate
+        link(href='/css/animate.css', type='text/css', rel='stylesheet')
+        block style_propio
+
+    body(style="overflow-x:hidden;background-color:#839eb4;" onload="init()")

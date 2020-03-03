@@ -1,0 +1,177 @@
+doctype html
+html(lang='en')
+    head
+        title ELFEC - INTRANET
+        meta(name="viewport", content="width=device-width, initial-scale=1,user-scalable=no")
+        link(rel='stylesheet', type='text/css', href='/css/init.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.min.css')
+        link(rel='shortcut icon', href='/images/logocl.png')   
+        //TODO: icons
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons",rel="stylesheet")
+        //TODO: estilos extras
+        link(rel='stylesheet', type='text/css', href='/css/style-extra.css')
+        //TODO: flexslider
+        link(href='/Flexslider/flexslider.css', rel='stylesheet', type='text/css', media='all')
+        //TODO: animate
+        link(href='/css/animate.css', type='text/css', rel='stylesheet')
+        block style_propio
+            style.
+                .txt-lower{
+                    text-transform: lowercase;
+                }
+                .icon-own:hover{
+                    cursor: pointer;
+                }
+            script.
+                var usuarioLogin = localStorage.getItem("nombre")
+                if(usuarioLogin == "" || usuarioLogin == null  ){ }
+                else{
+                    window.location = "/principal2"
+                }
+            
+    body.color_base(style="overflow-x:hidden;background-color:#68ab94;")
+            // Start Page Loading
+            #loader-wrapper
+                #loader
+                .loader-section.section-left
+                .loader-section.section-right
+            // End Page Loading
+            #login-page
+                .col-sm-4(style='margin: auto;')
+                    form#form-login.login-form(method='POST', style="text-align:center;")
+                        .row
+                            .col-sm-12.center
+                                img.img-fluid(src='images/elfec_icon_horizontal.png', alt='' style="height:auto;width:auto;")
+                        div.color_base
+                            #errorBox.bg-danger.text-white(hidden = "true")
+                                span#textError(style = "font-size:20px")   
+                            br                              
+                            .row.margin
+                                .col-md-12
+                                    label(for='username' style="color:white; padding-right: 208px;")
+                                        i.material-icons.prefix(style="color:white; padding-right: 4px;") perm_identity
+                                        |Usuario
+                                    .col-md-8(style="margin:auto;")
+                                        input#username.form-control(name='username',type='text',required)
+                            br
+                            .row.margin
+                                .col-md-12
+                                    label(for='password' style="color:white;")
+                                        i.material-icons.prefix(style="color:white; padding-right: 4px;") lock_outline
+                                        |Contraseña
+                                        span#see-pass(style="padding-left: 160px;")
+                                            i#ic-pass.material-icons.prefix.icon-own(style="color:white;", title="Mostrar") visibility_off
+                                    .col-md-8(style="margin:auto;")
+                                        input#password.form-control(name='password',type='password',required)
+                            br
+                            .row(style='margin-bottom:0px ')
+                                .col-md-12
+                                    p.margin.center-align.medium-small
+                                        a#text-error(style='color:rgb(255, 80, 80)')= message
+
+                                    button#botonLogin.btn.btn-primary(type='button',onclick='enviarLogin()')
+                                        span#textLogin Ingresar                               
+                            br 
+    
+    
+    <script src="/js/es6-promise.auto.js"></script> 
+    script(type='text/javascript', src='/js/axios.min.js')
+    script.
+        function enviarLogin() {
+            var usertxt = document.getElementById("username").value
+            var passtxt = document.getElementById("password").value
+            var objeto = {
+                 user: (usertxt).toLowerCase(),
+                 password: passtxt
+            };
+            document.getElementById("username").disabled = true                 
+            document.getElementById("password").disabled = true
+            document.getElementById("textLogin").innerHTML = "Espere por favor...."
+            document.getElementById("botonLogin").disabled = true
+            
+            axios.post('/loginBack', objeto)
+                .then(function (response) {
+                    
+                    if(response.hasOwnProperty('data')){
+                        
+                        if(response.data == "empty"){           
+                            document.getElementById("username").disabled = false                 
+                            document.getElementById("password").disabled = false
+                            document.getElementById("textError").innerHTML = "Campos vacios no se puede acceder"                            
+                            document.getElementById("errorBox").hidden = false
+                            document.getElementById("botonLogin").disabled = false
+                            document.getElementById("textLogin").innerHTML= "Ingresar"
+                        }
+                        if(response.data == "error"){
+                            document.getElementById("username").disabled = false                 
+                            document.getElementById("password").disabled = false
+                            document.getElementById("textError").innerHTML = "Datos incorrectos"                            
+                            document.getElementById("errorBox").hidden = false
+                            document.getElementById("botonLogin").disabled = false
+                            document.getElementById("textLogin").innerHTML= "Ingresar"
+                        }
+                        if(response.data.hasOwnProperty('message')){
+                            document.getElementById("username").disabled = false                 
+                            document.getElementById("password").disabled = false
+                            document.getElementById("textError").innerHTML = response.data.message                           
+                            document.getElementById("errorBox").hidden = false
+                            document.getElementById("botonLogin").disabled = false
+                            document.getElementById("textLogin").innerHTML= "Ingresar"
+                            console.log("error servidor")                            
+                        }
+                        
+                        if(response.data.hasOwnProperty('Nombre')){                            
+                            console.log("ok entro")                            
+                            localStorage.setItem("nombre", response.data.Nombre)
+                            localStorage.setItem("apellido", response.data.Apellido)
+                            localStorage.setItem("cargo", response.data.Cargo)
+                            localStorage.setItem("login", response.data.login)
+                            localStorage.setItem("item_personal" , response.data.item_personal)
+                            window.location = "/principal2"
+                        }                        
+                    }    
+                })
+            .catch(function (e) {
+                console.log("no hay conexion")
+                console.log(e);
+            });        
+        }
+        
+        let contrasenia = document.getElementById('password');
+        contrasenia.onkeydown = function(e) {  
+            if(e.keyCode == 13){
+                enviarLogin();
+            }
+        };
+
+        let see_pass = document.getElementById('see-pass');
+        let ic_pass = document.getElementById('ic-pass');
+        see_pass.onmousedown = function() {  
+            ic_pass.style.color = 'whitesmoke';
+            contrasenia.type = 'text';
+            ic_pass.innerHTML = 'visibility';
+        };
+
+        see_pass.onmouseup = function() {  
+            ic_pass.style.color = 'white';
+            contrasenia.type = 'password';
+            ic_pass.innerHTML = 'visibility_off';
+        };
+
+        let dt_user = document.getElementById('username');
+        dt_user.onkeypress = function() {  
+            if(dt_user.value == ''){
+                dt_user.classList.remove('txt-lower');
+            }else{
+                if(dt_user.classList.contains('txt-lower') == false) dt_user.classList.add('txt-lower');
+            }
+        };
+
+        dt_user.onkeyup = function() {  
+            if(dt_user.value == ''){
+                dt_user.classList.remove('txt-lower');
+            }else{
+                if(dt_user.classList.contains('txt-lower') == false) dt_user.classList.add('txt-lower');
+            }
+        };

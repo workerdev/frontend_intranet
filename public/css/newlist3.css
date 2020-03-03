@@ -1,0 +1,50 @@
+.bose-pagination3 {
+    text-align: center;
+}
+.bose-pagination3 .bose-pagination__page3 {
+    display: none;
+    padding: 8px 12px;
+    margin: 0 8px;
+    border: 1px solid #333;
+    cursor: pointer;
+    background-color: #eee;
+}
+.bose-pagination3 .bose-pagination__page3:first-child {
+    margin-left: 0;
+}
+.bose-pagination3 .bose-pagination__page3:last-child {
+    margin-right: 0;
+}
+.bose-pagination3 .bose-pagination__page3:hover, .bose-pagination3 .bose-pagination__page3.bose-pagination__page--active3 {
+    display: initial;
+    background-color: #333;
+    color: white;
+}
+.bose-pagination3 .bose-pagination__nav3 {
+    text-transform: uppercase;
+}
+.bose-pagination3 .bose-pagination__nav3.bose-pagination__nav--disabled3 {
+    color: #bbb;
+}
+.bose-pagination3 .bose-pagination__nav3.bose-pagination__nav--next3 {
+    margin-left: 12px;
+}
+.bose-pagination3 .bose-pagination__nav3.bose-pagination__nav--next3::after {
+    content: ' >';
+}
+.bose-pagination3 .bose-pagination__nav3.bose-pagination__nav--previous3 {
+    margin-right: 12px;
+}
+.bose-pagination3 .bose-pagination__nav3.bose-pagination__nav--previous3::before {
+    content: '< ';
+}
+
+button {
+    -webkit-appearance: none;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
+}

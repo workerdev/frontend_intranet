@@ -1,0 +1,290 @@
+@media (min-width: 320px) {
+    .comite_ocultar_xs{
+        display: none;
+    }
+    .comite_ocultar_sm{
+        margin:10px;
+    }
+    .comite_ocultar_sm #img_elfec{
+        width: 50%;
+        float: left;
+    }
+    .comite_ocultar_sm #img_logo{
+        width: 20%;
+    }
+    #comite_etica h4{
+        color: white;
+        font-family: Arial,sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+
+    #comite_etica h2{
+        color: white;
+        font-family: Arial,sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        vertical-align: middle;
+        margin: 3px;
+    }
+
+    #comite_etica input{
+        border-radius: 4px;
+        padding: 2px;
+        font-size: 14px;
+    }
+    #comite_etica button{
+        font-family: Tahoma, sans-serif;
+        font-size: 14px;
+        border-radius: 5px;
+    }
+    #comite_etica textarea{
+        border-radius: 3px;
+        resize: none;
+        font-size: 14px;
+        width: 80%;
+        min-height: 150px;
+        padding: 15px;
+    }
+    #myTab a{
+        background-color: white;
+        padding: 10px 5px;
+        font-size: 10px;
+        border-left: 0.9px solid #707070;
+        border-top: 0.9px solid #707070;
+        border-right: 0.9px solid #707070;
+        font-weight: bold;
+    }
+
+    #myTab a[aria-selected=true]{
+        background-color: #19458D;
+        border: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    #myTabContent{
+        padding: 12px;
+        background-color: white;
+        border: 0.9px solid #707070;
+    }
+    /* TODO: estilo de noticias de empresa*/
+
+    .card_noticia_empresa{
+        margin-top:15px;
+        border: 1px solid white;
+        padding: 5px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+    }
+    .card_noticia_empresa .card-body{
+        padding: 15px 10px;
+        margin-bottom: 0;
+        align-content: center;
+    }
+    .card_noticia_empresa .card-body h5{
+        margin-bottom: 0;
+        font-size: 15px;
+    }
+    /* TODO: complemento de galeria*/
+    .card_galeria{
+        width: 86vw;
+        margin: 5px;
+    }
+    .card_content_img{
+        /*width: 21vw;*/
+        height: 100%;
+        white-space: nowrap;
+    }
+    /*.card_content_img img{*/
+        /*max-height: 20vw;*/
+    /*}*/
+    /* TODO: complementos de mis links*/
+    .card_links{
+        width: 66vw;
+        margin: 5px;
+        background-color: #19458D;
+        border-bottoms: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card_links h5{
+        color: white;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .card_links .card_content_img{
+        width: auto;
+        height: 100%;
+        white-space: nowrap;
+        background-color: white;
+        padding: 10px;
+    }
+    .card_links .card_content_img img{
+        height: auto;
+    }
+}
+
+@media (min-width: 576px) {
+    .comite_ocultar_sm #img_elfec{
+        width: 30%;
+        float: left;
+    }
+    .comite_ocultar_sm #img_logo{
+        width: 10%;
+        float: right;
+        margin: 5px 20px;
+    }
+    #comite_etica input{
+        width:70%;
+    }
+}
+@media (min-width: 768px){
+
+    #comite_etica h2{
+        text-align: right;
+        font-size: 15px;
+    }
+    #comite_etica input{
+        width: 80%;
+    }
+    #comite_etica .row{
+        margin: 5px;
+    }
+    #comite_etica button{
+        margin: 15px;
+    }
+    /* TODO: complemento de galeria*/
+    .card_galeria{
+        width: 18rem;
+        /*margin: 10px;*/
+    }
+    .card_content_img{
+        width: 100%;
+        height: 20vw;
+        max-height: 490px;
+        white-space: nowrap;
+    }
+    /* TODO: complemento de links*/
+    .card_links{
+        width: 18rem;
+        /*margin: 10px;*/
+    }
+    .card_links .card_content_img{
+        width: auto;
+        height: 20vw;
+        max-height: 490px;
+        white-space: nowrap;
+    }
+    .card_links .card_content_img img{
+        height: auto;
+        width: 100%;
+        max-height: 18vw;
+    }
+}
+
+@media (min-width: 991px) and (orientation: landscape) {
+    #comite_etica{
+        margin-top: 25px;
+    }
+    #comite_etica input{
+        width: 100%;
+        max-height: 300px;
+    }
+    #comite_etica textarea{
+        width: 100%;
+        max-height: 300px;
+    }
+
+    /* TODO: complemento de galeria*/
+    .card_galeria{
+        width: 21vw;
+        /*margin: 10px;*/
+    }
+    .card_content_img{
+        width: 100%;
+        height: 20vw;
+        max-height: 490px;
+        white-space: nowrap;
+    }
+    /* TODO: complemento de mis links*/
+    .card_links{
+        /*width: 18vw;*/
+        /*margin: 10px;*/
+    }
+    .card_links .card_content_img{
+        width: 100%;
+        /*height: 20vw;*/
+        /*max-height: 490px;*/
+        white-space: nowrap;
+    }
+
+}
+
+@media (min-width: 992px)  {
+    #comite_etica{
+        margin-top: 25px;
+    }
+
+    #comite_etica textarea{
+        height: 450px;
+    }
+    /* TODO: complemento de galeria*/
+    .card_galeria{
+        width: 21vw;
+        max-width: 350px;
+        max-height: 370px;
+        /*margin: 10px;*/
+    }
+    .card_content_img{
+        width: 100%;
+        height: 20vw;
+        max-height: 315px;
+        white-space: nowrap;
+    }
+    /* TODO: complemento de links*/
+    .card_links{
+        width: 19vw;
+        max-width: 350px;
+        max-height: 370px;
+        margin: 5px;
+    }
+
+    .card_links .card_content_img{
+        width: 100%;
+        height: 12vw;
+        max-height:11vw;
+        white-space: nowrap;
+    }
+    .card_links .card_content_img img{
+        max-height: 10vw;
+    }
+}
+
+@media (min-width: 1025px) {
+    #comite_etica{
+        margin-top: 25px;
+    }
+
+    #comite_etica textarea{
+        height: 450px;
+    }
+
+}
+
+@media (min-width: 1281px) {
+    #comite_etica{
+        margin-top: 25px;
+    }
+
+    #comite_etica textarea{
+        height: 450px;
+    }
+}
+.card_noticia_empresa{
+    cursor: pointer;
+}

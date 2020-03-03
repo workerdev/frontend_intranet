@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .row
+        .col.s12.m4
+        .col.s12.m4
+            .card
+                .card-content
+                    h5 Editar datos
+                    .row
+                        form.col.s12(method="POST",action='edit_savechage')
+                            .row
+                                .input-field.col.s12
+                                    input#id.validate(type='hidden', required='', name='id',value= id)
+                                    label(for='id')
+                                .input-field.col.s12
+                                    input#text.validate(type='text',name='text', value= text)
+                                    label(for='text') Texto
+                                button.btn.waves-effect.waves-light(type="submit", data-position='right', data-delay='50') Guadar cambios
+                                .row(style='margin-bottom:0px ')
+                                    .input-field.col.s12
+                                        p.margin.center-align.medium-small
+                                            a#text-error(style='color:rgb(255, 80, 80)')= message

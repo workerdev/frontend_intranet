@@ -1,0 +1,56 @@
+extends ../layout
+block style_propio
+    style.
+        body.tinybackground{
+            background-color: blue;
+            background: blue;
+        }
+
+        @media (min-width: 768px) {
+            #contenido {
+                max-height: 817px;
+                overflow-y: auto;
+            }
+        }
+block contenido
+    h2.color_texto_base RESPONSABILIDAD SOCIAL
+    .container    
+        #contenido3(style='background-color:transparent;')
+            .row
+                each data in responsabilidad
+                    .col-6
+                        .card
+                            .card-body
+                                if(data != null || data != undefined)
+                                    =data.contenido
+                                else
+                                    |Sin Datos
+
+block scripts
+
+    //function init(){
+
+    //script(src="/tinymce/tinymce.js")
+    script(type="text/javascript").
+                
+        var content = document.getElementById('contenido3');
+                var contenido = content.innerHTML;
+                var letter = ['Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', '×', 'Ø',
+                    'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë',
+                    'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', '÷', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ',
+                    'ÿ', '\'','¡','¢','£','¤','¥',	'¦','§','¨','©','ª','«',	'¬',	'\'', '®', '¯', '°', '±',
+                    '²', '³', '´', 'µ', '¶', '·', '¸', '¹', 'º', '»', '¼', '½', '¾', '¿', '€', '‚', 'ƒ', '„', '…',
+                    '†', '‡', 'ˆ', '‰', 'Š', '‹', 'Œ', 'Ž', '‘', '’', '“', '”', '•', '–', '—', '˜','™',	'š',	'›',
+                    'œ', 'ž', 'Ÿ', '"', '&', '<', '>']
+                var codes = [
+                    /&AElig;/g, /&Ccedil;/g, /&Egrave;/g, /&Eacute;/g, /&Ecirc;/g, /&Euml;/g, /&Igrave;/g, /&Iacute;/g, /&Icirc;/g, /&Iuml;/g, /&ETH;/g, /&Ntilde;/g, /&Ograve;/g, /&Oacute;/g, /&Ocirc;/g, /&Otilde;/g, /&Ouml;/g, /&times;/g, /&Oslash;/g, /&Ugrave;/g, /&Uacute;/g, /&Ucirc;/g, /&Uuml;/g, /&Yacute;/g, /&THORN;/g, /&szlig;/g, /&agrave;/g, /&aacute;/g, /&acirc;/g, /&atilde;/g, /&auml;/g, /&aring;/g, /&aelig;/g, /&ccedil;/g, /&egrave;/g, /&eacute;/g, /&ecirc;/g, /&euml;/g, /&igrave;/g, /&iacute;/g, /&icirc;/g, /&iuml;/g, /&eth;/g, /&ntilde;/g, /&ograve;/g, /&oacute;/g, /&ocirc;/g, /&otilde;/g, /&ouml;/g, /&divide;/g, /&oslash;/g, /&ugrave;/g, /&uacute;/g, /&ucirc;/g, /&uuml;/g, /&yacute;/g, /&thorn;/g, /&yuml;/g, /&nbsp;/g, /&iexcl;/g, /&cent;/g, /&pound;/g, /&curren;/g, /&yen;/g, /&brvbar;/g, /&sect;/g, /&uml;/g, /&copy;/g, /&ordf;/g, /&laquo;/g, /&not;/g, /&shy;/g, /&reg;/g, /&macr;/g, /&deg;/g, /&plusmn;/g, /&sup2;/g, /&sup3;/g, /&acute;/g, /&micro;/g, /&para;/g, /&middot;/g, /&cedil;/g, /&sup1;/g, /&ordm;/g, /&raquo;/g, /&frac14;/g, /&frac12;/g, /&frac34;/g, /&iquest;/g, /&euro;/g, /&sbquo;/g, /&fnof;/g, /&bdquo;/g, /&hellip;/g, /&dagger;/g, /&Dagger;/g, /&circ;/g, /&permil;/g, /&Scaron;/g, /&lsaquo;/g, /&OElig;/g, /&Zcaron;/g, /&lsquo;/g, /&rsquo;/g, /&ldquo;/g, /&rdquo;/g, /&bull;/g, /&ndash;/g, /&mdash;/g, /&tilde;/g, /&trade;/g, /&scaron;/g, /&rsaquo;/g, /&oelig;/g, /&zcaron;/g, /&Yuml;/g, /&quot;/g, /&amp;/g, /&lt;/g, /&gt;/g,
+                ]
+                var replace;
+                for (var i = 0; i < codes.length; i++) {
+                    replace = contenido.replace(codes[i], letter[i]);
+                    contenido = replace;
+                }
+                content.innerHTML = replace;
+        
+
+

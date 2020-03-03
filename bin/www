@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+// var LoteController=require('../controllers/lot')
+var app = require('../app');
+var debug = require('debug')('emailtest:server');
+var http = require('http');
+
+var server = require('http').Server(app);
+// /**
+//  * Get port from environment and store in Express.
+//  */
+// /**
+//  * Create HTTP server.
+//  */
+
+///var io=require('socket.io')(server);
+//LOCAL
+//var serv = 3000
+//PREPRODUCCION
+var serv = 3020
+
+server.listen(serv, function() {
+    //LOCAL
+    console.log('Servidor esta funcionando en http://127.0.0.1:' + serv);
+    //PREPRODUCCION
+    //console.log('Servidor esta funcionando en http://192.168.30.248:' + serv);
+});
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+//server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'port ' + addr.port;
+    debug('Listening on ' + bind);
+    //console.log("Server is online http://" + (addr.address == "::" ? "localhost" : addr.address) + ":" + port);
+}

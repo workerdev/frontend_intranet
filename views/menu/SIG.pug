@@ -1,0 +1,152 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+block contenido
+    h2.color_texto_base.text-center SISTEMA INTEGRADO DE GESTIÓN
+    .row 
+        .col-sm-12
+            .row
+                if (datos_sig.length != 0)
+                    - var n = 0
+                    .col-sm-12                                                   
+                        
+                            each datos,index in datos_sig
+                                if datos.children != null                                                                                                                 
+                                    .elementoPadre.alert.alert-primary=datos.titulo
+                                        .elementosHijos                                                                      
+                                            each datosHijos in datos.children
+                                                .elemento(style="padding-bottom: 10px;padding-top: 10px;")
+                                                    a.elemento-link(href= backend_route + datosHijos.ruta, target='_blank')                            
+                                                        i.far.fa-file-pdf
+                                                        span &nbsp;&nbsp;&nbsp;
+                                                        span(style="white-space: normal;")=datosHijos.titulo
+                                else                                                
+                                    if n == 0
+                                        p(hidden)=n++
+                                        .col-12
+                                            h5.text-center Otros                 
+                                    .col-md-3.text-center(style="padding-bottom: 20px; padding-top: 20px;")    
+                                        a.w-100.btn.btn-primary(href= backend_route + datos.ruta, target='_blank')
+                                            i.far.fa-file-pdf
+                                            span &nbsp;&nbsp;&nbsp;
+                                            span(style="white-space: normal;")=datos.titulo
+                else
+                    .col-12.text-center
+                        p.alert.alert-warning No tiene documentos registrados 
+    //- #accordion
+        .row.sig_button
+            .col-md-6
+                button(style="cursor:pointer", onclick="location.href = '/documentos/POLITICA DEL SISTEMA INTEGRADO DE GESTION.pdf'")
+                    |Política de sistema integrado de gestión
+        .row.sig_button
+            .col-md-6
+                button(style="cursor:pointer", onclick="location.href = '/documentos/Información Documentada SIG.pdf'")
+                    |Información documentada
+
+        .row.sig_button
+            .col-md-6(data-toggle="collapse", data-target="#objetivos", aria-controls="objetivos", aria-expanded="false")
+                button#id2
+                    |Objetivos sistema integrado de Gestión
+            #objetivos.col-md-6.collapse.btn_extras(aria-labelledby="id2", data-parent="#accordion")
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Calidad.pdf'")
+                        |Objetivos de Calidad y las acciones para lograr esos objetivos
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Medio Ambiente.pdf'")
+                        |Objetivos de Medio Ambiente y las acciones para lograr esos objetivos
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Seguridad y Salud Ocupacional.pdf'")
+                        |Objetivos de Seguridad y Salud Ocupacional y las acciones para lograr esos objetivos
+        .row.sig_button
+            .col-md-6(data-toggle="collapse", data-target="#acciones", aria-controls="acciones", aria-expanded="false")
+                button#id3
+                    |Matriz de Riesgos y Oportunidades
+            #acciones.col-md-6.collapse.btn_extras(aria-labelledby="id3", data-parent="#accordion")
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Calidad.pdf'")
+                        |Calidad
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Medio Ambiente.pdf'")
+                        |Medio Ambiente
+                div
+                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Seguridad y Salud Ocupacional.pdf'")
+                        |Seguridad y Salud Ocupacional
+        .row.sig_button
+            .col-md-6(data-toggle="collapse", data-target="#politicas", aria-controls="politicas", aria-expanded="false")
+                button#id1
+                    |Requisitos Legales y otros requisitos.
+            #politicas.col-md-6.collapse.btn_extras(aria-labelledby="id1", data-parent="#accordion")
+                div
+                    button
+                        | Medio Ambiente
+                div
+                    button
+                        | Seguridad y Salud Ocupacional
+
+        .row.sig_button
+            .col-md-6
+                button(style="cursor:pointer", onclick="location.href = '/documentos/ENCUESTAS DE SATISFACCION DE CLIENTES.pdf'")
+                    | Encuestas de satisfacción de clientes
+        .row.sig_button
+            .col-md-6
+                button(style="cursor:pointer", onclick="location.href = '/documentos/Accidentes a Septiembre 2018.pdf'")
+                    | Resumen de accidentes e incidentes
+        //- .row.sig_button
+        //-     .col-md-6
+        //-         button(style="cursor:pointer")
+        //-             | Cantidad de días sin accidentes
+
+block scripts
+    script(type="text/javascript").
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })

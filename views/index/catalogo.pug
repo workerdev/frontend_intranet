@@ -1,0 +1,67 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css') 
+    style.
+        input[type="search"]{    
+            border: 1px solid #00940f !important;     
+        }
+block contenido
+    h2.color_texto_base.text-center CATÁLOGO DE APLICACIONES
+
+    div.col-sm-12
+        table#table-catalogo.table.table-striped.table-bordered(style="background-color: white;")
+            //- thead(style="background-color:#0085ba4f")
+            //-     tr
+            //-         th(scope='col') Sistema
+            //-         th(scope='col') Descripción
+            //-         th(scope='col') Enlaces / Dueño
+            //- tbody
+            //-     each sistema in catalogo
+            //-         tr
+            //-             td=sistema.sistema
+            //-             td=sistema.descripcion
+            //-             td.identificarurl=sistema.urldueno
+block scripts
+    script(src='/js/dataTables.bootstrap4.min.js')
+    script(type="text/javascript").
+        
+        var catalogo = !{JSON.stringify(catalogo)} 
+        
+        $('#table-catalogo').DataTable({
+            language: {
+                        "url": "/js/Spanish.json"
+            },
+            dom: '<"pull-left"f><"pull-right"l>tip',
+            data : catalogo,
+            columns : [
+                        { title : "Sistema" , data : "sistema" , width : "300px"},                  
+                        { title : "Descripcion" , data : "descripcion" },                  
+                        { title : "Dueño" , data : "duenio" , width : "150px" ,
+                         render : function(data){
+                              if (data == null)
+                                return 'Dueño no asignado'                        
+                              else
+                                return data                      
+                         }
+                        },                  
+                        { title : "Enlace" , data : "url" ,
+                            render: function (data){
+                            if (data == null)
+                                return 'No contiene enlace'
+                              else
+                                return '<a target="_blank" class="btn btn-primary" href="'+data+'">Enlace</a>'
+                            },
+                            width : "100px"
+                        },                  
+                    ]
+        })
+        
+        //- function urlify(text) {
+        //-     var urlRegex = /(https?:\/\/[^\s]+)/g;
+        //-     return text.replace(urlRegex, function (url) {
+        //-         return '<a href="' + url + '">' + url + '</a>';
+        //-     })
+        //-     // or alternatively
+        //-     // return text.replace(urlRegex, '<a href="$1">$1</a>')
+        //- }

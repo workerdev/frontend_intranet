@@ -1,0 +1,109 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/personal_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+    link(rel="stylesheet", href="/css/principal.css")
+block contenido
+    h2.color_texto_base.text-center PERSONAL
+    .row        
+        .col-sm-12
+            .row(style="padding-top:20px").animated.fadeInDown
+                .col-sm-6(style="text-align:center;")
+                    h2 Directorio Personal
+                    button.design_button(style="background-color: #3fc83a;", onclick="location.href = '/personal/Directorio'")
+                        img#img-1(src="/images/icons/Elfec-12.png", style="width: 80%;")
+                    
+                .col-sm-6(style="text-align:center;")
+                    h2 Buzón de Sugerencia
+                    button.design_button(style="background-color: #ffaf37;", onclick="location.href = '/personal/Buzon'")
+                        img#img-2(src="/images/icons/Elfec-13.png", style="width: 80%;")
+                    
+                .col-sm-12    
+                    h2.text-center Cumpleañero de la semana
+                .col-sm-12(style="text-align:center;padding-top:40px")                                         
+                    
+                    if cumpleaneros.length != 0
+                        div.row
+                            each cumple in cumpleaneros
+                                .col-xl-2.col-lg-3
+                                    div(style="margin: 1.5px;border: 1px solid black;border-radius: 10%;background-color: #ecf7e9c7;")
+                                        p(style="font-size:15px;text-align: center;")=cumple.dia
+                                        div(style="max-height: 122px; max-width: 188px;")
+                                            if cumple.foto === "S/F" || cumple.foto == null 
+                                                if cumple.dia == 'HOY'
+                                                    if cumple.genero == 'M'
+                                                        div(style="")
+                                                        img(src="/images/icons/birthdayBoy.png", style="max-height: 122px; width: auto; height: 100%;")
+                                                    else
+                                                        div(style="")
+                                                        img(src="/images/icons/birthdayGirl.png", style="max-height: 122px; width: auto; height: 100%;")
+                                                else
+                                                    if cumple.genero == 'M'
+                                                        div(style="")
+                                                        img(src="/images/icons/boy.png", style="max-height: 122px; width: auto; height: 100%;")
+                                                    else
+                                                        div(style="")
+                                                        img(src="/images/icons/girl.png", style="max-height: 122px; width: auto; height: 100%;")           
+                                            else
+                                                img(src= backend_route + cumple.foto, style="max-height: 122px; width: auto; height: 100%;")                                            
+                                        div
+                                            p(style="font-size:12px;line-height: normal;text-align: center;word-wrap: break-word;overflow: hidden;max-height: 5.4em;padding-left: 10px;padding-right: 10px;")=cumple.nombre
+                    else
+                        .alert.alert-primary Ningun cumpleañero esta semana
+                
+
+block scripts
+    //- script(type="text/javascript").
+    //-     $(window).load(function () {            
+    //-         $('#contenedor').slideDown('slow');
+    //-         var buttonNavigation = $('.nav-link');
+    //-         var anchowindow = (window.innerWidth);
+
+    //-         if (anchowindow >= 992) {
+    //-             $('nav').css('height', '817px')
+    //-             if (buttonNavigation.length > 7) {
+    //-                 $('#scroll').attr('class', 'submenu_mayor');
+    //-             } else {
+    //-                 $('#scroll').attr('class', 'submenu_menor');
+    //-             }
+    //-         } else if (anchowindow >= 767 && anchowindow <= 991) {
+    //-             // var contenido = $('#accesos').offset().top;
+    //-             var contenidoHeight = $('#contenido').height();
+    //-             // var total = contenido + contenidoHeight;
+    //-             var cabecera = $('#head').height();
+    //-             var total = contenidoHeight;
+    //-             $('nav').css('height', (total) + 'px')
+    //-             if (buttonNavigation.length > 13) {
+    //-                 $('#scroll').attr('class', 'submenu_mayor');
+    //-             } else {
+    //-                 $('#scroll').attr('class', 'submenu_menor');
+    //-             }
+    //-         }
+    //-     });
+
+    //-     $(window).on('resize', function () {
+    //-         var anchowindow = (window.innerWidth);
+    //-         var buttonNavigation = $('.nav-link');
+    //-         if (anchowindow >= 992) {
+    //-             $('nav').css('height', '817px')
+    //-             if (buttonNavigation.length > 7) {
+    //-                 $('#scroll').attr('class', 'submenu_mayor');
+    //-             } else {
+    //-                 $('#scroll').attr('class', 'submenu_menor');
+    //-             }
+    //-         } else if (anchowindow >= 767 && anchowindow <= 991) {
+    //-             // var contenido = $('#contenido';
+    //-             var contenidoHeight = $('#contenido').height();
+    //-             // var total = contenido + contenidoHeight;
+    //-             var cabecera = $('#head').height();
+    //-             var total = contenidoHeight;
+    //-             $('nav').css('height', (total) + 'px')
+    //-             if (buttonNavigation.length > 13) {
+    //-                 $('#scroll').attr('class', 'submenu_mayor');
+    //-             } else {
+    //-                 $('#scroll').attr('class', 'submenu_menor');
+    //-             }
+    //-         }
+    //-     });
+    script(src="/js/personal.js")   
+       

@@ -1,0 +1,279 @@
+.bg-teal {
+    background-color: #1976d2 !important;
+}
+.pointer{
+    cursor: pointer;
+}
+#btn_procesos, #btn_docs, #btn_cargos, #btn_auds, #btn_crocm{
+    /*opacity: 1;*/
+    transition: all 2s ease-in-out;
+}
+#btn_procesos:hover{
+    /*opacity: 0.8;*/
+    color: #343a40 !important;
+    border-radius: 0px 40px;
+    background-color: rgba(255, 255, 255, .5) !important;
+    transform: translate(0px, -20px) /*rotate(-8deg)*/ scale(0.95);
+}
+#btn_docs:hover{
+    /*opacity: 0.6;*/
+    border-radius: 40px 0px;
+    color: #007bff !important;
+    background-color: rgba(255, 255, 255, .5) !important;
+    transform: rotate(8deg) scale(0.95);
+}
+#btn_cargos:hover{
+    /*opacity: 0.7;*/
+    border-radius: 0px 40px;
+    color: #28a745 !important;
+    background-color: rgba(255, 255, 255, .5) !important;
+    transform: rotate(-8deg) scale(0.95);
+}
+#btn_auds:hover{
+    /*opacity: 0.7;*/
+    border-radius: 40px 0px;
+    color: #17a2b8 !important;
+    background-color: rgba(255, 255, 255, .5) !important;
+    transform: translate(0px, 20px) /*rotate(8deg)*/ scale(0.95);
+}
+#btn_crocm:hover{
+    /*opacity: 0.6;*/
+    border-radius: 0px 30px;
+    color: #3f51b5 !important;
+    background-color: rgba(255, 255, 255, .5) !important;
+    transform: rotate(8deg) scale(0.95);
+}
+
+.bg-indigo {
+    color: #fff !important;
+    background-color: #3f51b5 !important;
+    border-color: 1px solid gba(255, 255, 255, .5) !important;
+}
+
+.btn-info2 {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.btn-info2:hover {
+    color: #fff;
+    background-color: #057885;
+    border-color: #17a2b8;
+}
+
+.btn-primary2 {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.btn-primary2:hover {
+    color: #fff;
+    background-color: #005ec9;
+    border-color: #007bff;
+}
+
+.btn-secondary2 {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+.btn-secondary2:hover {
+    color: #fff;
+    background-color: #4b5157;
+    border-color: #6c757d;
+}
+
+.btn-info4 {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.btn-info4:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-primary4 {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0069d9;
+}
+.btn-primary4:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary4 {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+.btn-secondary4:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-dark4 {
+    color: #fff;
+    background-color: #23272b;
+    border-color: #1d2124;
+}
+.btn-dark4:hover {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+.dropdown-item{
+    background-color: rgba(255, 255, 255, .1) !important;
+}
+.dropdown-item:hover{
+    cursor: pointer;
+    color: rgba(255, 255, 255, .7) !important;
+    background-color: rgba(0, 0, 0, .2) !important;
+}
+.gitem{
+    /*background-color: rgba(255, 255, 255, .5) !important;*/
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}/*
+.gitem:hover{
+    background-color: rgba(0, 0, 0, .3) !important;
+}*/
+
+
+.items:hover{
+    color: rgba(255, 255, 255, .8) !important;
+    background-color: rgba(0, 0, 0, .5) !important;
+}
+
+#list_aheq tr{
+    cursor: pointer;
+}
+.row-cont {
+    width: 160px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    height: 60px;
+    transition: height 10s ease-in-out;
+}
+
+.row-cont:hover {
+    height: auto;
+    cursor: pointer;
+    white-space: normal;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.botonAtras:hover{    
+    -webkit-animation-name: wobble;
+    animation-name: wobble;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}   
+@-webkit-keyframes wobble {
+    0% {
+    -webkit-transform: none;
+    transform: none;
+    }
+    15% {
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+    30% {
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+    45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+    60% {
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+    75% {
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+    100% {
+    -webkit-transform: none;
+    transform: none;
+    }
+}
+@keyframes wobble {
+    0% {
+    -webkit-transform: none;
+    transform: none;
+    }
+    15% {
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+    30% {
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+    45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+    60% {
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+    75% {
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+    100% {
+    -webkit-transform: none;
+    transform: none;
+    }
+} 
+
+.btn{white-space:normal;}
+
+.fondo {
+    background: linear-gradient(rgba(255,255,255,.5),
+                 rgba(255,255,255,.5)),
+                  url('/images/Elfec_icon.png') no-repeat center;
+    /* background : url('/images/Elfec_icon.png') no-repeat center;
+    background-size: 50%; */
+    background-size: 50%;
+}
+input{    
+    border:1px solid #179e58 !important;     
+}
+textarea{    
+    border:1px solid #179e58 !important;     
+}
+
+.boton-id {
+    color :white;
+    border: 2px solid #034eef;
+    background: #0085ba;
+}
+.button-id {
+    color :white;
+    border: 2px solid #00796b;
+    background: rgba(0, 150, 136, .9);
+}
+.card-body{
+    background-color: aliceblue;
+}
+select {
+    border:2px solid #179e58 !important; 
+}
+.card-own {
+    height: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /*text-align: center !important;*/
+}

@@ -1,0 +1,323 @@
+doctype html
+html(lang='en')
+    head
+        title ELFEC - INTRANET
+        meta(name="viewport", content="width=device-width, initial-scale=1,user-scalable=no")
+        link(rel='stylesheet', type='text/css', href='/css/init.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.min.css')
+        link(rel='shortcut icon', href='/images/logocl.png')
+        link(rel='stylesheet', href='/css/newlist.css')
+        link(rel='stylesheet', href='/css/newlist2.css')
+        link(rel='stylesheet', href='/css/newlist3.css')
+        link(rel='stylesheet', href='/css/radios.css')   
+        link(href='/css/font-awesome.min.css', rel='stylesheet')
+        link(rel="stylesheet", href="/css/all.css")
+        
+        //TODO: estilos extras
+        link(rel='stylesheet', type='text/css', href='/css/style-extra.css')
+        //TODO: flexslider
+        link(href='/Flexslider/flexslider.css', rel='stylesheet', type='text/css', media='all')
+        //TODO: animate
+        link(href='/css/animate.css', type='text/css', rel='stylesheet')
+        link(rel="stylesheet", href="/css/buscador.css")
+        block style_propio
+        script.
+            var usuarioLogin = localStorage.getItem("nombre");
+            if(usuarioLogin == "" || usuarioLogin == null  ){                
+                window.location = "/"
+            }
+
+    body(style="overflow-x:hidden;background-color:#e3f2e8;" onload="init()")
+        
+        block cabecera
+            #head.container-fluid
+                #cabecera.row
+                    #espacio.col-sm-1(onclick="location.href = '/principal2'", style="background-color:white;")
+                        img#vertical(src="/images/Elfec_icon.png",alt="logo_elfec")
+                        img#horizontal(src="/images/elfec_icon_horizontal.png",alt="logo_elfec_horizontal")
+                    #pointer.col-sm-11.color_base
+                        .row.center_vertical
+                            .col-xs-12.col-md-8.title-principal
+                                h3 BIENVENIDOS A NUESTRA INTRANET
+                            #search_space.col-md-4
+                                input#inputBusqueda.search_input(type="text", placeholder="Busqueda aquí")
+                                button.button-search
+                                    i.material-icons search
+                            #search.search    
+                                table.search-table#searchTable
+                                    thead
+                                        tr
+                                            td
+                                    tbody
+                                        tr
+                                            td 
+                                                a(href="/menu/1") 1.- EMPRESA
+                                        tr
+                                            td 
+                                                a(href="/menu/1") 1.1. Mision
+                                        tr
+                                            td 
+                                                a(href="/menu/1") 1.2. Vision        
+                                        tr
+                                            td 
+                                                a(href="/menu/1") 1.3. Valores        
+                                        tr
+                                            td 
+                                                a(href="/menu/1") 1.4. Lineamiento Estrategico        
+                                        tr
+                                            td 
+                                                a(href="/empresa/organigrama") 1.5. Organigrama        
+                                        tr
+                                            td 
+                                                a(href="/empresa/comite_etica") 1.6. Comite de &Eacute;tica     
+                                        tr
+                                            td
+                                                a(href="/menu/2") 2.- PERSONAL
+                                        tr
+                                            td
+                                                a(href="/personal/Directorio") 2.1. Directorio Personal
+                                        tr
+                                            td
+                                                a(href="/personal/Buzon") 2.2 Buz&oacute;n de Sugerencia
+                                        tr
+                                            td
+                                                a(href="/menu/2") 2.3 Cumplea&ntilde;o del dia
+                                        tr 
+                                            td
+                                                a(href="/menu/3") 3.- INDICADORES
+                                        tr 
+                                            td
+                                                a(href="/indicadores/ventas") 3.1 Ventas
+                                        tr 
+                                            td
+                                                a(href="/indicadores/clientes") 3.2 Clientes
+                                        tr 
+                                            td
+                                                a(href="/indicadores/cobertura") 3.3 Cobertura
+                                        tr
+                                            td
+                                                a(href="/menu/4") 4.- SISTEMA INTEGRADO DE GESTION
+                                        tr
+                                            td
+                                                a(href="/menu/4") 4.1 Politica de sistema integrado de gesti&oacute;n
+                                        tr
+                                            td
+                                                a(href="/menu/4") 4.2 Informacion Documentada
+                                        tr
+                                            td
+                                                a(href="/menu/4") 4.3 Objetivos sistema integrado de gesti&oacute;n
+                                        tr
+                                            td
+                                                a(href="/menu/5") 4.4 Matriz de riesgos y opertunidades
+                                        tr
+                                            td
+                                                a(href="/menu/5") 4.5 Requisitos legales y otros requisitos
+                                        tr
+                                            td
+                                                a(href="/menu/5") 4.6 Encuestas de Satisfacci&oacute;n de clientes
+                                        tr
+                                            td
+                                                a(href="/menu/5") 4.7 Resumen de accidentes e incidentes
+                                        tr
+                                            td
+                                                a(href="/menu/5") 4.8 Cantidad de dias sin accidente
+                                        tr
+                                            td
+                                                a(href="/menu/5") 5.- Informacion Sistema Integrado de Gesti&oacute;n
+                                        tr
+                                            td
+                                                a.procesos 5.1. Procesos
+                                        tr
+                                            td
+                                                a.procesos 5.1.1. Fichas de procesos
+                                        tr
+                                            td
+                                                a#fpOrdenadoGerencia 5.1.1.1. Ordenado por Gerencias 
+                                        tr
+                                            td
+                                                a#fpOrdenadoProcesos 5.1.1.2. Ordenado por Procesos
+                                        tr
+                                            td
+                                                a.procesos 5.1.2. Indicadores
+                                        tr
+                                            td
+                                                a#indOrdenadoGerencia 5.1.2.1 Ordenado por Gerencias
+                                        tr
+                                            td
+                                                a#indSeguimiento 5.1.2.1 Seguimiento
+                                        tr
+                                            td
+                                                a.procesos 5.1.3. Cambio-Riesgo-Oportunidad-Correctiva-Mejora
+                                        tr                                        
+                                            td
+                                                a#crocmOrdenadoGerencias 5.1.3.1. Ordenado por Gerencias
+                                        tr                                        
+                                            td
+                                                a#crocmSeguimiento 5.1.3.2. Seguimiento
+                                        tr                                        
+                                            td
+                                                a#documentos 5.2. Documentos
+                                        tr                                        
+                                            td
+                                                a#docInformacionDocumentada 5.2.1. Informacion Documentada
+                                        tr                                        
+                                            td
+                                                a#docFormularios 5.2.2. Formularios
+                                        tr                                        
+                                            td
+                                                a#docExternosYLegales 5.2.3. Documentos Externos y Legales
+                                        tr                                        
+                                            td
+                                                a#docEnProceso 5.2.4 Documentos en Proceso
+                                        tr                                        
+                                            td
+                                                a#docBaja 5.2.5 Documentos en Baja
+                                        tr                                        
+                                            td
+                                                a#fichaCargo 5.3. Fichas de Cargo
+                                        tr                                        
+                                            td
+                                                a(href="/menu/5") 5.4. Auditorias
+                                        tr                                        
+                                            td
+                                                a#audAuditoriaYHallazgos 5.4.1. Auditorias y Hallazgos
+                                        tr                                        
+                                            td
+                                                a#audAcciones 5.4.2. Acciones
+                                        tr                                        
+                                            td
+                                                a#audHallazgos 5.4.3. Hallazgos
+                                        tr                                        
+                                            td
+                                                a#audCrocm 5.4.4. Cambio-Riesgo-Oportunidad-Correctiva-Mejora
+                                        tr                                        
+                                            td
+                                                a#audVerEficacia 5.4.5. Verificacion Eficacia de Acciones Implementadas                                                
+                                        tr                                        
+                                            td
+                                                a#audFortalezas 5.4.5. Fortalezas                                                
+                                        tr
+                                            td
+                                                a(href="/menu/6") 6.- COMUNICACION
+                                        tr
+                                            td
+                                                a(href="/comunicacion/NoticiasEmpresa") 6.1 Noticias de Empresa
+                                        tr
+                                            td
+                                                a(href="/comunicacion/NoticiasPrensa") 6.2 Noticias de Prensa
+                                        tr
+                                            td
+                                                a(href="/comunicacion/ResponsabilidadSocial") 6.3 Responsabilidad Social Empresarial
+                                        tr
+                                            td
+                                                a(href="/comunicacion/Galeria") 6.4. Galeria de Fotos
+                                        tr
+                                            td
+                                                a(href="/comunicacion/galeria/5") 6.4.1. Imagenes
+                                        tr
+                                            td
+                                                a(href="/comunicacion/galeria/6") 6.4.2. Videos                                 
+                                        tr
+                                            td
+                                                a(href="/menu/7") 7.- MIS LINKS
+                                       
+
+                                                 
+                #file_usuario.row.color_base2
+                    table
+                        tbody
+                            tr
+                                td.align-middle 
+                                    a(href="/").text-white 
+                                        <i class="fas fa-home"></i> Inicio
+                                td.align-middle.ocultar_usuario_xs
+                                    span#usuarioNombre
+                                td.align-middle.ocultar_usuario_xs
+                                    span#usuarioCargo
+                                td.align-middle.ocultar_usuario_xs
+                                    button#mesa.boton-superior
+                                        |Mesa de Ayuda
+                                td.align-middle.ocultar_usuario_xs
+                                    a#botonSistemaSyso.boton-superior.btn(href="#") Sistema SYSO                                        
+                                td.align-middle.ocultar_usuario_xs
+                                    button#mesa.boton-superior(onclick = 'irConsultarDocumentos()')
+                                        |Consulta Documentos
+                                td.align-middle.ocultar_usuario_xs
+                                    button#mesa.boton-superior(onclick = 'irConsultarFormularios()')
+                                        |Consulta Formularios
+                                td.align-middle.ocultar_usuario_xs
+                                    button#mesa.boton-superior(onclick = 'irConsultarDocumentosExternosYLegales()')
+                                        |Consulta Doc. Ext. y Legales
+                            tr
+                                td.align-middle.ocultar_usuario_sm
+                                    span#usuarioNombresm
+                            tr
+                                td.align-middle.ocultar_usuario_sm
+                                    span#usuarioCargosm
+                            tr
+                                td.align-middle.ocultar_usuario_sm
+            block submenu
+                .container-fluid
+                    #contenedor.row
+                        label#mobile-menu.color_base.col-md-12(for="menu-switch", style="margin: 0;")
+                            i.material-icons(aria-hidden="true") dehaze
+                        input#menu-switch(type="checkbox")
+
+                        nav.col-md-2.color_base.flex-column
+                            #scroll
+                                if menuprincipal
+                                    each menu in menuprincipal
+                                        button.color_base_boton_lateral.nav-link.btn-principal.btn-owner(data-link="/menu/" + menu.id ,value=menu.id + '')
+                                            img.icono.icon-owner(src=backend_route + menu.icono)
+                                            h3.texto_color_base=menu.nombre
+                        #contenido.col-md-10
+                            block contenido
+        
+        
+        script(src='/js/jquery-3.3.1.js', type='text/javascript')
+        script(src="/js/sweetalert2.all.min.js")      
+        script(src='/js/axios.min.js')
+        script(src='/js/list.js')
+        
+        script(src='/js/newlist.js')
+        script(src='/js/newlist2.js')
+        script(src='/js/newlist3.js')
+        script(src='/js/jquery.dataTables.min.js')
+        script(src='/Flexslider/carousel/modernizr.js', type='text/javascript')
+        script(src='/bootstrap/js/bootstrap.bundle.js')
+        script(src='/bootstrap/js/bootstrap.bundle.min.js')
+        script(src='/js/index.js', type='text/javascript')
+        script(defer, src="/Flexslider/carousel/jquery.flexslider.js")
+        script(src='/js/buscador.js', type='text/javascript')
+        script(type='text/javascript').
+            var fullname = localStorage.getItem("nombre") + " "+ localStorage.getItem("apellido")
+            document.getElementById("usuarioNombre").innerHTML = fullname
+            document.getElementById("usuarioCargo").innerHTML = localStorage.getItem("cargo")
+            document.getElementById("usuarioNombresm").innerHTML = fullname
+            document.getElementById("usuarioCargosm").innerHTML = localStorage.getItem("cargo")
+            $(".btn-principal").click(function () {
+                var link = $(this).attr('data-link');
+                location.href = link;
+                localStorage.setItem("consulta","")
+            });
+            $("#mesa").click(function () {
+                location.href = "http://elfweb01/mesaayuda/";
+            });
+            $("#botonSistemaSyso").click(function () {
+                location.href = "http://elfweb01/hysweb/login/";
+            });
+            function irConsultarDocumentos(){
+                window.location = '/menu/5'
+                localStorage.setItem('consulta','documentos')
+            }
+            function irConsultarFormularios(){
+                window.location = '/menu/5'
+                localStorage.setItem('consulta','formularios')
+            }
+            function irConsultarDocumentosExternosYLegales(){
+                window.location = '/menu/5'
+                localStorage.setItem('consulta','legales')
+            }
+
+        block scripts

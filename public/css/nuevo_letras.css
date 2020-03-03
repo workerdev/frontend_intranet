@@ -1,0 +1,21 @@
+.fuente_y_color{
+    color: #19458D;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: bold;
+    padding: 15px 5px 0px 30px;
+}
+.form-control{
+/* border-radius: 0rem;
+font-size: 10px;
+height: 20px; */
+}
+.paralabel-control{
+font-size: 12px;
+height: 20px;
+}
+
+.vertical_izq{
+-webkit-transform: rotate(90deg);
+font-size: 10px;
+height: 20px;
+}

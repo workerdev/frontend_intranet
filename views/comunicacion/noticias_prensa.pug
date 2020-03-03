@@ -1,0 +1,103 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/extras/extra.css')
+    style.
+        @media (min-width: 768px) {
+            #contenido {
+                max-height: 817px;
+                overflow-y: auto;
+            }
+        }
+
+        .card_noticia_empresa img {
+            width: 90%;
+            height: 90%;
+        }
+block contenido
+    h2.color_texto_base.text-center NOTICIAS DE PRENSA
+
+    if (categorias.length == 0 || categorias == null)
+        div(style="display: table;margin-right: auto; margin-left: auto;")
+            h6(style="display: table-cell;vertical-align: middle;text-align: center;font-weight: bold; font-size:15px;padding: 20px 0px;") No se ha añadido noticias
+    else
+        .row
+            each item in categorias
+                .col-sm-6.col-md-6.col-lg-4(style='text-align: center;')
+                    .card_noticia_empresa.card(style="cursor:pointer;background-color: transparent;",onclick="location.href = '/comunicacion/NoticiaPrensa/" + item.categoria_id + "/" + item.nombre_categoria + "'")
+                        div(style="width: auto;height: auto;")
+                            h5(style="color:darkslateblue;")=item.titulo_noticia
+                            div.cont_noticia=item.contenido_noticia
+                        .card-body(style="background-color:#2e9c9b;;")
+                            h5.card-title=item.nombre_categoria
+
+
+block scripts
+    script(type="text/javascript").
+        
+            var content = document.getElementsByClassName('cont_noticia');
+            for (var i = 0; i < content.length; i++) {
+                var contenido = content[i].innerHTML;
+                var replace1 = contenido.replace(/&lt;/g, "<");
+                var replace2 = replace1.replace(/&gt;/g, ">");
+                //console.log(replace2)
+                var encontrado = replace2.match(/<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/);
+                content[i].innerHTML = encontrado[0];
+
+            }
+            var imagenes = $('.card_noticia_empresa img');
+
+            for (var i = 0; i < imagenes.length; i++) {
+                imagenes[i].setAttribute('style','height: 90%; width: 90%;')
+            }
+        
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })

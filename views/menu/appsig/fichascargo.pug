@@ -1,0 +1,99 @@
+//Formularios detalle ficha de cargo
+p#espere(style="display:none;") Cargando Datos espere por favor 
+.container#detalle_fichacargo(style="margin-top:0%;display:none;")
+    input#rt_fc(type="hidden", value=backend_route)
+    #div_indi(style="margin-top:0%;display:none;")
+    .row
+        .col-md-12
+            p.text-center.mb-3.lead DETALLE FICHA DE CARGO
+            .row
+                .col-sm-6
+                    .form-group.row
+                        label.paralabel-control.col-sm-2(for='fc_id') ID CARGO
+                        .col-sm-8
+                            input#fc_id.form-control(type='text')
+                .col-sm-6
+                    .form-group.row
+                        label.paralabel-control.col-sm-3(for='fc_id_area') ID AREA
+                        .col-sm-4
+                            input#fc_id_area.form-control(type='text')
+
+                .col-sm-6
+                    .form-group.row
+                        label.paralabel-control.col-sm-6.text-right(for='fc_id_gas') ID AREA
+                        .col-sm-8
+                            input#fc_id_gas.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-6.text-right(for='fc_gerencia') GERENCIA
+                        .col-sm-8
+                            input#fc_gerencia.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-6.text-right(for='fc_area') AREA
+                        .col-sm-8
+                            input#fc_area.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-6.text-right(for='fc_sector') SECTOR
+                        .col-sm-8
+                            input#fc_sector.form-control(type='text')
+
+                .col-sm-6
+                    .form-group
+                        label(for='fc_objetivo_cargo') OBJETIVO CARGO
+                        textarea#fc_objetivo_cargo.form-control(rows="9")
+                .col-sm-6
+                    .form-group
+                        label(for='fc_experiencia') EXPERIENCIA
+                        textarea#fc_experiencia.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='fc_conocimientos') CONOCIMIENTOS
+                        textarea#fc_conocimientos.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='fc_formacion') FORMACION
+                        textarea#fc_formacion.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='fc_caracteristicas_pers') CARACTERISTICAS PERS.
+                        textarea#fc_caracteristicas_pers.form-control
+                .col-sm-8
+                    .form-group
+                        label(for='fc_responsabilidades') RESPONSABILIDADES
+                        textarea#fc_responsabilidades.form-control
+
+                .col-sm-6
+                    .form-group.row
+                        label.paralabel-control.col-sm-4.text-right(for='fc_fecha_aprobacion') FECHA APROBACION
+                        .col-sm-8
+                            input#fc_fecha_aprobacion.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-4.text-right(for='fc_aprobado_jefe') APROBADO JEFE
+                        .col-sm-8
+                            input#fc_aprobado_jefe.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-4.text-right(for='fc_firma_electronica_jefe') FIRMA ELECTRONICA JEFE
+                        .col-sm-8
+                            input#fc_firma_electronica_jefe.form-control(type='text')
+
+                .col-sm-6
+                    .form-group.row
+                        label.paralabel-control.col-sm-4.text-right(for='fc_aprobado_gerente') APROBADO GERENTE
+                        .col-sm-8
+                            input#fc_aprobado_gerente.form-control(type='text')
+                    .form-group.row
+                        label.paralabel-control.col-sm-4.text-right(for='fc_firma_electronica_gerente') FIRMA ELECTRONICA GERENTE
+                        .col-sm-8
+                            input#fc_firma_electronica_gerente.form-control(type='text')
+                .col-sm-12
+                    .text-center
+                        p VINCULO ARCHIVO FICHA CARGO
+                        a#fc_vinculo_archivo_ficha_cargo_boton.btn.btn-primary.text-white Ver archivo Ficha Cargo
+                            //- input#fc_vinculo_archivo_ficha_cargo.form-control(type='text')
+        .col-sm-12
+            p.text-center.mb-3.lead.mt-3 DOCUMENTOS ASOCIADOS
+            // Aqui el datatable
+            table#FICHACARGO_TABLE.table.table-striped.table-bordered.display(style='width:100%')
+
+
+#list_fc(style="margin-top:0%;display:none;")
+    table#table_fcdata.table.table-striped.table-bordered.display(style='width:100%')       

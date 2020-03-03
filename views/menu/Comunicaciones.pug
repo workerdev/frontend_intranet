@@ -1,0 +1,107 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/comunicacion_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+block contenido
+    h2.color_texto_base COMUNICACIONES
+    .row.documentacion
+        .col-sm-4.col-md-4
+            button(style="background-color: #ccbd6f;", onclick="location.href = '/comunicacion/NoticiasEmpresa'")
+                img#marginado(src="/images/Elfec iconos-13.png")
+            h3 Noticias de Empresa
+        .col-sm-4.col-md-4
+            button(style="background-color: #b54d51;", onclick="location.href = '/comunicacion/NoticiasPrensa'")
+                img(src="/images/Elfec iconos-14.png")
+            h3 Noticias de Prensa
+        .col-sm-4.col-md-4
+            button(style="background-color: #848376;", onclick="location.href = '/comunicacion/ResponsabilidadSocial'")
+                img(src="/images/Elfec iconos-15.png")
+            h3 Responsabilidad Social Empresarial
+
+    .row.documentacion
+        .col-md-3
+        .col-md-6(style="text-align: center;")
+            if(lastFile == null)
+                #album-galeria()
+                    div(style="display: table;margin-right: auto; margin-left: auto;")
+                        h6(style="display: table-cell;vertical-align: middle;text-align: center;font-weight: bold; font-size:15px;padding: 20px 0px;") SIN ELEMENTOS
+
+                h3 Galería de Fotos
+
+            else
+                #album-galeria(onclick="location.href = '/comunicacion/Galeria'", style="cursor:pointer;")
+                    input#route(style="display:none", value=backend_route)
+                    if (lastFile.tipo + "" == 'imagen')
+                        img(style="height: auto; width: 100%;padding:0px;", class='ruta', src=backend_route + lastFile.ruta + "" , alt=lastFile.tipo + "")
+                    else
+                        video(style="height: auto; width: 100%;padding:0px;", class='ruta', src=backend_route + lastFile.ruta + "", controls)
+
+                h3 Galería de Fotos
+
+
+
+block scripts
+    script(type="text/javascript").
+        /*9function init(){
+            var rutas = document.getElementsByClassName('ruta');
+            for (let i = 0; i < rutas.length; i++) {
+                var ruta = rutas[i];
+                var src = ruta.getAttribute('src');
+                //var rutaCortada = src.split('public')
+                var route = $('#route').val();
+                rutas[i].setAttribute('src', route+rutaCortada[1] + "");
+            }
+        }*/
+
+
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })

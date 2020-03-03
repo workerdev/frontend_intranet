@@ -1,0 +1,112 @@
+
+/* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(icons.woff2) format('woff2');
+}
+.odd{
+ background-color: aliceblue !important;
+}
+.even{
+    background-color: #deeef5 !important;
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+#preload-content{
+    background-color: #FFF;
+}
+#preload-loader{
+    background-color: #FFF;
+}
+
+#preload-content2{
+    background-color: #FFF;
+}
+#preload-loader2{
+    background-color: #FFF;
+}
+
+#title-anger{
+    text-align: left;
+    padding-left: 0;
+}
+#progress-anger{
+    text-align: right;
+    padding-right: 0;
+}
+#title-disgust{
+    text-align: left;
+    padding-left: 0;
+}
+#progress-disgust{
+    text-align: right;
+    padding-right: 0;
+}
+#title-joy{
+    text-align: left;
+    padding-left: 0;
+}
+#progress-joy{
+    text-align: right;
+    padding-right: 0;
+}
+#title-sadness{
+    text-align: left;
+    padding-left: 0;
+}
+#progress-sadness{
+    text-align: right;
+    padding-right: 0;
+}
+#title-fear{
+    text-align: left;
+    padding-left: 0;
+}
+#progress-fear{
+    text-align: right;
+    padding-right: 0;
+}
+
+#logo{
+    padding-bottom: 15px;
+}
+nav{
+    /* background-color: #1C578C; */
+}
+.cyan{
+    background-color: #1C578C !important;
+}
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#posts{
+   overflow-y: scroll;
+   width: 100%;
+}
+#post-content{
+    margin-bottom: 30px;
+}
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

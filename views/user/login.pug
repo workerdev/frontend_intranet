@@ -1,0 +1,69 @@
+doctype html
+html(lang='en', style="background-color:#839eb4;overflow:;")
+    head
+        title ELFEC - INTRANET
+        meta(name="viewport", content="width=device-width, initial-scale=1,user-scalable=no")
+        //link(rel='stylesheet', type='text/css', href='/css/materialize.min.css')
+        //link(rel='stylesheet', type='text/css', href='/css/sweetalert2.min.css')
+        link(rel='stylesheet', type='text/css', href='/css/init.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', type='text/css', href='/bootstrap/css/bootstrap.min.css')
+        link(rel='shortcut icon', href='/images/logocl.png')
+        script(rel='ajax', src="/js/axios.min.js")
+        //TODO: icons
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons",rel="stylesheet")
+        //TODO: estilos extras
+        link(rel='stylesheet', type='text/css', href='/css/style-extra.css')
+        //TODO: flexslider
+        link(href='/Flexslider/flexslider.css', rel='stylesheet', type='text/css', media='all')
+        //TODO: animate
+        link(href='/css/animate.css', type='text/css', rel='stylesheet')
+        block style_propio
+
+    body.color_base(style="overflow-x:hidden;background-color:#839eb4;")
+            // Start Page Loading
+            #loader-wrapper
+                #loader
+                .loader-section.section-left
+                .loader-section.section-right
+            // End Page Loading
+            #login-page
+                .col-sm-4(style='margin: auto;')
+                    form#form-login.login-form(action='/login/authenticate',method='POST', style="text-align:center;")
+                        .row
+                            .col-sm-12.center
+                                img.img-fluid(src='images/elfec_icon_horizontal.png', alt='' style="height:auto;width:auto;")
+                        div.color_base
+                            br
+                            .row.margin
+                                .col-md-12
+                                    label(for='username' style="color:white;")
+                                        i.material-icons.prefix(style="color:white;") perm_identity
+                                        |Usuario
+                                    .col-md-8(style="margin:auto;")
+                                        input#username.form-control(name='username',type='text',required)
+                            br
+                            .row.margin
+                                .col-md-12
+                                    label(for='password' style="color:white;")
+                                        i.material-icons.prefix(style="color:white;") lock_outline
+                                        |Contraseña
+                                    .col-md-8(style="margin:auto;")
+                                        input#password.form-control(name='password',type='password',required)
+                            br
+                            .row(style='margin-bottom:0px ')
+                                .col-md-12
+                                    p.margin.center-align.medium-small
+                                        a#text-error(style='color:rgb(255, 80, 80)')= message
+
+                                    button.btn.btn-primary(type='submit')
+                                        | Ingresar
+
+                            br
+                            .row
+                                .col-sm-12
+                                    p.margin.medium-small
+                                        a(style="color:white;", href='/register') Registrate
+                                .col-sm-12
+                                    p.margin.medium-small
+                                        a(style="color:white;", href='/forget_password') ¿Olvidaste tu contraseña?

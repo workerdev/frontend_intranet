@@ -1,0 +1,430 @@
+#op_auds(style="margin-top:0%; display:none;")
+    .container
+        .row
+            .col-md-4
+                button.btn.btn-secondary2.btn-block(type="button", id="btn_audhlg") AUDITORIAS Y HALLAZGOS
+            .col-md-4    
+                button.btn.btn-info2.btn-block(type="button", id="btn_acn") ACCIONES
+            .col-md-4    
+                button.btn.btn-secondary2.btn-block(type="button", id="btn_hlg") HALLAZGOS
+        .row(style = "margin-top:20px")        
+            //- .col-md-4
+            //-     button.btn.btn-info2.btn-block(type="button", id="btn_crocm") CAMBIO-RIESGO-OPORTUNIDAD-CORRECTIVA-MEJORA            
+            .col-md-6
+                button.btn.btn-secondary2.btn-block(type="button", id="btn_veref") VERIFICACION EFICACIA DE ACCIONES IMPLEMENTADAS
+            .col-md-6
+                button.btn.btn-info2.btn-block(type="button", id="btn_fort") FORTALEZAS    
+       
+                                
+#audhlg(style="margin-top:0%;display:none;")
+    div.page-header        
+    table#table_audhlg.table.table-striped.table-bordered.display(style='width:100%')
+        
+
+
+.container-fluid#aud-det(style="margin-top:0%;display:none;")
+    .card
+        .card-body
+            .nav.nav-tabs.justify-content-center
+                .container-fluid
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center AUDITORIAS
+                        .col-sm-6
+                            .form-group.row
+                                label(for="audh_id_auditoria").paralabel-control.col-sm-2 ID. AUDITORIA
+                                .col-sm-10
+                                    input.form-control.det-aud#audh_id_auditoria(type='text')
+                        .col-sm-6
+                            .form-group.row
+                                label(for="audh_id_area").paralabel-control.col-sm-2 ID. PROCESO
+                                .col-sm-10   
+                                    input.form-control.det-aud#audh_id_area(type='text')    
+                        .col-sm-6
+                            .form-group.row
+                                label(for="audh_tipo_auditoria").paralabel-control.col-sm-2 TIPO AUDITORIA
+                                .col-sm-10
+                                    input.form-control.det-aud#audh_tipo_auditoria(type='text')              
+                        .col-sm-6
+                            .form-group.row
+                                label(for="audh_f_programada").paralabel-control.col-sm-2 F. PROGRAMADA
+                                .col-sm-10
+                                    input.form-control.det-aud#audh_f_programada(type='text')        
+                    .row
+                        .col-sm-6
+                            label(for="audh_duracion_estimada_horas").paralabel-control DURACION ESTIMADA HORAS
+                            input.form-control.det-aud#audh_duracion_estimada_horas(type='text')     
+                        .col-sm-6
+                            label(for="audh_lugar_de_auditoria").paralabel-control LUGAR AUDITORIA
+                            input.form-control.det-aud#audh_lugar_de_auditoria(type='text')
+                    hr(style="border-bottom: 1px solid #004c99;")
+                    
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center GERENCIA, AREA Y SECTOR
+                            #list-sectors
+                                ul.list#ul_sectors(style='list-style:none;margin-left: -30px;')  
+                    
+                    hr(style="border-top: 2px solid #004c99;")
+                    .row
+                        .col-sm-6
+                            .form-group  
+                                label(for="audh_alcance").paralabel-control ALCANCE                          
+                                textarea#audh_alcance.form-control.det-aud  
+                        .col-sm-6
+                            .form-group  
+                                label(for="audh_objetivos").paralabel-control OBJETIVOS                          
+                                textarea#audh_objetivos.form-control.det-aud  
+                    .row
+                        .col-sm-3
+                            label.paralabel-control FECHA HORA INICIO        
+                            input.form-control.det-aud#audh_fecha_hora_inicio(type='text')                    
+                        .col-sm-3
+                            label.paralabel-control FECHA HORA FIN 
+                            input.form-control.det-aud#audh_fecha_hora_fin(type='text')                      
+                        .col-sm-3
+                            label.paralabel-control JEFE / COORDINADOR / SUPERVISOR DE AREA
+                            input.form-control.det-aud#audh_responsable_registro(type='text')          
+                        .col-sm-3                
+                            label.paralabel-control FECHA REGISTRO        
+                            input.form-control.det-aud#audh_fecha_registro(type='text')    
+                    .row
+                        .col-sm-12
+                            .form-group  
+                                label(for="audh_conclusiones").paralabel-control CONCLUSIONES                          
+                                textarea#audh_conclusiones.form-control.det-aud    
+                    hr
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center EQUIPO AUDITOR                 
+                        .col-sm-4
+                            .form-group
+                                label.paralabel-control ID. AUDITORIA
+                                input.form-control.det-aud#ahe_id_auditoria(type='text')                    
+                        .col-sm-4
+                            .form-group
+                                label.paralabel-control ITEM AUDITOR    
+                                input.form-control.det-aud#ahe_item_auditor(type='text')                   
+                        .col-sm-4
+                            .form-group
+                                label.paralabel-control TIPO AUDITOR   
+                                input.form-control.det-aud#ahe_tipo_auditor(type='text') 
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center AUDITOR
+                            table#list_aheq.table.table-striped.table-bordered.display(style='width:100%')
+                    hr
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center HALLAZGOS
+                            table#list_ahlg.table.table-striped.table-bordered.display(style='width:100%')   
+
+
+#hlg-det(style="margin-top:0%;display:none;")
+    #div_dhlg(style="margin-top:0%;display:none;")
+
+    .card
+        .card-body
+            .row
+                .col-md-12
+                    p.text-center.mb-3.lead(style="color: #004c99; font-weight: 500 !important; font-size: 17px;") HALLAZGOS
+                    div.container-fluid
+                        div.row
+                            div.col
+                                label(for="hlg_id_hallazgo") ID. HALLAZGO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_id_hallazgo")
+                            div.col
+                                label(for="hlg_id_auditoria") ID. AUDITORIA
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_id_auditoria")
+                            div.col
+                                label(for="hlg_tipo_hallazgo") TIPO HALLAZGO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_tipo_hallazgo")
+                            div.col
+                                label(for="hlg_ordinal_hallazgo") ORDINAL HALLAZGO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_ordinal_hallazgo")
+                        div.row
+                            div.col
+                                label(for="hlg_titulo_hallazgo") TITULO HALLAZGO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_titulo_hallazgo")
+                        div.row
+                            div.col
+                                label(for="hlg_descripcion_hallazgo") DESCRIPCION HALLAZGO
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_descripcion_hallazgo", rows="3")
+                            div.col
+                                label(for="hlg_evidencia_del_hallazgo") EVIDENCIA DEL HALLAZGO
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_evidencia_del_hallazgo", rows="3")
+                        div.row
+                            div.col
+                                label(for="hlg_documento_del_hallazgo") DOCUMENTO HALLAZGO
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_documento_del_hallazgo", rows="3")
+                            div.col
+                                label(for="hlg_punto_iso_del_hallazgo") PUNTO ISO DEL HALLAZGO
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_punto_iso_del_hallazgo", rows="3")
+                        div.row
+                            div.col
+                                label(for="hlg_impacto") IMPACTO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_impacto")
+                            div.col
+                                label(for="hlg_probabilidad") PROBABILIDAD
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_probabilidad")
+                        div.row
+                            div.col
+                                label(for="hlg_analisis_causa_raiz") ANALISIS CAUSA RAIZ
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_analisis_causa_raiz", rows="3")
+                            div.col
+                                label(for="hlg_recomendaciones") RECOMENDACIONES
+                                textarea.form-control.form-control-sm.det-hlg(id="hlg_recomendaciones", rows="3")
+                        div.row
+                            div.col
+                                label(for="hlg_cargo_del_auditado") CARGO DEL AUDITADO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_cargo_del_auditado")
+                            div.col
+                                label(for="hlg_nombre_del_auditado") NOMBRE DEL AUDITADO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_nombre_del_auditado")
+                        div.row
+                            div.col
+                                label(for="hlg_responsable_registro") RESPONSABLE REGISTRO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_responsable_registro")
+                            div.col
+                                label(for="hlg_fecha_registro") FECHA REGISTRO
+                                input.form-control.form-control-sm.det-hlg(type="text", id="hlg_fecha_registro")
+                .col-sm-12
+                    hr
+                    p.text-center.mb-3.lead.mt-3(style="color: #004c99; font-weight: 500 !important; font-size: 17px;") ACCIONES
+                    table#list_acn.table.table-striped.table-bordered.display(style='width:100%')
+
+
+.container-fluid#hlg(style="margin-top:0%;display:none;")
+    div.page-header
+        h4.text-center
+            small HALLAZGOS
+    table#table_hlg.table.table-striped.table-bordered.display(style='width:100%')
+        
+
+
+.container-fluid#acn(style="margin-top:0%;display:none;")
+    div.page-header
+        h4.text-center
+            small ACCIONES
+    table#table_acn.table.table-striped.table-bordered.display(style='width:100%')        
+
+
+div#crocm.card(style="display:none;")
+  div.card-body
+    button.btn.btn-primary.btn-lg.btn-block.m-2(id="ins-crocm", type="button") INSERTAR CAMBIO-RIESGO-OPORTUNIDAD-CORRECTIVA-MEJORA
+    p.card-text Registra los datos de un detrminado proceso, ante la eventualidad de insertar acciones originadas por:
+        ul.list-unstyled
+            li - Un CAMBIO, que tenga alto impacto en el sector o la organización
+            li - Un RIESGO, algo cuyos efectos potenciales son adversos (amenazas)
+            li - Una OPORTUNIDAD, algo cuyos efectos potenciales son beneficiosos
+            li - Una CORRECTIVA, para eliminar una No Conformidad o una desviación al proceso y evitar que vuelva a ocurrir
+            li - Una MEJORA, actividad para mejorar el desempeño
+    button.btn.btn-secondary.btn-lg.btn-block(id="con-crocm", type="button") CONSULTA
+
+//- Insertar Crocm   
+.container-fluid#aud-cromins(style="margin-top:0%; display:none ")
+    .card
+        .card-body
+            .nav.nav-tabs.justify-content-center
+                .container-fluid                    
+                    div.row
+                        .col-md-12
+                            #infoEspere.alert.alert-warning(style="display:none") Cargando datos, espere por favor...
+                        div.col-sm-12
+                            .row
+                                .col-sm-2
+                                    div.form-group.row
+                                        label.paralabel-control.col-sm-6 ID. CRO
+                                        div.col-sm-6
+                                            input.form-control.cod_doc_1(type="text", disabled)                            
+                                .col-sm-4
+                                    div.form-group.row
+                                        label.paralabel-control.col-sm-2 TIPO
+                                        div.col-sm-10
+                                            select#cbtipo.form-control
+                                                option(value='',selected, disabled) Seleccione el tipo                                     
+                                .col-sm-6
+                                    div.form-group.row
+                                        label.paralabel-control.col-sm-2 COD. PROCESO
+                                        div.col-sm-10
+                                            select#cbproceso.form-control
+                                                option(value='',selected, disabled) Seleccione el proceso 
+                
+                        div.col-sm-12
+                            div.form-group.row
+                                label.paralabel-control.col-sm-2 ORIGEN CROCM
+                                div.col-sm-10
+                                    textarea#origenCrocm.form-control(type="text", required)
+                            
+                        div.col-sm-12
+                            div.form-group.row
+                                label.paralabel-control.col-sm-2 DESCRIPCION CROCM
+                                div.col-sm-10
+                                    textarea#descripcionCrocm.form-control(type="text", required)
+                        div.col-sm-12
+                            div.form-group.row
+                                label.paralabel-control.col-sm-2 ANALISIS CAUSA RAIZ
+                                div.col-sm-10
+                                    textarea#analisisCausaRaiz.form-control(type="text", required)
+                        div.col-sm-6
+                            div.form-group.row
+                                label.paralabel-control.col-sm-3 PROBABILIDAD
+                                div.col-sm-9
+                                    select#cbprobabilidad.form-control
+                                        option(value='',selected, disabled) Seleccione probabilidad 
+                                    
+                        div.col-sm-6
+                            div.form-group.row
+                                label.paralabel-control.col-sm-3 IMPACTO
+                                div.col-sm-9
+                                    select#cbimpacto.form-control
+                                        option(value='',selected, disabled) Seleccione impacto
+                                
+                            
+                        div.col-sm-12
+                            div.form-group.row
+                                label.paralabel-control.col-sm-2 ACCION
+                                div.col-sm-8
+                                    textarea#accionCrocm.form-control(type="text",required)
+                            
+                        div.col-sm-4
+                            div.form-group.row
+                                label.paralabel-control.col-sm-5 FECHA IMPLEMENTACION
+                                div.col-sm-7
+                                    input#fecha_implementacion.datepicker-here.form-control(type="text",
+                                    data-language='es',data-position='top left' , readonly , required , data-date-format='yyyy-mm-dd', style="background-color: white;")
+                            
+                        div.col-sm-4
+                            div.form-group.row
+                                label.paralabel-control.col-sm-4 RESPONSABLE
+                                div.col-sm-8
+                                    select#cbresponsable.form-control
+                                                                    
+                            
+                        div.col-sm-4
+                            div.form-group.row
+                                label.paralabel-control.col-sm-4 ESTADO
+                                div.col-sm-8
+                                    select#cbestado.form-control
+                                        option(value="PENDIENTE") PENDIENTE
+                                        option(value="CERRADO") CERRADO                            
+                        div.col-sm-4                            
+                            .form-group
+                                button#insertarCrocm.btn.btn-primary(style="font-size: 15px;") GUARDAR                                                                       
+
+.container-fluid#crocm-con(style="margin-top:0%;display:none;")
+    div.page-header
+        h4.text-center
+            small CONSULTA CROCM
+    table#tb_concrocm.table.table-striped.table-bordered.display(style='width:100%')
+        
+
+
+.container-fluid#crocmaud-det(style="margin-top:0%;display:none;")
+    .card
+        .card-body
+            .nav.nav-tabs.justify-content-center
+                .container
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center CAMBIO-RIESGO-OPORTUNIDAD-CORRECTIVA-MEJORA
+                        .col-sm-6
+                            .form-group.row
+                                label(for="adcr_id_cro").paralabel-control.col-sm-3 ID. CRO
+                                .col-sm-9
+                                    input.form-control#adcr_id_cro(type='text')
+                        .col-sm-5
+                            .form-group.row
+                                label(for="adcr_tipo_cro").paralabel-control.col-sm-3 TIPO CRO
+                                .col-sm-9   
+                                    input.form-control#adcr_tipo_cro(type='text')    
+                        .col-sm-8
+                            .form-group.row
+                                label(for="adcr_cod_proceso").paralabel-control.col-sm-3 COD. PROCESO
+                                .col-sm-9
+                                    input.form-control#adcr_cod_proceso(type='text')     
+                    .row
+                        .col-sm-6
+                            .form-group  
+                                label(for="adcr_origen_crocm").paralabel-control ORIGEN CRO                        
+                                textarea#adcr_origen_crocm.form-control  
+                        .col-sm-6
+                            .form-group  
+                                label(for="adcr_descripcion_crocm").paralabel-control DESCRIPCION CROCM                         
+                                textarea#adcr_descripcion_crocm.form-control    
+                        .col-sm-6
+                            .form-group  
+                                label(for="adcr_analisis_causa_raiz").paralabel-control ANALISIS CAUSA RAIZ                        
+                                textarea#adcr_analisis_causa_raiz.form-control 
+                    .row
+                        .col-sm-3
+                            .form-group.row
+                                label(for="adcr_probabilidad").paralabel-control PROBABILIDAD
+                                input.form-control#adcr_probabilidad(type='text')     
+                        .col-sm-9                                                                             
+                            .form-group.row
+                                label(for="adcr_impacto").paralabel-control.col-sm-10 IMPACTO
+                                    input.form-control#adcr_impacto(type='text')   
+                    .row
+                        .col-sm-6
+                            .form-group  
+                                label(for="adcr_accion").paralabel-control ACCION                         
+                                textarea#adcr_accion.form-control 
+                    .row
+                        .col-sm-3
+                            .form-group.row
+                                label(for="adcr_f_implementacion").paralabel-control FECHA IMPLEMENTACION
+                                input.form-control#adcr_f_implementacion(type='text')     
+                        .col-sm-9                                                                             
+                            .form-group.row
+                                label(for="adcr_responsable").paralabel-control.col-sm-10 RESPONSABLE
+                                    input.form-control#adcr_responsable(type='text')     
+                        .col-sm-9                                                                             
+                            .form-group.row
+                                label(for="adcr_estado").paralabel-control.col-sm-10 ESTADO
+                                    input.form-control#adcr_estado(type='text')  
+                    .row
+                        .col-sm-12
+                            hr
+                            p.fuente_y_color.text-center SEGUIMIENTO CROCM
+                            table#tb_segcro.table.table-bordered.display(style='width:100%')   
+
+
+.container-fluid#verif-ef(style="margin-top:0%;display:none;")
+    div.page-header
+        
+    table#tb_verif_ef.table.table-striped.table-bordered.display(style='width:100%')
+        tfoot
+            tr
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th  
+
+
+.container-fluid#fortaleza(style="margin-top:0%;display:none;")
+    div.page-header
+        h4.text-center
+            small FORTALEZAS
+    table#tb_fortaleza.table.table-striped.table-bordered.display(style='width:100%')
+        tfoot
+            tr
+                th
+                th
+                th
+                th
+                th
+                th
+                th
+                th

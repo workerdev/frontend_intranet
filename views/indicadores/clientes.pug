@@ -1,0 +1,25 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+block contenido
+    h2.color_texto_base CLIENTES
+        div(style="min-width: 240px;overflow: auto;")
+            table.table.table-bordered(style="background-color: white;")
+                thead
+                    tr
+                        th(scope='col') N°
+                        th(scope='col') Nombre
+                        th(scope='col') Apellido
+                        th(scope='col') Telefono
+                        th(scope='col') Correo
+                        th(scope='col') Area
+                        th(scope='col') Cargo
+                tbody
+                    tr
+                        th(scope='row') 1
+                        td Mark
+                        td Otto
+                        td @mdo
+                        td @mdo
+                        td @mdo
+                        td @mdo

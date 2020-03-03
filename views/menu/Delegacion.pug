@@ -1,0 +1,80 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css')        
+    link(rel="stylesheet", href="/css/table_icon.css")
+    link(rel='stylesheet', type='text/css', href='/css/datepicker.min.css')
+    style.         
+        input[type="search"]{    
+            border: 1px solid #00940f !important;     
+        }
+        .datepicker{
+            z-index:9999
+        }
+        .form-control:disabled,.form-control[readonly]{
+            background-color: #ffffff;
+            opacity: 1;
+        } 
+        .bg-Anulado {
+            background-color: #ffb989 !important;
+        }
+block contenido
+    input#backend(type="hidden", value=backend_route)
+    .container-fluid
+        .row
+            .col-sm-12
+                h3.text-center(style="padding-top: 20px") Delegacion de autoridad 
+                //- .alert.alert-info#cargandoTabla
+                    <i class="fas fa-spinner fa-spin"></i>
+                    span &nbsp; Cargando Datos espere por favor...
+            .col-sm-12.pb-2
+                button#newCorrelativo.btn.btn-primary(data-toggle="modal" data-target="#modalDelegacion" style="display:none" ) 
+                    i.fas.fa-plus  
+                    span &nbsp;Nuevo
+                input(type="hidden")#unidadCantidad    
+                input(type="hidden")#direccionIP    
+            .col-sm-12            
+                table#table_delegacion.table.table-striped.table-bordered.display(style='width:100%')
+            
+block scripts 
+    script(src='/js/datepicker.min.js')
+    script(src='/js/datepicker.es.js')
+    //script(src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js') 
+    script(src='/js/dataTables.bootstrap4.min.js')   
+    script(src='/js/customValidation.js')   
+    script(src="/js/fileSaver.js") 
+    script(src="/js/base64.js") 
+    script.
+        var delegacion = !{JSON.stringify(delegacion)}
+        var backend_server = "#{backend_route}"
+       
+        $(document).ready(function () {
+            $.extend( true, $.fn.dataTable.defaults, {
+                "language": {
+                        "url": "/js/Spanish.json"
+                    }
+                
+            } );
+        });
+        $('#table_delegacion').DataTable({
+            data: delegacion ,
+            language: {
+                        "url": "/js/Spanish.json"
+                    },
+            dom: '<"pull-left"f><"pull-right"l>tip',
+            columns : [
+                { title: "Nombre" , data:"nombre"},
+                { title: "Cargo" , data:"cargo"},
+                { title: "Foto" , data:"foto" , 
+                    render: function(data) {
+                            var a = '<img class="img-responsive" width="150px" src="'+ backend_server +"/delautoridad" + data +'">'
+                            return a
+                        }
+                },
+                { title: "Archivo" , data:"archivo",
+                    render: function(data) {
+                            var a = '<a class="btn btn-primary" width="150px" target="_blank" href="'+ backend_server +"/delautoridad" + data + '">Ver Archivo </a>'
+                            return a
+                        }
+                }
+            ]
+        });

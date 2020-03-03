@@ -1,0 +1,85 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css') 
+    style.
+        input[type="search"]{    
+            border: 1px solid #00940f !important;     
+        }
+block contenido
+    h2.color_texto_base TURNO PERSONAL
+
+    div#contenedorTurno
+        
+
+
+block scripts
+    script(src='/js/dataTables.bootstrap4.min.js')
+    
+    script.             
+        var turnos = !{JSON.stringify(turnos)}
+        console.log(turnos.length)
+        var contenedor = document.getElementById("contenedorTurno")
+        if (turnos.length > 0){
+            var tipoTurnos = []
+            var listaTurnos = []
+            for (elemento in turnos){               
+                tipoTurnos.push(turnos[elemento].fktipo.id)
+                listaTurnos.push(turnos[elemento].fktipo.descripcion)                        
+            }              
+            let tipoTurnosUnico = new Set(tipoTurnos)
+            let listaTurnosUnico = new Set(listaTurnos)
+            listaTurnosArray = Array.from(listaTurnosUnico);            
+            var contador = 0
+            for(let item of tipoTurnosUnico){
+                var listaPersonal = []
+                var nombreTurno = listaTurnosArray[contador]
+                for (elemento in turnos) {                    
+                    if ( item == turnos[elemento].fktipo.id){
+                        listaPersonal.push(turnos[elemento])
+                    }
+                    
+                }
+                var titulo = document.createElement('h4') 
+                titulo.innerText = nombreTurno
+                titulo.style.paddingTop = "20px"
+                contenedor.appendChild(titulo)
+                var hr = document.createElement('hr') 
+                contenedor.appendChild(hr)
+                var table = document.createElement('table')
+                table.setAttribute('id' , 'turno-'+ item)
+                //.table.table-striped.table-bordered
+                table.classList.add("table","table-striped","table-bordered")
+                contenedor.appendChild(table)
+                
+                var itemTabla = "#turno-" + item + ""                
+                $(itemTabla).DataTable({
+                    language: {
+                        "url": "/js/Spanish.json"
+                    },
+                    dom: '<"pull-left"f><"pull-right"l>tip',
+                    data : listaPersonal,
+                    columns : [
+                        { title : "Personal" , data : "personal"},                  
+                        { title : "Fecha Inicio" , data : "fechainicio"},                  
+                        { title : "Fecha fin" , data : "fechafin"},                  
+                        { title : "Telefono" , data : "telefono"},                  
+                        { title : "Celular" , data : "celular"}
+                        //- { title : "Fecha" , data : function(data,type,row){
+                        //-     return data.fechainicio + " - " + data.fechafin
+                        //- }
+                        //- },                  
+                    ]
+                });
+
+
+                //console.log(contenedor)
+                //console.log(listaPersonal)
+                //console.log("contenido del item ")
+                //console.log(item)
+                contador++
+            }
+            //console.log([new Set(tipoTurnos)])
+            
+        }
+       

@@ -1,0 +1,350 @@
+div.container(id="op_process", style="margin-top:0%; display:none;")
+    //- div.row
+    //-     div.btn-group-vertical.col-lg-10(role="group", aria-label="Vertical button group")
+    //-         div.btn-group.col-lg-8.mb-3(role="group")
+    //-             button.btn.btn-secondary2.btn-sm(id="fc-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") FICHA DE PROCESOS
+    //-             div(id="cont-fc", style="display: none")
+    //-                 a#btn_ger.dropdown-item Ordenado por Gerencias
+    //-                 a#btn_pro.dropdown-item Ordenado por Procesos
+    //-         div.btn-group.col-lg-8.mb-3(role="group")
+    //-             button.btn.btn-primary2.btn-sm(id="ind-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") INDICADORES
+    //-             div(id="cont-ind", style="display: none")
+    //-                 a#btn_ind_ger.dropdown-item Ordenado por Gerencias
+    //-                 a#btn_ind_seg.dropdown-item Seguimiento
+    //-         div.btn-group.col-lg-8.mb-3(role="group")
+    //-             button.btn.btn-info2.btn-sm(id="crocm-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") CAMBIO-RIESGO-OPORTUNIDAD-CORRECTIVA-MEJORA
+    //-             div(id="cont-crocm", style="display: none")
+    //-                 a#crocm_ger.dropdown-item Ordenado por Gerencias
+    //-                 a#crocm_seg.dropdown-item Seguimiento
+    #opc_procesos.row()
+        .col-sm
+            button.btn.btn-primary.btn-block(id="fc-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") FICHA DE PROCESOS
+            .dropdown-menu
+                a#btn_ger.dropdown-item Ordenado por Gerencias
+                a#btn_pro.dropdown-item Ordenado por Procesos
+        .col-sm
+            button.btn.btn-success.btn-block(id="ind-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") INDICADORES
+            .dropdown-menu
+                a#btn_ind_ger.dropdown-item Ordenado por Gerencias
+                a#btn_ind_seg.dropdown-item Seguimiento
+        .col-sm
+            button.btn.btn-info.btn-block(id="crocm-cont", type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") CAMBIO-RIESGO-OPORTUNIDAD-CORRECTIVA-MEJORA
+            .dropdown-menu
+                a#crocm_ger.dropdown-item Ordenado por Gerencias
+                a#crocm_seg.dropdown-item Seguimiento              
+
+
+//Formularios detalle de indicador listado por gerencias
+.container#detalle_indicador(style="margin-top:0%;display:none;")
+    #div_indi(style="margin-top:0%;display:none;")
+    .row
+        .col-md-12
+            p.text-center.fuente_y_color DETALLE INDICADOR                
+            .row
+                .col-sm-3
+                    .form-group.row
+                        label.col-sm-6(for='IND_ID_INDICADOR') ID
+                        .col-sm-6
+                            input#IND_ID_INDICADOR.form-control(type='text')
+                .col-sm-9
+                    .form-group.row
+                        label.col-sm-4(for='IND_COD_PROCESO') COD_PROCESO
+                        .col-sm-8
+                            input#IND_COD_PROCESO.form-control(type='text')
+                .col-sm-12
+                    .form-group.row
+                        label.col-sm-2(for='IND_CODIGO_INDICADOR') COD_INDICADOR
+                        .col-sm-10
+                            input#IND_CODIGO_INDICADOR.form-control(type='text')
+                .col-sm-6
+                    .form-group
+                        label(for='IND_OBJETIVO_INDICADOR') OBJETIVO INDICADOR
+                        textarea#IND_OBJETIVO_INDICADOR.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='IND_DESCRIPCION_INDICADOR') DESCRIPCION INDICADOR
+                        textarea#IND_DESCRIPCION_INDICADOR.form-control
+                .col-sm-12
+                    .form-group.row
+                        label.col-sm-3(for='IND_RESPONSABLE_ELABORACION') RESPONSABLE_ELABORACION
+                        .col-sm-9
+                            input#IND_RESPONSABLE_ELABORACION.form-control(type='text')
+                .col-sm-6
+                    .form-group
+                        label(for='IND_FORMULA') FORMULA
+                        textarea#IND_FORMULA.form-control
+                .col-sm-6
+                    .form-group.row
+                        label.col-sm-4.text-right(for='IND_UNIDAD') UNIDAD
+                        .col-sm-8
+                            input#IND_UNIDAD.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-4.text-right(for='IND_META_MENSUAL') META MENSUAL
+                        .col-sm-8
+                            input#IND_META_MENSUAL.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-4.text-right(for='IND_META_ANUAL') META ANUAL
+                        .col-sm-8
+                            input#IND_META_ANUAL.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-4.text-right(for='IND_VIGENTE') VIGENTE
+                        .col-sm-8
+                            input#IND_VIGENTE.form-control(type='text')
+        .col-sm-12
+            p.text-center.fuente_y_color PROCESO INDICADORES SEGUIMIENTO
+            // Aqui el datatable
+            table#IND_TABLE.table.table-striped.table-bordered.display(style='width:100%')
+
+
+//Formularios detalle crocm
+.container#detalle_crocm(style="margin-top:0%;display:none;")
+    #div_indi(style="margin-top:0%;display:none;")
+    .row
+        .col-md-12
+            p.text-center.fuente_y_color DETALLE CROCM
+            .row
+                .col-sm-3
+                    .form-group.row
+                        label.col-sm-6(for='crocm_id') ID CRO
+                        .col-sm-6
+                            input#crocm_id.form-control(type='text')
+                .col-sm-9
+                    .form-group.row
+                        label.col-sm-4(for='crocm_tipo') TIPO CRO
+                        .col-sm-8
+                            input#crocm_tipo.form-control(type='text')
+                .col-sm-12
+                    .form-group.row
+                        label.col-sm-2(for='crocm_cod_proceso') COD. PROCESO
+                        .col-sm-10
+                            input#crocm_cod_proceso.form-control(type='text')
+                .col-sm-6
+                    .form-group
+                        label(for='crocm_origen') ORIGEN CRO
+                        textarea#crocm_origen.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='crocm_descripcion') DESCRIPCION CRO
+                        textarea#crocm_descripcion.form-control
+                .col-sm-6
+                    .form-group
+                        label(for='crocm_analisiscausaraiz') ANALISIS CAUSA RAIZ
+                        textarea#crocm_analisiscausaraiz.form-control
+                .col-sm-3
+                    .form-group.row
+                        label.col-sm-6(for='crocm_probabilidad') PROBABILIDAD
+                        .col-sm-6
+                            input#crocm_probabilidad.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-6(for='crocm_impacto') IMPACTO
+                        .col-sm-6
+                            input#crocm_impacto.form-control(type='text')
+                .col-sm-6
+                    .form-group
+                        label(for='crocm_accion') ACCION
+                        textarea#crocm_accion.form-control
+                .col-sm-6
+                    .form-group.row
+                        label.col-sm-4.text-right(for='crocm_fecha_implementacion') FECHA IMPLEMENTACION
+                        .col-sm-8
+                            input#crocm_fecha_implementacion.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-4.text-right(for='crocm_responsable_accion') RESPONSABLE ACCION
+                        .col-sm-8
+                            input#crocm_responsable_accion.form-control(type='text')
+                    .form-group.row
+                        label.col-sm-4.text-right(for='crocm_estado') ESTADO
+                        .col-sm-8
+                            input#crocm_estado.form-control(type='text')
+        .col-sm-12
+            p.text-center.fuente_y_color SEGUIMIENTO CROCM
+            // Aqui el datatable
+            table#CROCM_TABLE.table.table-striped.table-bordered.display(style='width:100%')
+
+
+//Formularios
+.container#ficha_proceso(style="margin-top:0%;display:none;")
+    #gg(style="margin-top:0%;display:none;")
+    .card
+        .card-body
+            //- ul.nav.nav-tabs.justify-content-center
+            //-     li.nav-item
+            //-         a.nav-link.active(data-toggle='tab' href='#tabfc' style='padding: .5rem 1rem;') Ficha Proceso
+            //-     li.nav-item
+            //-         a.nav-link(data-toggle='tab' href='#tabdoc' style='padding: .5rem 1rem;') Documentos
+            //-     li.nav-item
+            //-         a.nav-link(data-toggle='tab' href='#tabcrocm' style='padding: .5rem 1rem;') CROCM    
+            //-     li.nav-item
+            //-         a.nav-link(data-toggle='tab' href='#tabind' style='padding: .5rem 1rem;') Indicadores    
+            //-     li.nav-item
+            //-         a.nav-link(data-toggle='tab' href='#tabger' style='padding: .5rem 1rem;') Gerencias
+            //Paneles
+            .tab-content
+                    //#tabfc.container.tab-pane.active
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center FICHA DE PROCESO
+                        .col-sm-3
+                            .form-group.row
+                                label(for="id_1").col-sm-3 ID
+                                .col-sm-9
+                                    input.form-control#id_1(type='text')
+                        .col-sm-4
+                            .form-group.row
+                                label(for="id_area_1").col-sm-4 ID_AREA
+                                .col-sm-8   
+                                    input.form-control#id_area_1(type='text')            
+                    .row
+                        .col-sm-12
+                            .form-group.row
+                                label(for="cod_1").col-sm-3 COD_PROCESO
+                                .col-sm-9
+                                    input.form-control#cod_1(type='text')                    
+                        .col-sm-12
+                            .form-group.row
+                                label(for="nombre_1").col-sm-3 NOMBRE_PROCESO
+                                .col-sm-9
+                                    input.form-control#nombre_1(type='text')
+                    #fichaproceso_vermas(style ="display:none")
+                    
+                        .form-row
+                            .col-sm-6
+                                .form-group
+                                    label(for="objetivo_1") COD_PROCESO                             
+                                    textarea#objetivo_1.form-control          
+                            .col-sm-6                                                                                
+                                .form-group.row
+                                    label(for="vigente_1").col-sm-4 VIGENTE
+                                    .col-sm-8
+                                        input.form-control#vigente_1(type='text')
+                                .form-group.row
+                                    label(for="version_1").col-sm-4 VERSION
+                                    .col-sm-8
+                                        input.form-control#version_1(type='text')
+                                .form-group.row
+                                    label(for="input_fec_1").col-sm-4 FECHA_EMISION
+                                    .col-sm-8
+                                        input.form-control#input_fec_1(type='text')                            
+                        .row
+                            .col-sm-6
+                                .form-group
+                                    label ENTRADAS REQUERIDAS
+                                    textarea#entrada_1.form-control.form-control     
+                            .col-sm-6
+                                .form-group
+                                    label SALIDAS ESPERADAS
+                                    textarea#salida_1.form-control.form-control 
+                        .row                        
+                            .col-sm-12
+                                label REQUISITOS LEGALES                    
+                                textarea#legales_1.form-control       
+                        .row                        
+                            .col-sm-12
+                                label RECURSOS NECESARIOS                    
+                                textarea#recursos_1.form-control   
+                    .row.text-center
+                        .col
+                            button#ver_mas_fp.btn.btn-outline-primary Ver mas
+                    //#tabdoc.container.tab-pane.fade
+                    fieldset
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center DOCUMENTOS
+                                #my-list1
+                                    ul.list#ul_doc(style='list-style:none;margin-left: -30px;')
+                                .row.text-center
+                                    .col
+                                        <button id="ver_mas_btn_documentos" class="ver btn btn-outline-primary">Ver mas datos documentos</button>    
+
+                    //#tabcrocm.container.tab-pane.fade 
+                    fieldset                    
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center PROCESOS CROCM
+                                #my-list2
+                                    ul.list#ul_crocm(style='list-style:none;margin-left: -30px;')          
+                                .row.text-center
+                                    .col
+                                        <button id="ver_mas_btn_crocm" class="ver btn btn-outline-primary">Ver mas datos documentos</button>    
+                    //#tabind.cotainer.tab-pane.fade
+                    fieldset
+                        //FORM INDICADORES DE PROCESOS
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center INDICADORES DE PROCESOS
+                                #my-list3
+                                    ul.list#ul_indi(style='list-style:none;margin-left: -30px;')
+                                .row.text-center
+                                    .col
+                                        <button id="ver_mas_btn_indicadores" class="ver btn btn-outline-primary">Ver mas datos documentos</button>    
+                                    
+                    //#tabger.container-tab-pane.fade
+                    fieldset
+                        //Form Procesos Gerencias Areas Sectores
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center PROCESOS GERENCIAS AREAS SECTORES
+                            .col-sm-12
+                                .form-group.row
+                                        label(for="id_ger_1").col-sm-4.text-right ID
+                                        .col-sm-8
+                                            input.form-control#id_ger_1(type='text')
+                            .col-sm-12
+                                .form-group.row
+                                        label(for="ger_gen_1").col-sm-4.text-right GERENCIA GENERAL
+                                        .col-sm-8
+                                            input.form-control#ger_gen_1(type='text')
+                            #ver_mas_form_gas.row(style="display:none")                
+                                .col-sm-12
+                                    .form-group.row
+                                            label(for="ger_are_1").col-sm-4.text-right AREA
+                                            .col-sm-8
+                                                input.form-control#ger_are_1(type='text')
+                                .col-sm-12
+                                    .form-group.row
+                                            label(for="ger_sec_1").col-sm-4.text-right SECTOR
+                                            .col-sm-8
+                                                input.form-control#ger_sec_1(type='text')
+                                .col-sm-12
+                                    .form-group.row
+                                            label(for="ger_resp_1").col-sm-4.text-right RESPONSABLE
+                                            .col-sm-8
+                                                input.form-control#ger_resp_1(type='text')
+                                .col-sm-12
+                                    .form-group.row
+                                            label(for="ger_vig_1").col-sm-4.text-right VIGENTE
+                                            .col-sm-8
+                                                input.form-control#ger_vig_1(type='text')
+                        .row.text-center
+                            .col
+                                <button id="ver_mas_btn_gas" class="ver btn btn-outline-primary">Ver mas datos documentos</button>                            
+            //Fin paneles           
+
+
+#lista_ord(style="margin-top:0%;display:none;")
+    table#table_procesos.table.table-striped.table-bordered.display(style='width:100%')
+
+
+.container-fluid#seguimiento(style="margin-top:0%;display:none;")
+    table#table_seguimiento.table.table-striped.table-bordered.display(style='width:100%')
+        tfoot
+            tr
+                th
+                th
+                th
+                th
+               
+#lista_ord_crocm(style="margin-top:0%;display:none;")
+    table#table_procesos_crocm.table.table-striped.table-bordered.display(style='width:100%')
+
+
+.container-fluid#seguimiento_crocm(style="margin-top:0%;display:none;")
+    table#table_seguimiento_crocm.table.table-striped.table-bordered.display(style='width:100%')
+        tfoot
+            tr
+                th
+                th
+                th
+                th
+                th
+                

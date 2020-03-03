@@ -1,0 +1,128 @@
+
+@media (min-width: 320px) and (max-width: 575px) {
+    .design_button{
+        height: 150px;
+        width: 150px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .design_button{
+        height: 150px;
+        width: 150px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px){
+    .center_vertical_personal{
+        position: relative;
+        top: 30%;
+    }
+    .design_button{
+        height: 150px;
+        width: 150px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) and (orientation: landscape) {
+    .center_vertical_personal{
+        position: relative;
+        top: 30%;
+    }
+    .design_button{
+        height: 200px;
+        width: 200px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+    .center_vertical_personal{
+        position: relative;
+        top: 30%;
+    }
+    .design_button{
+        height: 200px;
+        width: 200px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 21px;
+    }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .center_vertical_personal{
+        position: relative;
+        top: 30%;
+    }
+    .design_button{
+        height: 200px;
+        width: 200px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 21px;
+    }
+}
+@media (min-width: 1281px) {
+    .center_vertical_personal{
+        position: relative;
+        top: 30%;
+    }
+    .design_button{
+        height: 250px;
+        width: 250px;
+    }
+    .title_personal{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+    }
+}
+
+.design_button{
+    margin-left: auto;
+    margin-right: auto;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+    border: none;
+    cursor: pointer;
+}
+.title_personal{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+}

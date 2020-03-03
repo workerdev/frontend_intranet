@@ -1,0 +1,127 @@
+.wrap{
+	margin: auto;
+	width: 90%;
+	max-width: 1000px;
+}
+
+.wrap p{
+	font-size: 18px;
+}
+
+header{
+	width: 100%;
+	position: fixed;
+}
+
+.header-top{
+	width: 100%;
+	background: #378FD9;
+}
+
+.navegacion{
+	width: 90%;
+	max-width: 1000px;
+	margin: auto;
+	padding:12px 0;
+}
+
+input[type="search"]{
+	padding: 10px;
+	padding-right: 35px;
+	border: none;
+}
+
+.search{	
+	max-width: 1000px;
+	margin-left: 50%;	
+	/* padding:0 10px;
+	padding-bottom: 5px; */
+	max-height: 19rem;
+	overflow-x: hidden;
+    display: none;
+	z-index: 9999;	    
+    width: 520px;
+    border-radius: 20px;
+    /* border: 2px; */
+	background: rgba(25, 69, 141, 0.8);
+}
+@media only screen and (max-width: 767px) {
+	.search{	
+		max-width: 1000px;
+		margin: auto;	
+		/* padding:0 10px;
+		padding-bottom: 5px; */
+		max-height: 19rem;
+		overflow-x: hidden;
+		display: none;
+		z-index: 9999;	    
+		width: 520px;
+		border-radius: 20px;
+		/* border: 2px; */
+		background: rgba(25, 69, 141, 0.8);
+	}
+  }
+
+
+
+
+.search-table{
+	width: 100% !important;
+}
+
+.search-table tbody tr td{
+	width: 100%;
+}
+
+.search-table tbody tr td a{
+	text-decoration: none;
+	font-size: 18px;
+	color: #e6e4e4 !important;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 20px 0;
+	padding-left: 20px;
+    /* border: 2px solid #fff; */
+    text-align: center
+}
+.search .dataTables_empty{
+	color: #e6e4e4
+}
+
+.search-table tbody tr td a:hover{
+	border: 2px solid #fff;
+	border-radius: 20px
+}
+
+.search::-webkit-scrollbar{ 
+	background:rgba(0,0,0,0);  
+}
+
+.search::-webkit-scrollbar-button{
+ 	background:#C1C1C1;  
+}
+
+.search::-webkit-scrollbar-thumb{ 
+	background:#C1C1C1; 
+}
+
+/* .dataTables_filter,
+.dataTables_length,
+.dataTables_info,
+.dataTables_paginate {
+	display: none !important;
+} */
+.dataTables_empty{
+    padding: 19px;
+}
+
+#searchTable tbody tr + .odd{
+	background-color : #285f90 !important
+}
+#searchTable tbody tr + .even{
+	background-color : #5393c7 !important
+}
+#searchTable tbody tr:first-child{
+	background-color : #285f90 !important
+}

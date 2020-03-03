@@ -1,0 +1,447 @@
+@media (min-width: 10px) and (max-width: 575px) {
+    #contenido{
+        height: 150vw;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 250px;
+        max-width: 250px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 4vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 25vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 25vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    #contenido{
+        height:125vw;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 250px;
+        max-width: 250px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 4vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 22vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 22vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 768px) and (max-width: 991px){
+    #contenido{
+        height: auto;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 250px;
+        max-width: 250px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 3vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 15vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 15vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) and (orientation: landscape) {
+    #contenido{
+        height: 817px;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 230px;
+        max-width: 230px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 2vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 15vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 15vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+    #contenido{
+        height: 817px;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 230px;
+        max-width: 230px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 2vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 15vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 15vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #contenido{
+        height: 817px;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 280px;
+        max-width: 280px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 30%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 2vw;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+    #img-1{
+        position: absolute; width: 15vw;margin-top: -40px;margin-left: -25%;
+    }
+    #img-2{
+        position: absolute;width: 15vw;margin-top: 0;margin-left: -60%
+    }
+}
+@media (min-width: 1281px) {
+    #contenido{
+        height: 817px;
+    }
+    .box {
+        height: 40vw;
+        width:40vw;
+        max-height: 280px;
+        max-width: 280px;
+        position: absolute;
+        border: none;
+        margin-top: -5%;
+        margin-left: 40%;
+        cursor: pointer;
+    }
+    .blue {
+        background-color:#ebb271;
+        transform: translate(-70%, 100%) rotate(45deg);
+        -webkit-transform: translate(-70%, 100%) rotate(45deg);
+        border-bottom-left-radius: 100%;
+    }
+    .green {
+        background-color:#f97070;
+        transform: translate(0, 30%) rotate(45deg);
+        -webkit-transform: translate(0, 30%) rotate(45deg);
+        border-top-left-radius: 100%;
+    }
+    .red {
+        background-color:#c17ead;
+        transform: translate(70%, 100%) rotate(45deg);
+        -webkit-transform: translate(70%, 100%) rotate(45deg);
+        border-top-right-radius: 100%;
+    }
+    .yellow {
+        background-color:#78be7a;
+        transform: translate(0, 170%) rotate(45deg);
+        -webkit-transform: translate(0, 170%) rotate(45deg);
+        border-bottom-right-radius: 100%;
+    }
+
+    .box h4{
+        text-align: center;
+        font-size: 30px;
+    }
+    #tiempo_problemas{
+        background-color: white;
+        color: black;
+        border-radius: 5px;
+        width: 90%;
+        text-align: center;
+        font-size: 30px;
+        margin-left: 5%;
+    }
+    .align_horizontal{
+        transform: rotate(315deg);
+    }
+
+    #cliente_title{
+        padding-left: 15%;
+    }
+    #img-1{
+        position: absolute;
+        width: 15vw;
+        max-width: 230px;
+        margin-top: -70px;
+        margin-left: -25%;
+    }
+    #img-2{
+        position: relative;
+        width: 13vw;
+        max-width: 220px;
+        margin-top: 0;
+        margin-left: -30%;
+    }
+}
+
+#indicador button{
+    outline:none;
+}
+
+/*.box {*/
+    /*height: 20vw;*/
+    /*width:20vw;*/
+    /*max-height: 250px;*/
+    /*max-width: 250px;*/
+    /*position: absolute;*/
+    /*border: none;*/
+    /*margin-top: -5%;*/
+    /*margin-left: 40%;*/
+    /*cursor: pointer;*/
+/*}*/
+/*.blue {*/
+    /*background-color:#ebb271;*/
+    /*transform: translate(-75%, 100%) rotate(45deg);*/
+    /*-webkit-transform: translate(-75%, 100%) rotate(45deg);*/
+    /*border-bottom-left-radius: 100%;*/
+/*}*/
+/*.green {*/
+    /*background-color:#f97070;*/
+    /*transform: translate(0, 25%) rotate(45deg);*/
+    /*-webkit-transform: translate(0, 25%) rotate(45deg);*/
+    /*border-top-left-radius: 100%;*/
+/*}*/
+/*.red {*/
+    /*background-color:#c17ead;*/
+    /*transform: translate(75%, 100%) rotate(45deg);*/
+    /*-webkit-transform: translate(75%, 100%) rotate(45deg);*/
+    /*border-top-right-radius: 100%;*/
+/*}*/
+/*.yellow {*/
+    /*background-color:#78be7a;*/
+    /*transform: translate(0, 175%) rotate(45deg);*/
+    /*-webkit-transform: translate(0, 175%) rotate(45deg);*/
+    /*border-bottom-right-radius: 100%;*/
+/*}*/
+
+/*.box h4{*/
+    /*transform: rotate(315deg);*/
+    /*text-align: center;*/
+/*}*/
+/*.align_horizontal{*/
+    /*transform: rotate(315deg);*/
+/*}*/

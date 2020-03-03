@@ -1,0 +1,40 @@
+@media (min-width: 320px) and (max-width: 575px) {
+    #contenido{
+        height: auto;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #contenido{
+        min-height: 817px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px){
+    #contenido{
+        min-height: 1312px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) and (orientation: landscape) {
+    #contenido{
+        /* height: 817px; */
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+    #contenido{
+        /* height: 817px; */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #contenido{
+        /* height: 817px; */
+    }
+}
+
+@media (min-width: 1281px) {
+    #contenido{
+        /* height: 817px; */
+    }
+}

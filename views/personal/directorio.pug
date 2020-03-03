@@ -1,0 +1,81 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css') 
+    style.
+        @media (min-width: 768px){
+            #contenido{
+                max-height: 817px;
+                overflow-y: auto;
+            }
+        }
+    link(rel='stylesheet', type='text/css', href='/css/select2.min.css')    
+block contenido
+    h2.color_texto_base DIRECTORIO PERSONAL
+
+    div(style="min-width: 240px;overflow: auto;")
+        table#tablePersonal.table.table-bordered(style="margin:15px;background-color: white;")
+            thead
+                tr
+                    
+                    th(scope='col') Nombre
+                    th(scope='col') Apellido                    
+                    th(scope='col') Telefono
+                    th(scope='col') Correo
+                    th(scope='col') Cargo
+                    th(scope='col') Foto
+                    th(scope='col') Sector
+                    th(scope='col') Area
+                    //- th(scope='col') CI
+            tbody
+                each persona in directorio
+                    tr
+                        td=persona.nombre
+                        td=persona.apellido
+                        td=persona.telefono
+                        td=persona.correo
+                        td=persona.cargo
+                        td
+                            if persona.foto 
+                                if persona.foto=="S/F"                            
+                                    if persona.genero == 'M'
+                                        div(style="")
+                                        img(src="/images/icons/boy.png", style="height: 180px !important; width: auto !important;")
+                                    else
+                                        div(style="")
+                                        img(src="/images/icons/girl.png", style="height: 180px !important; width: auto !important;")
+                                else
+                                    img(src=backend_route + persona.foto, alt="Without image", style="height: 180px !important; width: auto !important;")
+                            else                                  
+                                if persona.genero == 'M'
+                                    div(style="")
+                                    img(src="/images/icons/boy.png", style="height: 180px !important; width: auto !important;")
+                                else
+                                    div(style="")
+                                    img(src="/images/icons/girl.png", style="height: 180px !important; width: auto !important;")                                   
+                        td=persona.fksector.nombre
+                        td=persona.fkarea.nombre
+                        //- td=persona.ci
+block scripts
+    script(src='/js/select2.min.js')
+    script(src='/js/jquery.dataTables.yadcf.js')
+    script(src='/js/dataTables.bootstrap4.min.js')
+    script.
+        var tablePersonal = $('#tablePersonal').DataTable({
+             "language": {
+                        "url": "/js/Spanish.json"
+                    }
+        });
+        yadcf.init(tablePersonal,[
+                {
+                    column_number : 0,                    
+                    select_type: 'select2',
+                    filter_reset_button_text: false ,
+                    filter_default_label : "Todos"
+                },{
+                    column_number : 1,
+                    select_type: 'select2',                    
+                    filter_reset_button_text: false,
+                    filter_default_label : "Todos"
+                }
+            ])

@@ -1,0 +1,96 @@
+extends ../layout
+block style_propio
+    link(rel='stylesheet', type='text/css', href='/css/personal_style.css')
+    link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+    link(rel='stylesheet', type='text/css', href='/css/extras/extra.css')
+    style.
+        @media (min-width: 768px) {
+            #contenido {
+                max-height: 817px;
+                overflow-y: auto;
+            }
+        }
+block contenido
+    h2.color_texto_base MIS LINKS
+    input#route(style="display:none;", value=backend_route)
+    .row
+        .col-lg-1
+        .col-md-12.col-lg-10
+            .row
+                each item in links
+                    .col-md-6.col-lg-4
+                        .card_links.card(onclick="location.href= '"+item.link+"'")
+                            .card_content_img
+                                span(style="display: inline-block;height: 100%; vertical-align: middle;")
+                                img.card-img-top.align-middle.ruta(src=backend_route+item.ruta, alt='Card image cap')
+                            h5.card-title=item.nombre
+
+
+block scripts
+    script(type="text/javascript").
+        function init() {
+            var rutas = document.getElementsByClassName('ruta');
+            for (let i = 0; i < rutas.length; i++) {
+                var ruta = rutas[i];
+                var src = ruta.getAttribute('src');
+                //console.log("src: "+src);
+                var rutaCortada = src.split('public')
+                //console.log(rutaCortada[1])
+                var route = $('#route').val();
+                //console.log(route + rutaCortada[1])
+                rutas[i].setAttribute('src', src+"");
+            }
+        }
+        $(window).load(function () {
+            $('#contenedor').slideDown('slow');
+            var buttonNavigation = $('.nav-link');
+            var anchowindow = (window.innerWidth);
+
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#accesos').offset().top;
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        });
+
+        $(window).on('resize', function () {
+            var anchowindow = (window.innerWidth);
+            var buttonNavigation = $('.nav-link');
+            if (anchowindow >= 992) {
+                $('nav').css('height', '817px')
+                if (buttonNavigation.length > 7) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            } else if (anchowindow >= 767 && anchowindow <= 991) {
+                // var contenido = $('#contenido';
+                var contenidoHeight = $('#contenido').height();
+                // var total = contenido + contenidoHeight;
+                var cabecera = $('#head').height();
+                var total = contenidoHeight;
+                $('nav').css('height', (total) + 'px')
+                if (buttonNavigation.length > 13) {
+                    $('#scroll').attr('class', 'submenu_mayor');
+                } else {
+                    $('#scroll').attr('class', 'submenu_menor');
+                }
+            }
+        })
+
+        

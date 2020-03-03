@@ -1,0 +1,192 @@
+@media (min-width: 320px) and (max-width: 575px) {
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 55vw;
+        height: 55vw;
+        border: none;
+        border-radius:25px;
+    }
+    .documentacion img{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 7vw;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 25vw;
+        height: 25vw;
+        border: none;
+        border-radius: 25px;
+    }
+    .documentacion img{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 3vw;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px){
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 20vw;
+        height: 20vw;
+        border: none;
+        border-radius: 25px;
+    }
+    .documentacion img{
+        width: auto;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) and (orientation: landscape) {
+    .documentacion{
+        margin-top: 25%;
+    }
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 20vw;
+        height: 20vw;
+        border: none;
+        border-radius: 25px;
+    }
+    .documentacion img{
+        width: auto;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+    #marginado{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+    .documentacion{
+        margin-top: 25%;
+    }
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 20vw;
+        height: 25vw;
+        border: none;
+        border-radius: 25px;
+    }
+    .documentacion img{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    #marginado{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .documentacion{
+        margin-top: 15%;
+    }
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 20vw;
+        height: 25vw;
+        border: none;
+        border-radius: 25px;
+    }
+    .documentacion img{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    #marginado{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+@media (min-width: 1281px) {
+    .documentacion{
+        margin-top: 15%;
+    }
+    .documentacion .col-md-4{
+        text-align: center;
+    }
+    .documentacion button{
+        width: 20vw;
+        height: 25vw;
+        border: none;
+        border-radius: 25px;
+        max-width: 250px;
+        max-height: 290px;
+    }
+    .documentacion img{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    #marginado{
+        width: 100%;
+        height: 100%;
+        padding: 25px 20px;
+    }
+    .documentacion h3{
+        color: white;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+
+.documentacion button{
+    cursor: pointer;
+}
+
+thead{
+    background-color: #0085ba4f;
+}
+.fondoTabla {
+    background-color: #6ddc9d4a;
+}

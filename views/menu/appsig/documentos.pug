@@ -1,0 +1,131 @@
+#op_docs(style="margin-top:0%; display:none;")
+    
+    .row
+        .col-sm-4    
+            button.btn.btn-secondary2.btn-block(type="button", id="btn_doc" , style="height : 50px ; margin-top:20px") INFORMACIÓN DOCUMENTADA
+        .col-sm-4
+            button.btn.btn-info2.btn-block(type="button", id="btn_form", style="height : 50px ; margin-top:20px") FORMULARIOS
+        .col-sm-4
+            button.btn.btn-secondary2.btn-block(type="button", id="btn_dleg" , style="height : 50px ; margin-top:20px") DOCUMENTOS EXTERNOS Y LEGALES
+        .col-sm-6   
+            button.btn.btn-info2.btn-block(type="button", id="btn_dproc", style="height : 50px ; margin-top:20px") DOCUMENTOS EN PROCESO
+        .col-sm-6
+            button.btn.btn-secondary2.btn-block(type="button", id="btn_dbaja" , style="height : 50px ; margin-top:20px") DOCUMENTOS DADOS DE BAJA
+
+
+
+.container-fluid#det_docproc(style="margin-top:0%;display:none;")
+    #gg(style="margin-top:0%;display:none;")
+    .card
+        .card-body
+            ul.nav.nav-tabs.justify-content-center
+                li.nav-item
+                    a.nav-link.active(data-toggle='tab' href='#tabdprc' style='padding: .5rem 1rem;') Documento en Proceso
+                li.nav-item
+                    a.nav-link(data-toggle='tab' href='#tabdprv' style='padding: .5rem 1rem;', id='ref-prv') En Proceso de Revisión
+            //Paneles
+            .tab-content
+                #tabdprc.container-fluid.tab-pane.active
+                    fieldset.border.border-secondary 
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center DOCUMENTOS EN PROCESO
+                                #list-dprc
+                                    ul.list#ul_dprc(style='list-style:none;margin-left: -30px;')       
+                #tabdprv.container-fluid.tab-pane.fade 
+                    fieldset.border.border-secondary                    
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center PROCESOS EN REVISIÓN
+                                #list-dprv
+                                    ul.list#ul_dprv(style='list-style:none;margin-left: -30px;display:none;')
+                                        table#table_procrev.table.table-striped.table-bordered.display(style='width:100%')         
+            //Fin paneles  
+
+
+.container-fluid#formdocs(style="margin-top:0%;display:none;")
+    #gg(style="margin-top:0%;display:none;")
+    input#rt_dfr(type="hidden", value=backend_route)
+    .card
+        .card-body
+            ul.nav.nav-tabs.justify-content-center
+                li.nav-item
+                    a.nav-link.active(data-toggle='tab' href='#tabdfrm' style='padding: .5rem 1rem;') Formulario
+                li.nav-item
+                    a.nav-link(data-toggle='tab' href='#tabdcto' style='padding: .5rem 1rem;') Documento
+            //Paneles
+            .tab-content
+                #tabdfrm.container-fluid.tab-pane.active
+                    .row
+                        .col-sm-12
+                            p.fuente_y_color.text-center FORMULARIO
+                        .col-sm-6
+                            .form-group.row
+                                label(for="frm_id_formulario").paralabel-control.col-sm-3 ID. FORMULARIO
+                                .col-sm-9
+                                    input.form-control#frm_id_formulario(type='text')
+                        .col-sm-5
+                            .form-group.row
+                                label(for="frm_cod_documento").paralabel-control.col-sm-3 COD. DOCUMENTO
+                                .col-sm-9   
+                                    input.form-control#frm_cod_documento(type='text')    
+                        .col-sm-5
+                            .form-group.row
+                                label(for="frm_cod_formulario").paralabel-control.col-sm-3 COD. FORMULARIO
+                                .col-sm-9
+                                    input.form-control#frm_cod_formulario(type='text')             
+                    .row               
+                        .col-sm-12
+                            .form-group.row
+                                label(for="frm_titulo_formulario").paralabel-control.col-sm-3 TITULO FORMULARIO
+                                .col-sm-9
+                                    input.form-control#frm_titulo_formulario(type='text')
+                    .form-row
+                        .col-sm-3
+                            .form-group
+                                label(for="frm_version_vigente_formulario").paralabel-control VERSION VIGENTE                          
+                                textarea#frm_version_vigente_formulario.form-control          
+                        .col-sm-5                                                                                
+                            .form-group.row
+                                label(for="frm_fecha_publicacion_formulario").paralabel-control.col-sm-4 FECHA PUBLICACION FORMULARIO
+                                .col-sm-8
+                                    input.form-control#frm_fecha_publicacion_formulario(type='text')                         
+                    .row
+                        .col-sm-6
+                            .form-group
+                                label.paralabel-control APROBADO POR
+                                .col-sm-8
+                                    input.form-control#frm_aprobado_por(type='text')  
+                            .form-group
+                                label.paralabel-control VINCULO ARCHIVO DIGITAL
+                                .col-sm12
+                                    div#frm_adg                         
+                            .form-group
+                                label.paralabel-control VINCULO ARCHIVO DESCARGA                   
+                                .col-sm-12
+                                    div#frm_vad
+                #tabdcto.container.tab-pane.fade
+                    fieldset.border.border-primary
+                        .row
+                            .col-sm-12
+                                p.fuente_y_color.text-center DOCUMENTO
+                                #list-frdoc
+                                    ul.list#ul_dcto(style='list-style:none;margin-left: -30px;')
+            //Fin paneles           
+   
+
+
+.container-fluid#bajadoc(style="margin-top:0%;display:none;")
+    table#table_bajadoc.table.table-striped.table-bordered(style='width:100%')
+       
+
+
+.container-fluid#formulario(style="margin-top:0%;display:none;")
+    table#table_docfrm.table.table-striped.table-bordered(style='width:100%')
+        
+                
+
+
+#doclegal(style="margin-top:0%;display:none;")
+    table#table_docleg.table.table-striped.table-bordered(style='width:100%')
+        

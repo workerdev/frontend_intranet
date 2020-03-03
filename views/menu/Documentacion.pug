@@ -1,0 +1,153 @@
+extends ../layout
+block style_propio
+    style.
+        .icon-own{
+            color: white;
+        }
+        .bg-teal-own{
+            background-color: #009688 !important;
+            color: white;
+        }
+        .bg-teal-own:hover{
+            background-color: #26a69a !important;
+            color: white;
+        }
+        .bg-red-own{
+            background-color: #e53935 !important;
+            color: white;
+        }
+        .bg-red-own:hover{
+            background-color: #ef5350 !important;
+            color: white;
+        }
+    link(rel='stylesheet', type='text/css', href='/css/documentacion_style.css')    
+    link(rel='stylesheet', type='text/css', href='/css/nuevo_letras.css')
+    link(rel='stylesheet', type='text/css', href='/css/dataTables.bootstrap4.min.css')        
+    link(rel='stylesheet', type='text/css', href='/css/appsig.css')    
+    link(rel='stylesheet', type='text/css', href='/css/table_icon.css')    
+    link(rel='stylesheet', type='text/css', href='/css/datepicker.min.css')    
+    link(rel='stylesheet', type='text/css', href='/css/select2.min.css')        
+
+block contenido    
+    .container-fluid
+        .row(style = "padding-top: 55px; padding-bottom: 20px;")
+            .col-sm-1
+                button(style=" display:none")#button-back.botonAtras
+                    <i class="fas fa-arrow-circle-left fa-2x" style="cursor:pointer;"></i> Atras
+            .col-sm-11
+                h3#tituloDocumentacion.text-center Información Sistema Integrado de Gestión
+            .col-sm-12
+                .alert.alert-info#spn-loadtb(style="display: none")
+                    <i class="fas fa-spinner fa-spin"></i>
+                    span &nbsp; Cargando datos, espere por favor...
+    div.container-fluid(id="opciones")
+        div.row
+            .col
+                .card-own.card.text-white.bg-dark.mb-2.m-4.col-md-4.pointer(id="btn_procesos", style="max-width: 14rem; max-height: 14rem;")
+                    div.card-header.font-weight-bold PROCESOS
+                    div.card-body(style= "background-color:transparent;")
+                        img.img-fluid.img-thumbnail(src="/images/sig/proceso.png", style="background-color: rgba(0, 0, 0, .2); border: 2px solid transparent;")
+            
+            .col        
+                .card-own.card.text-white.bg-primary.mb-2.m-4.col-md-4.pointer(id="btn_docs", style="max-width: 14rem;; max-height: 14rem;")
+                    div.card-header.font-weight-bold DOCUMENTOS
+                    div.card-body(style= "background-color:transparent;")
+                        img.img-fluid.img-thumbnail(src="/images/sig/dcs.png", style="background-color: rgba(0, 0, 0, .2); border: 2px solid transparent;")
+           
+            .col         
+                .card-own.card.text-white.bg-success.mb-2.m-4.col-md-4.pointer(id="btn_cargos", style="max-width: 14rem; max-height: 14rem;")
+                    div.card-header.font-weight-bold FICHAS DE CARGO
+                    div.card-body(style= "background-color:transparent;")
+                        img.img-fluid.img-thumbnail(src="/images/sig/org_design.png", style="background-color: rgba(0, 0, 0, .2); border: 2px solid transparent;")
+            
+            .col
+                .card-own.card.text-white.bg-info.mb-2.m-4.col-md-6.pointer(id="btn_auds", style="max-width: 14rem;; max-height: 14rem; float: roght;")
+                    div.card-header.font-weight-bold AUDITORIAS
+                    div.card-body(style= "background-color:transparent;")
+                        img.img-fluid.img-thumbnail(src="/images/sig/auditoria.png", style="background-color: rgba(0, 0, 0, .2); border: 2px solid transparent;")
+            
+            .col
+                .card-own.card.text-white.bg-indigo.mb-2.m-4.col-md-6.pointer(id="btn_crocm", style="max-width: 14rem;; max-height: 14rem;")
+                    div.card-header.font-weight-bold CAMBIO RIESGO OPORTUNIDAD CORRECTIVA MEJORA 
+                    div.card-body.text-center(style= "background-color:transparent;")
+                        img.img-fluid.img-thumbnail(src="/images/sig/crocm.png", style="background-color: rgba(0, 0, 0, .2); border: 2px solid transparent; width:50%")          
+
+    include appsig/procesos.pug
+    include appsig/documentos.pug
+    include appsig/documentos/informacionDocumentada.pug
+    include appsig/fichascargo.pug
+    include appsig/auditorias.pug
+
+block scripts
+    script(src='/js/newlist.js')
+    script(src='/js/appsig.js')
+    script(src='/js/sigDocumento.js')
+    script(src='/js/menu/sig.js')
+    script(src='/js/sigauditoria.js')
+    script(src='/js/popper.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/select2.min.js')
+    script(src='/js/jquery.dataTables.yadcf.js')
+    script(src='/js/dataTables.bootstrap4.min.js')
+    script(src='/js/datepicker.min.js')
+    script(src='/js/datepicker.es.js')
+    script(type="text/javascript").
+        $(document).ready(function () {
+            $.extend( true, $.fn.dataTable.defaults, {
+                "language": {
+                        "url": "/js/Spanish.json"
+                    },
+                dom: '<"pull-left"f><"pull-right"l>tip',                
+            } );
+        });
+
+        var c=0;
+        $("#fc-cont").click(function(){
+            if(c==0){
+                $("#cont-fc").css("display", "block");
+                c=1;
+            }else{
+                $("#cont-fc").css("display", "none");
+                c=0;
+            }
+        });
+
+        var d=0;
+        $("#ind-cont").click(function(){
+            if(d==0){
+                $("#cont-ind").css("display", "block");
+                d=1;
+            }else{
+                $("#cont-ind").css("display", "none");
+                d=0;
+            }
+        });
+
+        var e=0;
+        $("#crocm-cont").click(function(){
+            if(e==0){
+                $("#cont-crocm").css("display", "block");
+                e=1;
+            }else{
+                $("#cont-crocm").css("display", "none");
+                e=0;
+            }
+        });
+        
+        console.log(localStorage.getItem("consulta"))
+
+        if(localStorage.getItem("consulta") == "documentos" ){
+            document.getElementById("opciones").style.display = "none"
+            listarInformacionDocumentada()
+            $('#button-back').show()
+        }
+        if(localStorage.getItem("consulta") == "formularios" ){
+            document.getElementById("opciones").style.display = "none"
+            listarDocFormulario()
+            $('#button-back').show()
+        }
+        if(localStorage.getItem("consulta") == "legales" ){
+            document.getElementById("opciones").style.display = "none"
+            docExternosYLegales()
+            $('#button-back').show()
+        }

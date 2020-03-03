@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    .row
+        .col.s12.m4
+        .col.s12.m4
+            .card
+                .card-content
+                    h5 Mi perfil
+                    .row
+                        form.col.s12
+                            .row
+                                .input-field.col.s12
+                                    input#first_name.validate(type='text', disabled='', value= name)
+                                    label(for='first_name') Nombre
+                                .input-field.col.s12
+                                    input#last_name.validate(type='text', disabled='', value= last_name)
+                                    label(for='last_name') Apellido
+                                .input-field.col.s12
+                                    input#business.validate(type='text', disabled='', value= company)
+                                    label(for='business') Empresa
+                                .input-field.col.s12
+                                    input#email.validate(type='email', disabled='', value= username)
+                                    label(for='email') Email
+                                a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Cambiar contraseñas
+
+        #modal1.modal.modal-fixed-footer
+            .modal-content
+                h4 Cambiar contraseña
+                .row(style='margin-top:10%')
+                    form.col.s12(method='POST', action='/change_new_password')
+                        .row
+                            .input-field.col.s12
+                                input#password.validate(type='password',name='password', placeholder='Un mínimo 8 caracteres alfanuméricos sin espacios', required='')
+                                label(for='password') Contraseña
+                            .input-field.col.s12
+                                input#newpassword.validate(type='password',name='newpassword',placeholder='Un mínimo 8 caracteres alfanuméricos sin espacios', required='')
+                                label(for='newpassword') Repita su contraseña
+                        button.btn.waves-effect.waves-light(type='submit', name='action')
+                            | Guardar
+            .modal-footer
+                a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Cerrar
