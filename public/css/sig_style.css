@@ -244,12 +244,12 @@
     transition: all 500ms ease-in-out;
 } 
 .elementoPadre{    
-    
     background-color: #e6f0ff ;
     transition: 0.3s;
+    margin-left: 100px;
+    margin-right: 100px;
 } 
 .elementoPadre:hover {
-    
     background-color: #9edbf1 ;
     transition: 0.3s;
 }

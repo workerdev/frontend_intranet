@@ -70,6 +70,12 @@ block style_propio
         }
         .tr-stl {
             white-space: pre-wrap !important;
+            max-width: 250px !important;
+            word-wrap: break-word !important;
+        }
+        .format-col {
+            max-width: 10% !important;
+            word-wrap: break-word !important;
         }
     
 block contenido
@@ -200,7 +206,15 @@ block scripts
     script(src="/datatables/buttons/js/buttons.html5.min.js")          
     script.
         function load_view(year){
+            $('html, body').animate({scrollTop: 0}, 'slow');
             $('#cargandoTabla').show()
+
+            if ($.fn.DataTable.isDataTable('#table_correlativo')) {
+                var tabledel = $('#table_correlativo').DataTable()
+                tabledel.clear().draw()
+                tabledel.destroy()
+                $('#table_correlativo').empty()
+            }
 
             axios.post('/correlativo/datos_correlativo', {
                 username: localStorage.getItem("login"),
@@ -240,22 +254,19 @@ block scripts
                         load_view(this.value)
                     }
 
-                    if ($.fn.DataTable.isDataTable('#table_correlativo')) {
-                        var tabledel = $('#table_correlativo').DataTable()
-                        tabledel.clear().draw()
-                        tabledel.destroy()
-                        $('#table_correlativo').empty()
-                    }
-
                     var tableCorrelativo = $('#table_correlativo').DataTable({
                         "scrollX": true,
+                        "scrollY": false,
                         language :  {
                             "url": "/js/Spanish.json"
                         },
                         data: correlativos,
                         //dom: '<"pull-left"f><"pull-right"l>tip',
+                        width: "100%",
+                        'autoWidth': false,
                         columns: [
                             {
+                                //"width": "4%",
                                 "className": 'details-control',
                                 "orderable": false,
                                 "data": null,
@@ -301,12 +312,12 @@ block scripts
                                 },
                                 visible: false 
                             },
-                            { title: "Número correlativo" , data : "numcorrelativo" },
-                            { title: "Fecha de registro", data : "fechareg" },                    
-                            { title: "Solicitante", data : "fullname" }, 
-                            { title: "Redactor", data : "redactor" },
-                            { title: "Referencia" , data : "referencia" }, 
-                            { title: "URL", data :"url",
+                            { title: "Número correlativo" , data : "numcorrelativo"/*, "width": "6%"*/ },
+                            { title: "Fecha de registro", data : "fechareg"/*, "width": "7%"*/ },                    
+                            { title: "Solicitante", data : "fullname"/**, "width": "15%"*/ }, 
+                            { title: "Redactor", data : "redactor"/*, "width": "15%"*/ },
+                            { title: "Referencia" , data : "referencia"/*, "width": "25%"*/ }, 
+                            { title: "URL", /*"width": "6%", */data :"url",
                                 render : function (data, type, row) {
                                     if (['', 'N/A', null].includes(data)) a = 'Ningún archivo'                         
                                     else {
@@ -317,7 +328,7 @@ block scripts
                                     return a
                             }
                             },
-                            { title: "URL editable", data : "urleditable",
+                            { title: "URL editable", /*"width": "6%", */data : "urleditable",
                                 render : function (data, type, row) {
                                     if (['', 'N/A', null].includes(data)) a = 'Ningún archivo'                         
                                     else {
@@ -328,7 +339,7 @@ block scripts
                                     return a
                                 }
                             },
-                            { title: "URL origen", data : "urlorigen",
+                            { title: "URL origen", /*"width": "6%", */data : "urlorigen",
                                 render : function (data, type, row){                            
                                     if (['', 'N/A', null].includes(data)) a = 'Ningún archivo'                         
                                     else {
@@ -339,7 +350,7 @@ block scripts
                                     return a
                                 }
                             },
-                            { title: "Acciones", data : 'id' ,
+                            { title: "Acciones", /*"width": "10%", */data : 'id' ,
                                 render : function (data, type, row){  
                                     if(row.action_permission){                                           
                                         a = '<button class="btn btn-primary editar" target="_blank" data-id="'+ row.id +'" data-numcorrelativo="'+ row.numcorrelativo +'" ><i class="fas fa-edit" style="color: aliceblue;font-size: 14px;"></i></button>'  +
@@ -358,7 +369,7 @@ block scripts
                             if (data.estadocorrelativo == "Anulado") {
                                 $(row).addClass('bg-voided');
                             }
-                            $(row).children(':nth-child(6)').addClass('tr-stl');
+                            //$(row).children(':nth-child(6)').addClass('tr-stl');
                             $(row).children(':nth-child(7)').attr('align', 'center');
                             $(row).children(':nth-child(8)').attr('align', 'center');
                             $(row).children(':nth-child(9)').attr('align', 'center');
@@ -414,6 +425,10 @@ block scripts
                                 title: 'ELFEC - Correlativos Registrados'  
                             }
                         ],
+                        'columnDefs': [
+                            { className: "format-col", "targets": [9, 10, 11, 12, 13, 14, 15, 16, 17] },
+                            { 'max-width': '10%', 'targets': [9, 10, 11, 12, 13, 14, 15, 16, 17] }
+                        ],
                         initComplete: function () {
                             $('.buttons-pdf').html('<i class="fa fa-file-pdf"></i> PDF')
                             $('.buttons-excel').html('<i class="fa fa-file-excel"></i> Excel')
@@ -434,17 +449,20 @@ block scripts
                             column_number: 11,
                             select_type: 'select2',
                             filter_reset_button_text: false,
+                            select_type_options: { 'width': '250px' },
                             filter_default_label: "Todos"
                         },{
                             column_number: 12,
                             select_type: 'select2',
                             filter_reset_button_text: false,
+                            select_type_options: { 'width': '250px' },
                             filter_default_label: "Todos"
                         },{
                             column_number: 13,
                             select_type: 'select2',
                             filter_reset_button_text: false,
-                            filter_default_label: "Todos"                
+                            select_type_options: { 'width': '250px' },
+                            filter_default_label: "Todos"              
                         }
                         ],{
                             cumulative_filtering: true                
@@ -795,8 +813,11 @@ block scripts
                     }                          
                 }).then( function (result){
                     console.log("El rasultado es ")
-                    console.log(result)
-                    if (!result.value.error) {  
+                    var dtreg = result.value
+                    console.log(dtreg)
+                    //console.log(Object.keys(dtreg).length)
+
+                    if (dtreg.hasOwnProperty('data') && !dtreg.error) {  
                         $('#modalCorrelativo').modal('hide')                         
                         Swal.fire({                                        
                             type : 'success',
