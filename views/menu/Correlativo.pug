@@ -77,6 +77,13 @@ block style_propio
             max-width: 10% !important;
             word-wrap: break-word !important;
         }
+        .format-dethead {
+            max-width: 60px !important;
+            word-wrap: break-word !important;
+            font-weight: 600 !important;;
+            color: #37474f !important;
+        }
+
     
 block contenido
     input#backend(type="hidden", value=backend_route)
@@ -548,35 +555,35 @@ block scripts
 
             return '<table id="tableDetalleCorrelativo" class="w-100" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
                 '<tr>'+
-                    '<td class="">Destinatario:</td>'+
+                    '<td class="format-dethead">Destinatario:</td>'+
                     '<td>'+data.destinatario+'</td>'+
                 '</tr>'+           
                 '<tr>'+
-                    '<td class="">Centro de control correlativo:</td>'+
+                    '<td class="format-dethead">Centro de control correlativo:</td>'+
                     '<td>'+correlativo+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="">Tipo de nota:</td>'+
+                    '<td class="format-dethead">Tipo de nota:</td>'+
                     '<td>'+tiponota+'</td>'+
                 '</tr>'+                      
                 '<tr>'+
-                    '<td class="">Antecedente:</td>'+
+                    '<td class="format-dethead">Antecedente:</td>'+
                     '<td>'+antecedente+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="">Estado correlativo:</td>'+
+                    '<td class="format-dethead">Estado correlativo:</td>'+
                     '<td>'+estadocorrelativo+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="">Item:</td>'+
+                    '<td class="format-dethead">Item:</td>'+
                     '<td>'+data.item+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="">Fecha de entrega:</td>'+
+                    '<td class="format-dethead">Fecha de entrega:</td>'+
                     '<td>'+entrega+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="">Unidad:</td>'+
+                    '<td class="format-dethead">Unidad:</td>'+
                     '<td>'+unidad+'</td>'+
                 '</tr>'+
                 '</table>';
