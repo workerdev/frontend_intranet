@@ -1,7 +1,60 @@
 extends ../layout
 block style_propio
-    link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
+    //link(rel='stylesheet', type='text/css', href='/css/sig_style.css')
     link(rel='stylesheet', type='text/css', href='/css/contenido_display.css')
+    style.
+        .txt-ind {
+            margin-left: 10px;
+            font-size: 14px;
+            word-wrap: break-word !important;
+            max-width: 80% !important;
+        }
+        .fa-smp {
+            font-size: 1em !important;
+        }
+        .elementoPadre{    
+            background-color: rgba(255,255,255,0);
+            margin: 0% 6%;
+            border-color: rgba(255, 255, 255, 0);
+        } 
+        .elemento{
+            background-color: #e6f0ff;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 76, 153, .3);
+            padding-left: 20px;
+        }
+        .elemento-link {
+            color: rgba(0, 76, 153, .7) !important;
+        }
+        .elemento-link:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .collapsed-own {
+            width: 100% !important;
+            text-align: left !important;
+        }
+        .btn-blue-own {
+            background-color: rgba(0, 76, 153, .7);
+            color: white;
+        }
+        .btn-blue-own:hover, .btn-blue-own:active {
+            background-color: rgba(0, 76, 153, .9);
+        }
+        .btn-blue-own:focus, .btn-blue-own:hover, .btn-blue-m:hover, .btn-blue-m:focus {
+            color: white;
+        }
+        .btn-blue-own:focus {
+            background-color: rgba(0, 76, 153, .9);
+        }
+        .btn-blue-m {
+            background-color: #1976d2;
+            color: white;
+            margin: 2% 4%;
+        }
+        .btn-blue-m:hover, .btn-blue-m:active {
+            background-color: #1565c0;
+        }
 block contenido
     h2.color_texto_base.text-center SISTEMA INTEGRADO DE GESTIÓN
     .row 
@@ -9,34 +62,32 @@ block contenido
             .row
                 if (datos_sig.length != 0)
                     - var n = 0
-                    .col-sm-12                                                   
-                        
-                            each datos,index in datos_sig
-                                if datos.children != null                                                                                                                 
-                                    .elementoPadre.alert.alert-primary
-                                        .row
-                                            .col-sm-10=datos.titulo
-                                            .col-sm-2.btn-acn
-                                                a.btn-ind.btn-acn(href='javascript:void(0)', id='ind'+datos.id)                            
-                                                    i.far.fa-caret-square-down.btn-acn
-                                                        span.txt-ind.btn-acn Mostrar
-                                        .elementosHijos(id='child'+datos.id)                                                                      
-                                            each datosHijos in datos.children
-                                                .elemento(style="padding-bottom: 10px;padding-top: 10px;")
-                                                    a.elemento-link(href= backend_route + datosHijos.ruta, target='_blank')                            
-                                                        i.far.fa-file-pdf
-                                                        span &nbsp;&nbsp;&nbsp;
-                                                        span(style="white-space: normal;")=datosHijos.titulo
-                                else                                                
-                                    if n == 0
-                                        p(hidden)=n++
-                                        .col-12
-                                            h5.text-center Otros                 
-                                    .col-md-3.text-center(style="padding-bottom: 20px; padding-top: 20px;")    
-                                        a.w-100.btn.btn-primary(href= backend_route + datos.ruta, target='_blank')
-                                            i.far.fa-file-pdf
-                                            span &nbsp;&nbsp;&nbsp;
-                                            span(style="white-space: normal;")=datos.titulo
+                    .col-sm-12    
+                        each datos,index in datos_sig
+                            if datos.children != null                                                                                                                 
+                                .elementoPadre.alert.alert-primary(id="collapseParent"+datos.id)
+                                    .row
+                                        a.btn.btn-blue-own.collapsed-own(data-toggle="collapse", href="#collapseChild"+datos.id, role="button", aria-expanded="false", aria-controls="collapseChild"+datos.id)                            
+                                            i.far.fa-caret-square-right.fa-smp(id='iconParent'+datos.id)
+                                                span.txt-ind=datos.titulo
+                                    .collapse(id='collapseChild'+datos.id, data-id=datos.id)                                                                      
+                                        each datosHijos in datos.children
+                                            .elemento(style="padding-bottom: 10px;padding-top: 10px;")
+                                                a.elemento-link(href= backend_route + datosHijos.ruta, target='_blank')                            
+                                                    i.far.fa-file-pdf
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    span(style="white-space: normal;")=datosHijos.titulo
+                            else                                            
+                                if n == 0
+                                    p(hidden)=n++
+                                    .col-12
+                                        h5.text-center Otros
+                               
+                                .col-sm-3.text-center
+                                    a.w-100.btn.btn-blue-m(href= backend_route + datos.ruta, target='_blank')
+                                        i.far.fa-file-pdf
+                                        span &nbsp;&nbsp;&nbsp;
+                                        span(style="white-space: normal;")=datos.titulo
                 else
                     .col-12.text-center
                         p.alert.alert-warning No tiene documentos registrados 
@@ -103,64 +154,30 @@ block contenido
         //-         button(style="cursor:pointer")
         //-             | Cantidad de días sin accidentes
 
-block scripts
-    script(type="text/javascript").
-        $(window).load(function () {
-            $('#contenedor').slideDown('slow');
-            var buttonNavigation = $('.nav-link');
-            var anchowindow = (window.innerWidth);
-
-            if (anchowindow >= 992) {
-                $('nav').css('height', '817px')
-                if (buttonNavigation.length > 7) {
-                    $('#scroll').attr('class', 'submenu_mayor');
-                } else {
-                    $('#scroll').attr('class', 'submenu_menor');
-                }
-            } else if (anchowindow >= 767 && anchowindow <= 991) {
-                // var contenido = $('#accesos').offset().top;
-                var contenidoHeight = $('#contenido').height();
-                // var total = contenido + contenidoHeight;
-                var cabecera = $('#head').height();
-                var total = contenidoHeight;
-                $('nav').css('height', (total) + 'px')
-                if (buttonNavigation.length > 13) {
-                    $('#scroll').attr('class', 'submenu_mayor');
-                } else {
-                    $('#scroll').attr('class', 'submenu_menor');
-                }
-            }
-        });
-
-        $(window).on('resize', function () {
-            var anchowindow = (window.innerWidth);
-            var buttonNavigation = $('.nav-link');
-            if (anchowindow >= 992) {
-                $('nav').css('height', '817px')
-                if (buttonNavigation.length > 7) {
-                    $('#scroll').attr('class', 'submenu_mayor');
-                } else {
-                    $('#scroll').attr('class', 'submenu_menor');
-                }
-            } else if (anchowindow >= 767 && anchowindow <= 991) {
-                // var contenido = $('#contenido';
-                var contenidoHeight = $('#contenido').height();
-                // var total = contenido + contenidoHeight;
-                var cabecera = $('#head').height();
-                var total = contenidoHeight;
-                $('nav').css('height', (total) + 'px')
-                if (buttonNavigation.length > 13) {
-                    $('#scroll').attr('class', 'submenu_mayor');
-                } else {
-                    $('#scroll').attr('class', 'submenu_menor');
-                }
-            }
-        })
-
-        $(document).ready(function(){
-            $('.btn-acn').bind('click', function() {
-                console.log('parent')
-                var dtid = 0
+block scripts        
+    script.
+        $(document).ready(function() {
+            $(".collapse").on('show.bs.collapse', function(){
+                console.log('The collapsible content is about to be shown.');
+            });
+            $(".collapse").on('hide.bs.collapse', function(){
+                console.log('The collapsible content is about to be hidden.');
+            });
+            
+            $(".collapse").on('shown.bs.collapse', function(){
+                console.log($(this).attr('id'))
+                console.log('The collapsible content is now fully shown.');
+                var dtid = $(this).attr('data-id');
+                $('#iconParent'+dtid).removeClass('fa-caret-square-right')
                 console.log(dtid)
-            })
+                $('#iconParent'+dtid).addClass('fa-caret-square-down')
+            });
+            $(".collapse").on('hidden.bs.collapse', function(){
+                console.log($(this).attr('id'))
+                console.log('The collapsible content is now hidden.');
+                var dtid = $(this).attr('data-id');
+                $('#iconParent'+dtid).removeClass('fa-caret-square-down')
+                console.log(dtid)
+                $('#iconParent'+dtid).addClass('fa-caret-square-right')
+            });    
         })
