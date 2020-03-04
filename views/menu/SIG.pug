@@ -55,6 +55,7 @@ block style_propio
         .btn-blue-m:hover, .btn-blue-m:active {
             background-color: #1565c0;
         }
+        
 block contenido
     h2.color_texto_base.text-center SISTEMA INTEGRADO DE GESTIÓN
     .row 
@@ -90,94 +91,20 @@ block contenido
                                         span(style="white-space: normal;")=datos.titulo
                 else
                     .col-12.text-center
-                        p.alert.alert-warning No tiene documentos registrados 
-    //- #accordion
-        .row.sig_button
-            .col-md-6
-                button(style="cursor:pointer", onclick="location.href = '/documentos/POLITICA DEL SISTEMA INTEGRADO DE GESTION.pdf'")
-                    |Política de sistema integrado de gestión
-        .row.sig_button
-            .col-md-6
-                button(style="cursor:pointer", onclick="location.href = '/documentos/Información Documentada SIG.pdf'")
-                    |Información documentada
-
-        .row.sig_button
-            .col-md-6(data-toggle="collapse", data-target="#objetivos", aria-controls="objetivos", aria-expanded="false")
-                button#id2
-                    |Objetivos sistema integrado de Gestión
-            #objetivos.col-md-6.collapse.btn_extras(aria-labelledby="id2", data-parent="#accordion")
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Calidad.pdf'")
-                        |Objetivos de Calidad y las acciones para lograr esos objetivos
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Medio Ambiente.pdf'")
-                        |Objetivos de Medio Ambiente y las acciones para lograr esos objetivos
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Objetivos Seguridad y Salud Ocupacional.pdf'")
-                        |Objetivos de Seguridad y Salud Ocupacional y las acciones para lograr esos objetivos
-        .row.sig_button
-            .col-md-6(data-toggle="collapse", data-target="#acciones", aria-controls="acciones", aria-expanded="false")
-                button#id3
-                    |Matriz de Riesgos y Oportunidades
-            #acciones.col-md-6.collapse.btn_extras(aria-labelledby="id3", data-parent="#accordion")
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Calidad.pdf'")
-                        |Calidad
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Medio Ambiente.pdf'")
-                        |Medio Ambiente
-                div
-                    button(style="cursor:pointer", onclick="location.href = '/documentos/Matriz de Riesgos y Oportunidades Seguridad y Salud Ocupacional.pdf'")
-                        |Seguridad y Salud Ocupacional
-        .row.sig_button
-            .col-md-6(data-toggle="collapse", data-target="#politicas", aria-controls="politicas", aria-expanded="false")
-                button#id1
-                    |Requisitos Legales y otros requisitos.
-            #politicas.col-md-6.collapse.btn_extras(aria-labelledby="id1", data-parent="#accordion")
-                div
-                    button
-                        | Medio Ambiente
-                div
-                    button
-                        | Seguridad y Salud Ocupacional
-
-        .row.sig_button
-            .col-md-6
-                button(style="cursor:pointer", onclick="location.href = '/documentos/ENCUESTAS DE SATISFACCION DE CLIENTES.pdf'")
-                    | Encuestas de satisfacción de clientes
-        .row.sig_button
-            .col-md-6
-                button(style="cursor:pointer", onclick="location.href = '/documentos/Accidentes a Septiembre 2018.pdf'")
-                    | Resumen de accidentes e incidentes
-        //- .row.sig_button
-        //-     .col-md-6
-        //-         button(style="cursor:pointer")
-        //-             | Cantidad de días sin accidentes
+                        p.alert.alert-warning No tiene documentos registrados
 
 block scripts        
     script.
         $(document).ready(function() {
-            $(".collapse").on('show.bs.collapse', function(){
-                console.log('The collapsible content is about to be shown.');
-            });
-            $(".collapse").on('hide.bs.collapse', function(){
-                console.log('The collapsible content is about to be hidden.');
-            });
-            
             $(".collapse").on('shown.bs.collapse', function(){
-                console.log($(this).attr('id'))
-                console.log('The collapsible content is now fully shown.');
                 var dtid = $(this).attr('data-id');
                 $('#iconParent'+dtid).removeClass('fa-caret-square-right')
-                console.log(dtid)
                 $('#iconParent'+dtid).addClass('fa-caret-square-down')
             });
+
             $(".collapse").on('hidden.bs.collapse', function(){
-                console.log($(this).attr('id'))
-                console.log('The collapsible content is now hidden.');
                 var dtid = $(this).attr('data-id');
                 $('#iconParent'+dtid).removeClass('fa-caret-square-down')
-                console.log(dtid)
                 $('#iconParent'+dtid).addClass('fa-caret-square-right')
             });    
         })
