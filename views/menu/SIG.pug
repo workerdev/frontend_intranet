@@ -13,8 +13,14 @@ block contenido
                         
                             each datos,index in datos_sig
                                 if datos.children != null                                                                                                                 
-                                    .elementoPadre.alert.alert-primary=datos.titulo
-                                        .elementosHijos                                                                      
+                                    .elementoPadre.alert.alert-primary
+                                        .row
+                                            .col-sm-10=datos.titulo
+                                            .col-sm-2.btn-acn
+                                                a.btn-ind.btn-acn(href='javascript:void(0)', id='ind'+datos.id)                            
+                                                    i.far.fa-caret-square-down.btn-acn
+                                                        span.txt-ind.btn-acn Mostrar
+                                        .elementosHijos(id='child'+datos.id)                                                                      
                                             each datosHijos in datos.children
                                                 .elemento(style="padding-bottom: 10px;padding-top: 10px;")
                                                     a.elemento-link(href= backend_route + datosHijos.ruta, target='_blank')                            
@@ -149,4 +155,12 @@ block scripts
                     $('#scroll').attr('class', 'submenu_menor');
                 }
             }
+        })
+
+        $(document).ready(function(){
+            $('.btn-acn').bind('click', function() {
+                console.log('parent')
+                var dtid = 0
+                console.log(dtid)
+            })
         })
